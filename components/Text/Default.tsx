@@ -1,3 +1,3 @@
 export default function DefaultText({ text }: { text: string }) {
-  return <div>{text}</div>;
+  return <div className="color-whit">{text}</div>;
 }

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import Image from "next/image";
 
 // Save as app/rsvp/page.tsx (Next.js App Router)
 export default function WeddingRSVPFormPage() {
@@ -120,9 +121,21 @@ export default function WeddingRSVPFormPage() {
 
   if (submitted) {
     return (
-      <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#FFF9F0] via-[#FFF5EA] to-[#F7EFE3] flex items-center justify-center p-6">
-        <MagnoliaCorner className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 opacity-60" />
-        <MagnoliaCorner className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rotate-180 opacity-70" />
+      <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
+        <Image
+          src="/magnolia_no_stem.png"
+          alt=""
+          width={1024}
+          height={1024}
+          className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 opacity-60"
+        />
+        <Image
+          src="/magnolia_no_stem.png"
+          alt=""
+          width={1024}
+          height={1024}
+          className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rotate-300 opacity-70"
+        />
         <section className="relative z-10 w-full max-w-2xl">
           <div className="rounded-3xl border border-[#E8DDC9] bg-white/70 backdrop-blur-xl shadow-xl p-10 text-center">
             <h1 className="font-serif text-4xl sm:text-5xl leading-tight text-[#2E4E3F]">
@@ -159,9 +172,21 @@ export default function WeddingRSVPFormPage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#FFF9F0] via-[#FFF5EA] to-[#F7EFE3] flex items-center justify-center p-6">
-      <MagnoliaCorner className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 opacity-60" />
-      <MagnoliaCorner className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rotate-180 opacity-70" />
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
+      <Image
+        src="/magnolia_no_stem.png"
+        alt=""
+        width={1024}
+        height={1024}
+        className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 opacity-60"
+      />
+      <Image
+        src="/magnolia_no_stem.png"
+        alt=""
+        width={1024}
+        height={1024}
+        className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rotate-300 opacity-70"
+      />
 
       <section className="relative z-10 w-full max-w-3xl">
         <form

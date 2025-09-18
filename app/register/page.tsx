@@ -4,10 +4,18 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import {
+  CheckboxField,
+  MagCorners,
+  NumberField,
+  SelectField,
+  TextAreaField,
+  TextField,
+} from "@/components";
 
-// Save as app/rsvp/page.tsx (Next.js App Router)
+// TEMP THIS WILL BE A SSC
 export default function WeddingRSVPFormPage() {
-  const dateText = "Saturday, May 16, 2026"; // ← update to your wedding date
+  const dateText = "Saturday, May 16, 2026";
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -15,7 +23,7 @@ export default function WeddingRSVPFormPage() {
     const p = searchParams?.get("attending");
     if (p === "yes") return true;
     if (p === "no") return false;
-    return undefined; // force a choice
+    return undefined;
   }, [searchParams]);
 
   const [attending, setAttending] = useState<boolean | undefined>(
@@ -87,7 +95,7 @@ export default function WeddingRSVPFormPage() {
       });
       if (!res.ok) throw new Error(`Submission failed (${res.status})`);
       setSubmitted(true);
-    } catch (err: any) {
+    } catch (err) {
       // If you haven't built the API yet, we'll still show a soft success so testing feels nice
       console.warn("/api/rsvp not implemented; showing local success.", err);
       setSubmitted(true);
@@ -122,20 +130,7 @@ export default function WeddingRSVPFormPage() {
   if (submitted) {
     return (
       <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
-        <Image
-          src="/magnolia_no_stem.png"
-          alt=""
-          width={1024}
-          height={1024}
-          className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 opacity-60"
-        />
-        <Image
-          src="/magnolia_no_stem.png"
-          alt=""
-          width={1024}
-          height={1024}
-          className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rotate-300 opacity-70"
-        />
+        <MagCorners />
         <section className="relative z-10 w-full max-w-2xl">
           <div className="rounded-3xl border border-[#E8DDC9] bg-white/70 backdrop-blur-xl shadow-xl p-10 text-center">
             <h1 className="font-serif text-4xl sm:text-5xl leading-tight text-[#2E4E3F]">
@@ -202,7 +197,6 @@ export default function WeddingRSVPFormPage() {
           <p className="mt-2 text-sm text-[#7A846F]">{dateText}</p>
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
 
-          {/* Attendance */}
           <fieldset className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <legend className="col-span-1 sm:col-span-3 mb-1 text-sm font-medium text-[#4F5E50]">
               Will you attend?
@@ -241,7 +235,6 @@ export default function WeddingRSVPFormPage() {
             </label>
           </fieldset>
 
-          {/* Contact */}
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <TextField
               label="Full name"
@@ -279,7 +272,6 @@ export default function WeddingRSVPFormPage() {
             />
           </div>
 
-          {/* Address */}
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-6">
             <TextField
               className="sm:col-span-6"
@@ -315,7 +307,6 @@ export default function WeddingRSVPFormPage() {
             />
           </div>
 
-          {/* Party size */}
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
             <NumberField
               label="# in your party (including you)"
@@ -351,7 +342,6 @@ export default function WeddingRSVPFormPage() {
             </div>
           )}
 
-          {/* Fun extras */}
           <div className="mt-8 grid grid-cols-1 gap-4">
             <TextAreaField
               label="Song you’d love to hear"
@@ -409,217 +399,5 @@ export default function WeddingRSVPFormPage() {
         </form>
       </section>
     </main>
-  );
-}
-
-/* ——— Styled Field Components ——— */
-function TextField({
-  label,
-  value,
-  onChange,
-  className = "",
-  required = false,
-  placeholder = "",
-  type = "text",
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  className?: string;
-  required?: boolean;
-  placeholder?: string;
-  type?: string;
-}) {
-  return (
-    <label className={`block ${className}`}>
-      <span className="mb-1 block text-sm font-medium text-[#4F5E50]">
-        {label}
-        {required && <span className="text-[#CAA55A]"> *</span>}
-      </span>
-      <input
-        type={type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        required={required}
-        placeholder={placeholder}
-        className="w-full rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F] shadow-sm outline-none placeholder:text-[#A39A86] focus:border-[#CAA55A] focus:ring-2 focus:ring-[#CAA55A]"
-      />
-    </label>
-  );
-}
-
-function NumberField({
-  label,
-  value,
-  onChange,
-  min = 0,
-  max = 99,
-  className = "",
-}: {
-  label: string;
-  value: number;
-  onChange: (n: number) => void;
-  min?: number;
-  max?: number;
-  className?: string;
-}) {
-  return (
-    <label className={`block ${className}`}>
-      <span className="mb-1 block text-sm font-medium text-[#4F5E50]">
-        {label}
-      </span>
-      <input
-        type="number"
-        min={min}
-        max={max}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F] shadow-sm outline-none focus:border-[#CAA55A] focus:ring-2 focus:ring-[#CAA55A]"
-      />
-    </label>
-  );
-}
-
-function TextAreaField({
-  label,
-  value,
-  onChange,
-  placeholder = "",
-  className = "",
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-  className?: string;
-}) {
-  return (
-    <label className={`block ${className}`}>
-      <span className="mb-1 block text-sm font-medium text-[#4F5E50]">
-        {label}
-      </span>
-      <textarea
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        rows={4}
-        placeholder={placeholder}
-        className="w-full rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F] shadow-sm outline-none placeholder:text-[#A39A86] focus:border-[#CAA55A] focus:ring-2 focus:ring-[#CAA55A]"
-      />
-    </label>
-  );
-}
-
-function CheckboxField({
-  label,
-  checked,
-  onChange,
-}: {
-  label: string;
-  checked: boolean;
-  onChange: (v: boolean) => void;
-}) {
-  return (
-    <label className="flex items-center gap-2 rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]">
-      <input
-        type="checkbox"
-        className="accent-[#2E4E3F]"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-      {label}
-    </label>
-  );
-}
-
-function SelectField({
-  label,
-  value,
-  onChange,
-  options,
-  placeholder = "Select",
-  className = "",
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: string[];
-  placeholder?: string;
-  className?: string;
-}) {
-  return (
-    <label className={`block ${className}`}>
-      <span className="mb-1 block text-sm font-medium text-[#4F5E50]">
-        {label}
-      </span>
-      <select
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F] shadow-sm outline-none focus:border-[#CAA55A] focus:ring-2 focus:ring-[#CAA55A]"
-      >
-        <option value="" disabled>
-          {placeholder}
-        </option>
-        {options.map((opt) => (
-          <option key={opt} value={opt}>
-            {opt}
-          </option>
-        ))}
-      </select>
-    </label>
-  );
-}
-
-/* ——— Magnolia Corner Decoration ——— */
-function MagnoliaCorner({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 200 200" aria-hidden="true">
-      <defs>
-        <radialGradient id="petal" cx="50%" cy="50%" r="60%">
-          <stop offset="0%" stopColor="#FFFAF2" />
-          <stop offset="60%" stopColor="#F7EFE2" />
-          <stop offset="100%" stopColor="#EDE2CD" />
-        </radialGradient>
-        <linearGradient id="leaf" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#3E5F4D" />
-          <stop offset="100%" stopColor="#2E4E3F" />
-        </linearGradient>
-      </defs>
-
-      <ellipse
-        cx="42"
-        cy="152"
-        rx="16"
-        ry="36"
-        fill="url(#leaf)"
-        transform="rotate(-20 42 152)"
-        opacity="0.85"
-      />
-      <ellipse
-        cx="162"
-        cy="38"
-        rx="16"
-        ry="36"
-        fill="url(#leaf)"
-        transform="rotate(-15 162 38)"
-        opacity="0.85"
-      />
-
-      <g transform="translate(100,100)">
-        <ellipse rx="22" ry="54" fill="url(#petal)" transform="rotate(0)" />
-        <ellipse rx="22" ry="54" fill="url(#petal)" transform="rotate(60)" />
-        <ellipse rx="22" ry="54" fill="url(#petal)" transform="rotate(120)" />
-        <ellipse rx="22" ry="54" fill="url(#petal)" transform="rotate(180)" />
-        <ellipse rx="22" ry="54" fill="url(#petal)" transform="rotate(240)" />
-        <ellipse rx="22" ry="54" fill="url(#petal)" transform="rotate(300)" />
-        <circle r="12" fill="#CAA55A" stroke="#B28B3F" strokeWidth="1.25" />
-      </g>
-
-      <g opacity="0.28">
-        <circle cx="18" cy="182" r="2" fill="#CAA55A" />
-        <circle cx="30" cy="166" r="1.5" fill="#CAA55A" />
-        <circle cx="174" cy="18" r="2" fill="#CAA55A" />
-        <circle cx="160" cy="34" r="1.5" fill="#CAA55A" />
-      </g>
-    </svg>
   );
 }

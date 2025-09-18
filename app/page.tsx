@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { formatDateLong, formatDateShort } from "@/helpers";
 import {
@@ -9,6 +8,7 @@ import {
   AccordionItem,
   Countdown,
   AddCalenderButton,
+  MagCorners,
 } from "@/components";
 
 export default function HomePage() {
@@ -21,26 +21,11 @@ export default function HomePage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b  text-[#2E4E3F]">
-      <Image
-        src="/magnolia_no_stem.png"
-        alt="Decorative magnolia"
-        width={1024}
-        height={1024}
-        className="pointer-events-none select-none absolute -top-20 -left-20 h-72 w-72 rotate-[140deg] opacity-60"
-        priority
-      />
-      <Image
-        src="/magnolia_no_stem.png"
-        alt="Decorative magnolia"
-        width={1024}
-        height={1024}
-        className="pointer-events-none select-none absolute -bottom-24 -right-24 h-80 w-80 rotate-[320deg] opacity-70"
-        priority
-      />
+      <MagCorners />
 
       <header className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
         <div className="font-serif text-xl sm:text-2xl text-white/90">
-          Hannah & Hayden's Wedding
+          Hannah & Hayden&apos;s Wedding
         </div>
         <nav className="hidden gap-6 text-sm text-white/80 sm:flex">
           <Link href="/rsvp" className="hover:text-white">

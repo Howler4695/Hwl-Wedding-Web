@@ -1,5 +1,3 @@
-export { default as MagnoliaCorner } from "./MagnoliaCorner/MagnoliaCorner";
-export { MagnoliaCornerDetailed as MagnoliaCornerDetailed } from "./MagnoliaCorner/MagnoliaCorner";
 export { default as GoldFrame } from "./GoldFrame/GoldFrame";
 export { default as Card } from "./Cards/Card";
 export { default as InfoCard } from "./Cards/InfoCard";
@@ -10,3 +8,9 @@ export { default as AccordionItem } from "./Accordions/AccordionItem";
 export { default as Countdown } from "./Countdown/Countdown";
 export { LogoFull as LogoFull } from "./Logo/Logo";
 export { LogoBadge as LogoBadge } from "./Logo/Logo";
+export { MagCorners as MagCorners } from "./Background/Corners";
+export { default as TextField } from "./Fields/TextField";
+export { default as NumberField } from "./Fields/NumberField";
+export { default as TextAreaField } from "./Fields/TextAreaField";
+export { default as CheckboxField } from "./Fields/CheckboxField";
+export { default as SelectField } from "./Fields/SelectField";

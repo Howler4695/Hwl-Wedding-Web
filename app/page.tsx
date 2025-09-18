@@ -19,8 +19,6 @@ export default function HomePage() {
   const RECEPTION_VENUE = "Propinquity";
   const HAS_GOLD_OUTLINE = false;
 
-  const targetDate = new Date(WEDDING_DATE);
-
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b  text-[#2E4E3F]">
       <Image
@@ -73,11 +71,11 @@ export default function HomePage() {
           </h1>
           <div className="mx-auto my-5 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
           <p className="text-[#4F5E50]">
-            {formatDateLong(targetDate)} · {CITY_STATE}
+            {formatDateLong(WEDDING_DATE)} · {CITY_STATE}
           </p>
 
           <div className="mt-6">
-            <Countdown target={targetDate} />
+            <Countdown weddingTarget={WEDDING_DATE} />
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 justify-evenly sm:justify-normal">
@@ -231,7 +229,7 @@ export default function HomePage() {
           href="/register"
           className="block w-full rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-center text-white shadow-lg"
         >
-          RSVP for {formatDateShort(targetDate)}
+          RSVP for {formatDateShort(WEDDING_DATE)}
         </Link>
       </div>
 

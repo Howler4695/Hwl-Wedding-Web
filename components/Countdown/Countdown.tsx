@@ -1,7 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-export default function Countdown({ target }: { target: Date }) {
+export default function Countdown({
+  weddingTarget,
+}: {
+  weddingTarget: string;
+}) {
+  const target = useMemo(() => new Date(weddingTarget), [weddingTarget]);
   const [now, setNow] = useState<Date>(new Date());
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 1000);

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
   CheckboxField,
@@ -16,11 +16,11 @@ import {
 // TEMP THIS WILL BE A SSC
 export default function WeddingRSVPFormPage() {
   const dateText = "Saturday, May 16, 2026";
-  const searchParams = useSearchParams();
+  const searchParams = "yes";
   const router = useRouter();
 
   const initialAttending = useMemo(() => {
-    const p = searchParams?.get("attending");
+    const p = searchParams;
     if (p === "yes") return true;
     if (p === "no") return false;
     return undefined;

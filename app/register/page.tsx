@@ -168,21 +168,7 @@ export default function WeddingRSVPFormPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
-      <Image
-        src="/magnolia_no_stem.png"
-        alt=""
-        width={1024}
-        height={1024}
-        className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 opacity-60"
-      />
-      <Image
-        src="/magnolia_no_stem.png"
-        alt=""
-        width={1024}
-        height={1024}
-        className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rotate-300 opacity-70"
-      />
-
+      <MagCorners />
       <section className="relative z-10 w-full max-w-3xl">
         <form
           onSubmit={handleSubmit}

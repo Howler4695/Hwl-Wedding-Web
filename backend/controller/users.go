@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"wedding/models"
 
@@ -24,6 +25,7 @@ func (ct *Controller) CreateUserInitial(c *gin.Context) {
 
 	if err := ct.Repo.CreateUser(&mNewUser); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 

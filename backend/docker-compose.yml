@@ -1,5 +1,5 @@
 services:
-  beskar-db:
+  wedding-db:
     image: postgres:17.4
     volumes:
       - ./SQL:/docker-entrypoint-initdb.d

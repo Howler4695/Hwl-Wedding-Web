@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -22,13 +23,27 @@ func main() {
 		fmt.Println(".env detected: using .env")
 	}
 
-	POSTGRES_URL := os.Getenv("PG_URL")
 	HOST_URL := os.Getenv("HOST_URL")
 
+	cfg, err := pgxpool.ParseConfig("")
+	if err != nil {
+		log.Fatal(err)
+	}
+	cfg.ConnConfig.Host = os.Getenv("DB_HOST")
+	cfg.ConnConfig.Port = 5432
+	cfg.ConnConfig.Database = os.Getenv("DB_DATABASE")
+	cfg.ConnConfig.User = os.Getenv("DB_USER")
+	cfg.ConnConfig.Password = os.Getenv("DB_PASSWORD")
+	cfg.ConnConfig.TLSConfig = nil
+	// cfg.ConnConfig.Config.RuntimeParams["sslmode"] = os.Getenv("DB_SSLMODE")
+
+	if err != nil {
+		log.Fatal(err)
+	}
 	router := gin.Default()
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 
-	pool, err := pgxpool.New(context.Background(), POSTGRES_URL)
+	pool, err := pgxpool.NewWithConfig(context.Background(), cfg)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)

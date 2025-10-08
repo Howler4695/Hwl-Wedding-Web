@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"fmt"
 	"log"
 	"os"
@@ -35,26 +37,26 @@ func main() {
 	cfg.ConnConfig.User = os.Getenv("DB_USER")
 	cfg.ConnConfig.Password = os.Getenv("DB_PASSWORD")
 	cfg.ConnConfig.TLSConfig = nil
-	cfg.ConnConfig.Config.RuntimeParams["sslmode"] = os.Getenv("DB_SSLMODE")
-	cfg.ConnConfig.Config.RuntimeParams["sslrootcert"] = os.Getenv("DB_ROOT_CERT")
-	// Use system cert pool (ensure ca-certificates are installed)
-	// roots, err := x509.SystemCertPool()
-	// if err != nil || roots == nil {
-	// 	roots = x509.NewCertPool()
-	// }
 
-	// cfg.ConnConfig.TLSConfig = &tls.Config{
-	// 	ServerName: os.Getenv("DB_HOST"),
-	// 	RootCAs:    roots,
-	// 	MinVersion: tls.VersionTLS12,
-	// }
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	roots, _ := x509.SystemCertPool()
+	if roots == nil {
+		roots = x509.NewCertPool()
+	}
+	pem, _ := os.ReadFile("/etc/ssl/certs/rds-ca-bundle.pem")
+	roots.AppendCertsFromPEM(pem)
+
+	cfg.ConnConfig.TLSConfig = &tls.Config{
+		ServerName: "database-1-instance-1.cbue6s2qw23y.us-east-2.rds.amazonaws.com",
+		RootCAs:    roots,
+		MinVersion: tls.VersionTLS12,
+	}
+	pool, err := pgxpool.NewWithConfig(context.Background(), cfg)
+	if err != nil {
+		log.Fatal(err)
+	}
 	router := gin.Default()
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 
-	pool, err := pgxpool.NewWithConfig(context.Background(), cfg)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)

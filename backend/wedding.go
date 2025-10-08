@@ -38,18 +38,22 @@ func main() {
 	cfg.ConnConfig.Password = os.Getenv("DB_PASSWORD")
 	cfg.ConnConfig.TLSConfig = nil
 
-	roots, _ := x509.SystemCertPool()
-	if roots == nil {
-		roots = x509.NewCertPool()
-	}
-	pem, _ := os.ReadFile(os.Getenv("DB_ROOTCERT_LOCATION"))
-	roots.AppendCertsFromPEM(pem)
+	if os.Getenv("DB_MODE") == "remote" {
 
-	cfg.ConnConfig.TLSConfig = &tls.Config{
-		ServerName: os.Getenv("DB_HOST"),
-		RootCAs:    roots,
-		MinVersion: tls.VersionTLS12,
+		roots, _ := x509.SystemCertPool()
+		if roots == nil {
+			roots = x509.NewCertPool()
+		}
+		pem, _ := os.ReadFile(os.Getenv("DB_ROOTCERT_LOCATION"))
+		roots.AppendCertsFromPEM(pem)
+
+		cfg.ConnConfig.TLSConfig = &tls.Config{
+			ServerName: os.Getenv("DB_HOST"),
+			RootCAs:    roots,
+			MinVersion: tls.VersionTLS12,
+		}
 	}
+
 	pool, err := pgxpool.NewWithConfig(context.Background(), cfg)
 	if err != nil {
 		log.Fatal(err)

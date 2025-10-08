@@ -60,3 +60,13 @@ func (r *Repo) CreatePlusOnes(plusOnes *[]models.PlusOne) error {
 
 	return nil
 }
+
+func (r *Repo) DeleteUser(u *models.User) error {
+	_, err := r.PgPool.Exec(context.Background(), "delete from users where user_id = $1", u.Id)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

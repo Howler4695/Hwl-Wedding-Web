@@ -26,32 +26,32 @@ func (ct *Controller) CreateUserInitial(c *gin.Context) {
 	mAttendance := models.Attendance{UserId: newId, Attending: newUser.Attending}
 
 	if err := ct.Repo.CreateUser(&mNewUser); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		log.Println(err.Error())
-		return
-	}
-
-	if err := ct.Repo.CreateContact(&mNewContact); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		log.Println(err.Error())
-		return
-	}
-
-	if err := ct.Repo.CreateAddress(&mNewAddress); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		log.Println(err.Error())
-		return
-	}
-
-	if err := ct.Repo.CreatePlusOnes(&mPlusOnes); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		log.Println(err.Error())
+		ct.Services.UserCreateRepoError(err, ct.Repo, &mNewUser, c)
 		return
 	}
 
 	if err := ct.Repo.CreateAttendance(&mAttendance); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		log.Println(err.Error())
+		ct.Services.UserCreateRepoError(err, ct.Repo, &mNewUser, c)
+		return
+	}
+
+	if newUser.Attending == false {
+		c.Status(http.StatusOK)
+		return
+	}
+
+	if err := ct.Repo.CreateContact(&mNewContact); err != nil {
+		ct.Services.UserCreateRepoError(err, ct.Repo, &mNewUser, c)
+		return
+	}
+
+	if err := ct.Repo.CreateAddress(&mNewAddress); err != nil {
+		ct.Services.UserCreateRepoError(err, ct.Repo, &mNewUser, c)
+		return
+	}
+
+	if err := ct.Repo.CreatePlusOnes(&mPlusOnes); err != nil {
+		ct.Services.UserCreateRepoError(err, ct.Repo, &mNewUser, c)
 		return
 	}
 

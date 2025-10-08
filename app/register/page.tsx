@@ -1,4 +1,3 @@
-// app/rsvp/page.tsx
 import { MagCorners } from "@/components";
 import { redirect } from "next/navigation";
 
@@ -56,6 +55,7 @@ export default async function WeddingRSVPFormPage() {
       number_plusones,
       plusones,
       notes,
+      attending: true,
     };
 
     const res = await fetch("http://localhost:8090/user/create", {
@@ -96,7 +96,7 @@ export default async function WeddingRSVPFormPage() {
               <input
                 name="firstName"
                 required
-                placeholder="Jane Magnolia"
+                placeholder="Hannah"
                 className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
               />
             </label>
@@ -107,7 +107,7 @@ export default async function WeddingRSVPFormPage() {
               <input
                 name="lastName"
                 required
-                placeholder="Jane Magnolia"
+                placeholder="Kounter"
                 className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
               />
             </label>
@@ -119,7 +119,7 @@ export default async function WeddingRSVPFormPage() {
                 type="email"
                 name="email"
                 required
-                placeholder="jane@example.com"
+                placeholder="hannah.kounter@example.com"
                 className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
               />
             </label>
@@ -183,32 +183,6 @@ export default async function WeddingRSVPFormPage() {
                 name="zip"
                 inputMode="numeric"
                 pattern="[0-9]*"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-          </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <label className="flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                # in your party (including you)
-              </span>
-              <input
-                type="number"
-                name="partySize"
-                min={1}
-                max={10}
-                defaultValue={1}
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="sm:col-span-2 flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                Dietary restrictions (optional)
-              </span>
-              <input
-                name="dietary"
-                placeholder="Vegetarian, nut allergy, etc."
                 className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
               />
             </label>

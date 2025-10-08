@@ -42,7 +42,7 @@ func main() {
 	if roots == nil {
 		roots = x509.NewCertPool()
 	}
-	pem, _ := os.ReadFile("/etc/ssl/certs/rds-ca-bundle.pem")
+	pem, _ := os.ReadFile("/etc/ssl/certs/rds-us-east-2-bundle.pem")
 	roots.AppendCertsFromPEM(pem)
 
 	cfg.ConnConfig.TLSConfig = &tls.Config{

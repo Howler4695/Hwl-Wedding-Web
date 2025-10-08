@@ -14,6 +14,7 @@ func (ct *Controller) CreateUserInitial(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&newUser); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 
@@ -31,16 +32,19 @@ func (ct *Controller) CreateUserInitial(c *gin.Context) {
 
 	if err := ct.Repo.CreateContact(&mNewContact); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 
 	if err := ct.Repo.CreateAddress(&mNewAddress); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 
 	if err := ct.Repo.CreatePlusOnes(&mPlusOnes); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		fmt.Println(err.Error())
 		return
 	}
 

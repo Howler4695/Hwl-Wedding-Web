@@ -16,7 +16,7 @@ type Address struct {
 	LineTwo string    `db:"address_line_two"`
 	State   string    `db:"state"`
 	City    string    `db:"city"`
-	ZipCode int       `db:"zip_code"`
+	ZipCode string    `db:"zip_code"`
 }
 
 type Contact struct {

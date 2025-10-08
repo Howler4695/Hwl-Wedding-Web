@@ -42,11 +42,11 @@ func main() {
 	if roots == nil {
 		roots = x509.NewCertPool()
 	}
-	pem, _ := os.ReadFile("/etc/ssl/certs/rds-us-east-2-bundle.pem")
+	pem, _ := os.ReadFile(os.Getenv("DB_ROOTCERT_LOCATION"))
 	roots.AppendCertsFromPEM(pem)
 
 	cfg.ConnConfig.TLSConfig = &tls.Config{
-		ServerName: "database-1-instance-1.cbue6s2qw23y.us-east-2.rds.amazonaws.com",
+		ServerName: os.Getenv("DB_HOST"),
 		RootCAs:    roots,
 		MinVersion: tls.VersionTLS12,
 	}

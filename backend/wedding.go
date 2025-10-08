@@ -54,6 +54,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	gin.SetMode(os.Getenv("GIN_MODE"))
 	router := gin.Default()
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 

@@ -35,15 +35,13 @@ export default async function WeddingRSVPFormPage() {
     const address2 = String(formData.get("address2") || "");
     const city = String(formData.get("city") || "");
     const stateProv = String(formData.get("stateProv") || "");
-    const zipStr = String(formData.get("zip") || "");
+    const zip = String(formData.get("zip") || "");
     const partySize = Number(formData.get("partySize") || 1);
     const guestNamesRaw = String(formData.get("guestNames") || "");
     const notes = String(formData.get("notes") || "");
 
     const plusones = parseGuestNames(guestNamesRaw);
     const number_plusones = Math.max(0, partySize - 1);
-
-    const zipNum = /^\d+$/.test(zipStr) ? Number(zipStr) : 0;
 
     const payload = {
       firstName,
@@ -52,7 +50,7 @@ export default async function WeddingRSVPFormPage() {
       address_line_two: address2,
       city,
       state: stateProv,
-      zip: zipNum,
+      zip: zip,
       email,
       phone_number: phone,
       number_plusones,

@@ -6,6 +6,8 @@ type PlusOneName struct {
 }
 
 type UserCreateDTO struct {
+	NumberPlusOnes int           `json:"number_plusones"`
+	Attending      bool          `json:"attending"`
 	FirstName      string        `json:"firstname"`
 	LastName       string        `json:"lastname"`
 	AddressLineOne string        `json:"address_line_one"`
@@ -15,7 +17,6 @@ type UserCreateDTO struct {
 	Zip            string        `json:"zip"`
 	Email          string        `json:"email"`
 	PhoneNumber    string        `json:"phone_number"`
-	NumberPlusOnes int           `json:"number_plusones"`
-	PlusOnes       []PlusOneName `json:"plusones"`
 	Notes          string        `json:"notes"`
+	PlusOnes       []PlusOneName `json:"plusones"`
 }

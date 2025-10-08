@@ -23,6 +23,7 @@ func (ct *Controller) CreateUserInitial(c *gin.Context) {
 	mNewContact := models.Contact{UserId: newId, Email: newUser.Email, PhoneNumber: newUser.PhoneNumber}
 	mNewAddress := models.Address{UserId: newId, LineOne: newUser.AddressLineOne, LineTwo: newUser.AddressLineTwo, City: newUser.City, State: newUser.State, ZipCode: newUser.Zip}
 	mPlusOnes := ct.Services.ConvertPlusOnes(newUser.PlusOnes, newId)
+	mAttendance := models.Attendance{UserId: newId, Attending: newUser.Attending}
 
 	if err := ct.Repo.CreateUser(&mNewUser); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -43,6 +44,12 @@ func (ct *Controller) CreateUserInitial(c *gin.Context) {
 	}
 
 	if err := ct.Repo.CreatePlusOnes(&mPlusOnes); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		log.Println(err.Error())
+		return
+	}
+
+	if err := ct.Repo.CreateAttendance(&mAttendance); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		log.Println(err.Error())
 		return

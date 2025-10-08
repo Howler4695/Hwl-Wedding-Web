@@ -37,6 +37,16 @@ func (r *Repo) CreateContact(c *models.Contact) error {
 	return nil
 }
 
+func (r *Repo) CreateAttendance(a *models.Attendance) error {
+	_, err := r.PgPool.Exec(context.Background(), "insert into attendance(fk_user_id, attending) values($1, $2)", a.UserId, a.Attending)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (r *Repo) CreatePlusOnes(plusOnes *[]models.PlusOne) error {
 	plusOneRows := make([][]interface{}, len(*plusOnes))
 	for i, po := range *plusOnes {

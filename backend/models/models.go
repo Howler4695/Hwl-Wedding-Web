@@ -32,3 +32,9 @@ type PlusOne struct {
 	FirstName string    `db:"first_name"`
 	LastName  string    `db:"last_name"`
 }
+
+type Attendance struct {
+	Id        int       `db:"attendance_id"`
+	UserId    uuid.UUID `db:"fk_user_id"`
+	Attending bool      `db:"attending"`
+}

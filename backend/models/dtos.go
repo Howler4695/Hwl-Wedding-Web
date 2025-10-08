@@ -12,7 +12,7 @@ type UserCreateDTO struct {
 	AddressLineTwo string        `json:"address_line_two"`
 	City           string        `json:"city"`
 	State          string        `json:"state"`
-	Zip            int           `json:"zip"`
+	Zip            string        `json:"zip"`
 	Email          string        `json:"email"`
 	PhoneNumber    string        `json:"phone_number"`
 	NumberPlusOnes int           `json:"number_plusones"`

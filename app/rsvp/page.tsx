@@ -9,12 +9,12 @@ export default function WeddingInvitePage() {
       <MagCorners />
 
       <section className="relative z-10 w-full max-w-2xl">
-        <div className="rounded-3xl border-2 border-white/10  bg-[#c6c0a1] backdrop-blur-xl shadow-2xl p-10 ">
+        <div className="rounded-3xl border-2 border-white/10  bg-white/70 backdrop-blur-xl shadow-2xl p-10 ">
           <p className="mb-2 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">
             Official Invitation
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl leading-tight text-[#2E4E3F]">
-            Congratulations—you&apos;re invited to our wedding!
+            Congrats you&apos;re invited to our wedding!
           </h1>
 
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />

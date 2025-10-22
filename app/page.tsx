@@ -83,11 +83,11 @@ export default function HomePage() {
           <Card useGold={HAS_GOLD_OUTLINE}>
             <h2 className="font-serif text-2xl sm:text-3xl">The Ceremony</h2>
             <p className="mt-2 text-sm text-[#7A846F]">{CEREMONY_VENUE}</p>
-            <p className="mt-1 text-[#4F5E50]">4:30 PM · Garden Lawn</p>
+            <p className="mt-1 text-[#4F5E50]">4:30 PM · Grace Church</p>
             <ul className="mt-4 list-disc pl-5 text-sm text-[#4F5E50]">
-              <li>Outdoor seating (shaded)</li>
-              <li>Attire: Garden formal</li>
-              <li>Shuttle service from hotel block</li>
+              <li>Indoor Searting</li>
+              <li>Attire: Formal</li>
+              <li>Free Parking next to church</li>
             </ul>
           </Card>
           <Card useGold={HAS_GOLD_OUTLINE}>
@@ -95,9 +95,9 @@ export default function HomePage() {
             <p className="mt-2 text-sm text-[#7A846F]">{RECEPTION_VENUE}</p>
             <p className="mt-1 text-[#4F5E50]">6:00 PM · Dinner & Dancing</p>
             <ul className="mt-4 list-disc pl-5 text-sm text-[#4F5E50]">
-              <li>Plated dinner (menu options later)</li>
-              <li>Open bar · Live band</li>
-              <li>After‑party bonfire on the beach</li>
+              <li>Plated dinner</li>
+              <li>Bar · Dance Floor · Cornhole</li>
+              <li>A fun night to remember</li>
             </ul>
           </Card>
         </div>
@@ -129,7 +129,7 @@ export default function HomePage() {
           <StoryCard
             title="Next Chapter"
             subtitle="May 2026"
-            text="Can’t wait to celebrate with our favorite people."
+            text="Can't wait to celebrate with our favorite people."
           />
         </div>
       </section>
@@ -141,16 +141,16 @@ export default function HomePage() {
         <h2 className="font-serif text-3xl text-white">Travel & Lodging</h2>
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
           <InfoCard
-            label="Hotel Block"
-            text="Magnolia Dunes Inn — mention ‘Kounter‑Howle’ for group rate."
+            label="Accommodations"
+            text="Best Western St. Franciville · The Myrtles · Hotel Francis · Family in area"
           />
           <InfoCard
-            label="Airports"
-            text="Closest: PNS (Pensacola), MOB (Mobile) — ~1.5 hrs drive."
+            label="Airport"
+            text="Closest: BTR (Baton Rouge) — ~30 min drive."
           />
           <InfoCard
             label="Getting Around"
-            text="Free shuttles wedding day; rideshare available in area."
+            text="You'll be driving, recommend car pooling with friends and family"
           />
         </div>
         <div className="mt-6 rounded-2xl border border-[#E8DDC9] bg-white/60 p-4 text-sm text-[#4F5E50]">
@@ -164,17 +164,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section
+      {/* <section
         id="registry"
         className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
       >
         <h2 className="font-serif text-3xl text-white/90">Registry</h2>
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <RegistryButton href="#" label="Amazon" />
-          <RegistryButton href="#" label="Target" />
-          <RegistryButton href="#" label="Zola" />
+          <RegistryButton
+            href="https://www.amazon.com/wedding/share/thehowles"
+            label="Amazon"
+          />
         </div>
-      </section>
+      </section> */}
 
       <section className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6">
         <h2 className="font-serif text-3xl text-white/90">Photos</h2>
@@ -194,21 +195,23 @@ export default function HomePage() {
       >
         <h2 className="font-serif text-3xl text-white/90">FAQs</h2>
         <div className="mt-4 divide-y divide-[#E8DDC9] rounded-2xl border border-[#E8DDC9] bg-white/60">
-          <AccordionItem
-            q="What’s the dress code?"
-            a="Garden formal. Think suits or cocktail dresses; breathable fabrics encouraged."
-          />
+          <AccordionItem q="What's the dress code?" a="Not Decided." />
           <AccordionItem
             q="Can I bring a guest?"
-            a="Please check your invitation; space is limited at the venue."
+            a="Yes, but plus one's may be limited due to space concerns."
           />
-          <AccordionItem
-            q="Are kids welcome?"
-            a="We love your little ones! We’ll share details on childcare options soon."
-          />
+          <AccordionItem q="Are kids welcome?" a="Absolutely!" />
         </div>
       </section>
 
+      <div className="fixed bottom-20 left-0 right-0 z-20 px-4 sm:hidden">
+        <Link
+          href="https://www.amazon.com/wedding/share/thehowles"
+          className="block w-full rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] text-[#6B725E] px-6 py-3 text-center shadow-lg"
+        >
+          Registry
+        </Link>
+      </div>
       <div className="fixed bottom-4 left-0 right-0 z-20 px-4 sm:hidden">
         <Link
           href="/register"

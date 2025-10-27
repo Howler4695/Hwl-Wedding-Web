@@ -4,19 +4,19 @@ import {
   Card,
   InfoCard,
   StoryCard,
-  RegistryButton,
   AccordionItem,
   Countdown,
   AddCalenderButton,
   MagCorners,
 } from "@/components";
+import Image from "next/image";
 
 export default function HomePage() {
   const COUPLE = "Hannah & Hayden";
   const WEDDING_DATE = "2026-05-16T16:30:00-05:00";
   const CITY_STATE = "Saint Francisville, Louisiana";
-  const CEREMONY_VENUE = "Grace Epicopal Church";
-  const RECEPTION_VENUE = "Propinquity";
+  // const CEREMONY_VENUE = "Grace Epicopal Church";
+  // const RECEPTION_VENUE = "Propinquity";
   const HAS_GOLD_OUTLINE = false;
 
   return (
@@ -32,12 +32,18 @@ export default function HomePage() {
             RSVP
           </Link>
           <Link href="#events" className="hover:text-white">
-            Events
+            Photos
+          </Link>
+          <Link href="#events" className="hover:text-white">
+            Details
           </Link>
           <Link href="#travel" className="hover:text-white">
             Travel
           </Link>
-          <Link href="#registry" className="hover:text-white">
+          <Link
+            href="https://www.amazon.com/wedding/share/thehowles"
+            className="hover:text-white"
+          >
             Registry
           </Link>
           <Link href="#faqs" className="hover:text-white">
@@ -46,7 +52,7 @@ export default function HomePage() {
         </nav>
       </header>
 
-      <section className="relative z-10 mx-auto mt-2 w-full max-w-5xl px-6">
+      <section className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6">
         <Card pad={32} useGold={HAS_GOLD_OUTLINE}>
           <p className="mb-1 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">
             Welcome
@@ -75,7 +81,7 @@ export default function HomePage() {
         </Card>
       </section>
 
-      <section
+      {/* <section
         id="events"
         className="relative z-10 mx-auto mt-12 w-full max-w-6xl px-6"
       >
@@ -101,6 +107,24 @@ export default function HomePage() {
             </ul>
           </Card>
         </div>
+      </section> */}
+
+      <section className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6">
+        <h2 className="font-serif text-3xl text-white/90">Photos</h2>
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Image
+              src={`/front_pic_${i}.jpg`}
+              alt={`image_${i}`}
+              width={4000}
+              height={4000}
+              key={i}
+              className="aspect-square rounded-xl border border-[#E8DDC9] bg-white/60"
+              placeholder="blur"
+              blurDataURL={`/blur.png`}
+            />
+          ))}
+        </div>
       </section>
 
       <section className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6">
@@ -108,28 +132,33 @@ export default function HomePage() {
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
           <StoryCard
             title="First Hello"
-            subtitle="January 2025"
-            text="Went on a date at El patron while Hannah was on a drill weekend."
+            subtitle="July 2024"
+            text="Hannah and Hayden meet online."
           />
           <StoryCard
-            title="Let's See Where This Goes"
+            title="First Date"
+            subtitle="January 2025"
+            text="Hayden asks Hannah on a date over Mexican and Margaritas."
+          />
+          <StoryCard
+            title="It's Official"
             subtitle="Febuary 2025"
-            text="After an amazing date at Buccees, we decide to officially become a couple."
+            text="After an amazing date at Buccees, Hannah and Hayden decide to officially become a couple."
           />
           <StoryCard
             title="Future Pharmicist"
             subtitle="August 2025"
-            text="After years of hard work and saving, Hannah walks the stage receiving here whitecoat. Starting her 4 year journey in PharmD."
+            text="After years of hard work, Hannah receives her whitecoat. Marking the start of her 4 year journey to get her doctorate in pharmacy."
           />
           <StoryCard
-            title="Yes!"
+            title="She Said Yes!"
             subtitle="September 2025"
-            text="Hayden proposed at the Redburn in Auburn at sunset."
+            text="Hayden proposes at the Red Barn in Auburn at sunset. Hannah says YES!!"
           />
           <StoryCard
             title="Next Chapter"
             subtitle="May 2026"
-            text="Can't wait to celebrate with our favorite people."
+            text="We can't wait to celebrate with our favorite people!"
           />
         </div>
       </section>
@@ -154,12 +183,28 @@ export default function HomePage() {
           />
         </div>
         <div className="mt-6 rounded-2xl border border-[#E8DDC9] bg-white/60 p-4 text-sm text-[#4F5E50]">
-          <p className="mb-2 font-medium text-[#2E4E3F]">Map</p>
-          <div className="grid place-items-center rounded-xl border border-[#E8DDC9] bg-white/60 p-8 text-center">
-            <p>Embed Google Map here (venue & hotel pins).</p>
-            <p className="mt-2 text-xs text-[#7A846F]">
-              Replace this box with an iframe or custom map component.
-            </p>
+          <p className="mb-2 font-medium text-[#2E4E3F]">
+            Ceremony to Reception
+          </p>
+          <div className="grid place-items-center rounded-xl border border-[#E8DDC9] bg-white/60 p-2 sm:p-4 md:p-8 text-center overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1713.9856490238308!2d-91.38767971111108!3d30.775384993640916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x862431ebbabe965d%3A0xbee33abb5fa6bb05!2sGrace%20Church%20Of%20West%20Feliciana%2C%2011621%20Ferdinand%20St%2C%20St%20Francisville%2C%20LA%2070775!3m2!1d30.7763928!2d-91.38685459999999!4m5!1s0x8624314e887dd377%3A0xde5e3fd0eb4923fd!2sPropinquity%20Marker%2C%20Royal%20St%2C%20Saint%20Francisville%2C%20LA!3m2!1d30.7744167!2d-91.3865012!5e0!3m2!1sen!2sus!4v1761532419832!5m2!1sen!2sus"
+              width="600"
+              height="450"
+              className="border-0 hidden md:block"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1713.9856490238308!2d-91.38767971111108!3d30.775384993640916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x862431ebbabe965d%3A0xbee33abb5fa6bb05!2sGrace%20Church%20Of%20West%20Feliciana%2C%2011621%20Ferdinand%20St%2C%20St%20Francisville%2C%20LA%2070775!3m2!1d30.7763928!2d-91.38685459999999!4m5!1s0x8624314e887dd377%3A0xde5e3fd0eb4923fd!2sPropinquity%20Marker%2C%20Royal%20St%2C%20Saint%20Francisville%2C%20LA!3m2!1d30.7744167!2d-91.3865012!5e0!3m2!1sen!2sus!4v1761532419832!5m2!1sen!2sus"
+              width="270"
+              height="300"
+              className="border-0 md:hidden "
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
       </section>
@@ -177,30 +222,21 @@ export default function HomePage() {
         </div>
       </section> */}
 
-      <section className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6">
-        <h2 className="font-serif text-3xl text-white/90">Photos</h2>
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div
-              key={i}
-              className="aspect-square rounded-xl border border-[#E8DDC9] bg-white/60"
-            />
-          ))}
-        </div>
-      </section>
-
       <section
         id="faqs"
         className="relative z-10 mx-auto mt-14 w-full max-w-3xl px-6"
       >
         <h2 className="font-serif text-3xl text-white/90">FAQs</h2>
         <div className="mt-4 divide-y divide-[#E8DDC9] rounded-2xl border border-[#E8DDC9] bg-white/60">
-          <AccordionItem q="What's the dress code?" a="Not Decided." />
+          <AccordionItem q="What's the dress code?" a="Cocktail Attire." />
           <AccordionItem
             q="Can I bring a guest?"
             a="Yes, but plus one's may be limited due to space concerns."
           />
-          <AccordionItem q="Are kids welcome?" a="Absolutely!" />
+          <AccordionItem
+            q="Are kids welcome?"
+            a="Absolutely! Please make sure they're added to your party."
+          />
         </div>
       </section>
 

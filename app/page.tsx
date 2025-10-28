@@ -10,14 +10,19 @@ import {
   MagCorners,
 } from "@/components";
 import Image from "next/image";
+import { auth } from "@/auth";
 
-export default function HomePage() {
+export default async function HomePage() {
   const COUPLE = "Hannah & Hayden";
   const WEDDING_DATE = "2026-05-16T16:30:00-05:00";
   const CITY_STATE = "Saint Francisville, Louisiana";
   // const CEREMONY_VENUE = "Grace Epicopal Church";
   // const RECEPTION_VENUE = "Propinquity";
   const HAS_GOLD_OUTLINE = false;
+
+  const session = await auth();
+  const firstName = session?.user?.name;
+  console.log(session);
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b  text-[#2E4E3F]">
@@ -58,7 +63,7 @@ export default function HomePage() {
             Welcome
           </p>
           <h1 className="font-serif text-4xl leading-tight sm:text-6xl">
-            {COUPLE}
+            {firstName}
           </h1>
           <div className="mx-auto my-5 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
           <p className="text-[#4F5E50]">
@@ -71,7 +76,7 @@ export default function HomePage() {
 
           <div className="mt-8 flex flex-wrap items-center gap-3 justify-evenly sm:justify-normal">
             <Link
-              href="/register"
+              href="/rsvp"
               className="sm:inline-flex items-center justify-center hidden rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
             >
               RSVP Now

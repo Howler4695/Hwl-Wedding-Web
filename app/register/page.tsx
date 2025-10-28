@@ -26,15 +26,6 @@ export default async function WeddingRSVPFormPage() {
   async function createRSVP(formData: FormData) {
     "use server";
 
-    const firstName = String(formData.get("firstName"));
-    const lastName = String(formData.get("lastName"));
-    const email = String(formData.get("email") || "");
-    const phone = String(formData.get("phone") || "");
-    const address1 = String(formData.get("address1") || "");
-    const address2 = String(formData.get("address2") || "");
-    const city = String(formData.get("city") || "");
-    const stateProv = String(formData.get("stateProv") || "");
-    const zip = String(formData.get("zip") || "");
     const partySize = Number(formData.get("partySize") || 1);
     const guestNamesRaw = String(formData.get("guestNames") || "");
     const notes = String(formData.get("notes") || "");
@@ -43,15 +34,6 @@ export default async function WeddingRSVPFormPage() {
     const number_plusones = Math.max(0, partySize - 1);
 
     const payload = {
-      firstName,
-      lastName,
-      address_line_one: address1,
-      address_line_two: address2,
-      city,
-      state: stateProv,
-      zip: zip,
-      email,
-      phone_number: phone,
       number_plusones,
       plusones,
       notes,
@@ -87,107 +69,7 @@ export default async function WeddingRSVPFormPage() {
           </h1>
           <p className="mt-2 text-sm text-[#7A846F]">{dateText}</p>
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
-
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <label className="flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                First Name
-              </span>
-              <input
-                name="firstName"
-                required
-                placeholder="Hannah"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                Last Name
-              </span>
-              <input
-                name="lastName"
-                required
-                placeholder="Kounter"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                Email
-              </span>
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="hannah.kounter@example.com"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                Phone
-              </span>
-              <input
-                type="phone"
-                name="phone"
-                placeholder="(555) 123-4567"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-          </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-6">
-            <label className="sm:col-span-6 flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                Address line 1
-              </span>
-              <input
-                name="address1"
-                placeholder="123 Magnolia Ave"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="sm:col-span-6 flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                Address line 2
-              </span>
-              <input
-                name="address2"
-                placeholder="Apt, suite, etc."
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="sm:col-span-3 flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                City
-              </span>
-              <input
-                name="city"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="sm:col-span-2 flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                State/Province
-              </span>
-              <input
-                name="stateProv"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="sm:col-span-1 flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                ZIP
-              </span>
-              <input
-                name="zip"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-          </div>
-
+          \
           <div className="mt-4 grid grid-cols-1 gap-4">
             <label className="flex flex-col">
               <span className="mb-1 text-sm font-medium text-[#4F5E50]">
@@ -216,7 +98,6 @@ export default async function WeddingRSVPFormPage() {
               />
             </label>
           </div>
-
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <button
               type="submit"
@@ -231,7 +112,6 @@ export default async function WeddingRSVPFormPage() {
               Back to invite
             </a>
           </div>
-
           <p className="mt-6 text-center text-xs text-[#8C7E68]">
             Made by Hayden Howle
           </p>

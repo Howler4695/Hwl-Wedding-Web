@@ -7,6 +7,17 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
+func (r *Repo) GetUser(userId string) (*models.User, error) {
+	row, err := r.PgPool.Query(context.Background(), "select * from users where user_id=$1", userId)
+	user, err := pgx.CollectExactlyOneRow(row, pgx.RowToStructByName[models.User])
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
 func (r *Repo) CreateUser(u *models.User) error {
 	_, err := r.PgPool.Exec(context.Background(), "insert into users(user_id, first_name, last_name, notes) values($1, $2, $3, $4)", u.Id, u.FirstName, u.LastName, u.Notes)
 

@@ -9,6 +9,19 @@ import (
 	"github.com/google/uuid"
 )
 
+func (ct *Controller) GetUserInfo(c *gin.Context) {
+	userId := c.Param("user_id")
+
+	user, err := ct.Repo.GetUser(userId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, &user)
+
+}
+
 func (ct *Controller) CreateUserInitial(c *gin.Context) {
 	newUser := &models.UserCreateDTO{}
 

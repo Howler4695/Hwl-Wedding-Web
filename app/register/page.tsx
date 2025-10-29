@@ -40,7 +40,7 @@ export default async function WeddingRSVPFormPage() {
       attending: true,
     };
 
-    const res = await fetch("http://localhost:8090/user/create", {
+    const res = await fetch(`${process.env.BACKEND_URL}/user/create`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

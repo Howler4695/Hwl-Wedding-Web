@@ -17,6 +17,7 @@ func (r *Routes) MapAllRoutes() {
 
 func (r *Routes) mapUserRoutes() {
 	r.Router.GET("/user/:user_id", r.Cont.GetUserInfo)
+	r.Router.GET("/user/contact/:user_id", r.Cont.GetUserContactInfo)
 	r.Router.POST("/user/create", r.Cont.CreateUserInitial)
 	// r.Router.PATCH("/user/update", controller.UpdateUser)
 }

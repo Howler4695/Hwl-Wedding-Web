@@ -22,6 +22,18 @@ func (ct *Controller) GetUserInfo(c *gin.Context) {
 
 }
 
+func (ct *Controller) GetUserContactInfo(c *gin.Context) {
+	userId := c.Param("user_id")
+
+	contacts, err := ct.Repo.GetUserContacts(userId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, &contacts)
+}
+
 func (ct *Controller) CreateUserInitial(c *gin.Context) {
 	newUser := &models.UserCreateDTO{}
 
@@ -32,7 +44,7 @@ func (ct *Controller) CreateUserInitial(c *gin.Context) {
 	}
 
 	newId := uuid.New()
-	mNewUser := models.User{Id: newId, FirstName: newUser.FirstName, LastName: newUser.LastName, Notes: newUser.Notes}
+	mNewUser := models.User{Id: newId, FirstName: newUser.FirstName, LastName: newUser.LastName}
 	mNewContact := models.Contact{UserId: newId, Email: newUser.Email, PhoneNumber: newUser.PhoneNumber}
 	mNewAddress := models.Address{UserId: newId, LineOne: newUser.AddressLineOne, LineTwo: newUser.AddressLineTwo, City: newUser.City, State: newUser.State, ZipCode: newUser.Zip}
 	mPlusOnes := ct.Services.ConvertPlusOnes(newUser.PlusOnes, newId)

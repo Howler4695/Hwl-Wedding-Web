@@ -21,8 +21,13 @@ export default async function HomePage() {
   const HAS_GOLD_OUTLINE = false;
 
   const session = await auth();
-  const firstName = session?.user?.name;
-  console.log(session);
+  const userId = session?.user?.id;
+
+  const userJ = await fetch(`${process.env.BACKEND_URL}/user/${userId}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const userInfo = await userJ.json();
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b  text-[#2E4E3F]">
@@ -63,7 +68,7 @@ export default async function HomePage() {
             Welcome
           </p>
           <h1 className="font-serif text-4xl leading-tight sm:text-6xl">
-            {firstName}
+            {`${userInfo.FirstName} ${userInfo.LastName}`}
           </h1>
           <div className="mx-auto my-5 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
           <p className="text-[#4F5E50]">

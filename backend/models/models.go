@@ -6,7 +6,6 @@ type User struct {
 	Id        uuid.UUID `db:"user_id"`
 	FirstName string    `db:"first_name"`
 	LastName  string    `db:"last_name"`
-	Notes     string    `db:"notes"`
 }
 
 type Address struct {

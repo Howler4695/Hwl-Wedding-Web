@@ -2,15 +2,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import PartyLabel from "./Label";
 import PartyRemove from "./RemoveButton";
-
-type Member = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  age: string;
-  phoneNumber: string;
-  allergies: string;
-};
+import { Member } from "./PartyBuilder";
 
 const inputStyles =
   "w-full rounded-xl border border-[#9FB39E] bg-white/80 px-3 py-3 text-sm text-[#2E4E3F] placeholder-[#7A846F] focus:border-[#CAA55A] focus:outline-none focus:ring-2 focus:ring-[#CAA55A]/40";
@@ -33,10 +25,10 @@ export default function PartyRow({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.15 }}
-          className="grid grid-cols-1 sm:grid-cols-12 items-center gap-3 px-4 py-3 border-b last:border-b-0 border-[#E8DDC9]"
+          className="grid grid-cols-2 md:grid-cols-12 items-center gap-3 px-4 py-3 border-b last:border-b-0 border-[#E8DDC9]"
         >
-          <div className="sm:col-span-2">
-            <PartyLabel id={m.id} text="First Name" />
+          <div className="md:col-span-2">
+            <PartyLabel id={m.id} text="First Name*" />
             <input
               id={`first-${m.id}`}
               type="text"
@@ -44,29 +36,31 @@ export default function PartyRow({
               autoComplete={idx === 0 ? "given-name" : "off"}
               value={m.firstName}
               onChange={(e) =>
-                updateMember(m.id, { firstName: e.target.value })
+                m.leader || updateMember(m.id, { firstName: e.target.value })
               }
               placeholder="Hannah"
               className={inputStyles}
             />
           </div>
 
-          <div className="sm:col-span-2">
-            <PartyLabel id={m.id} text="Last Name" />
+          <div className="md:col-span-2">
+            <PartyLabel id={m.id} text="Last Name*" />
 
             <input
               id={`last-${m.id}`}
               type="text"
               autoComplete={idx === 0 ? "family-name" : "off"}
               value={m.lastName}
-              onChange={(e) => updateMember(m.id, { lastName: e.target.value })}
+              onChange={(e) =>
+                m.leader || updateMember(m.id, { lastName: e.target.value })
+              }
               placeholder="Kounter"
               className={inputStyles}
             />
           </div>
 
-          <div className="sm:col-span-1">
-            <PartyLabel id={m.id} text="Age" />
+          <div className="md:col-span-1">
+            <PartyLabel id={m.id} text="Age*" />
             <input
               id={`age-${m.id}`}
               type="number"
@@ -86,18 +80,16 @@ export default function PartyRow({
             />
           </div>
 
-          <div className="sm:col-span-2">
-            <PartyLabel id={m.id} text="Phone Number (optional)" />
+          <div className="md:col-span-2">
+            <PartyLabel id={m.id} text="Phone Number" />
             <input
               id={`phone-${m.id}`}
               type="number"
-              min={0}
-              max={120}
               step={1}
-              inputMode="numeric"
-              pattern="phone"
+              inputMode="tel"
               value={m.phoneNumber}
               onChange={(e) =>
+                m.leader ||
                 updateMember(m.id, {
                   phoneNumber: e.target.value,
                 })
@@ -107,14 +99,8 @@ export default function PartyRow({
             />
           </div>
 
-          <div className="sm:col-span-4">
-            <label
-              className="mb-1 block text-xs font-medium text-[#6B725E] sm:hidden"
-              htmlFor={`allergy-${m.id}`}
-            >
-              Allergies (optional)
-            </label>
-            <PartyLabel id={m.id} text="Allergies (optional)" />
+          <div className="col-span-2 md:col-span-4">
+            <PartyLabel id={m.id} text="Allergies" />
             <input
               id={`allergy-${m.id}`}
               type="text"
@@ -128,7 +114,7 @@ export default function PartyRow({
             />
           </div>
 
-          <PartyRemove onClick={() => removeMember(m.id)} />
+          {m.leader || <PartyRemove onClick={() => removeMember(m.id)} />}
         </motion.div>
       ))}
     </AnimatePresence>

@@ -100,7 +100,7 @@ export default function PartyRow({
           </div>
 
           <div className="col-span-2 md:col-span-4">
-            <PartyLabel id={m.id} text="Allergies" />
+            <PartyLabel id={m.id} text="Allergies / Accomadations" />
             <input
               id={`allergy-${m.id}`}
               type="text"
@@ -109,7 +109,7 @@ export default function PartyRow({
               onChange={(e) =>
                 updateMember(m.id, { allergies: e.target.value })
               }
-              placeholder="peanuts, shellfish, lavender"
+              placeholder="peanuts, wheelchair"
               className={inputStyles}
             />
           </div>

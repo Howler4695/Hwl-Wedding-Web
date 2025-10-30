@@ -2,7 +2,7 @@ import Link from "next/link";
 import { MagCorners } from "@/components";
 
 export default function WeddingInvitePage() {
-  const dateText = "Saturday, May 16, 2026"; // API
+  const dateText = "Saturday, May 16, 2026";
 
   return (
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">

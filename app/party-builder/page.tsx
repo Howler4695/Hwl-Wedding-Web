@@ -18,8 +18,13 @@ export default async function PartyBuilderPage() {
       headers: { "Content-Type": "application/json" },
     }
   );
+  const popJ = await fetch(`${process.env.BACKEND_URL}/party/pops/${userId}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
   const userInfo = await userJ.json();
   const contactInfo = await contactsJ.json();
+  const partyPops = await popJ.json();
   return (
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-4 sm:p-6]">
       <MagCorners />
@@ -44,6 +49,8 @@ export default async function PartyBuilderPage() {
             firstName={userInfo.FirstName}
             lastName={userInfo.LastName}
             phoneNumber={contactInfo.PhoneNumber}
+            partyPop={partyPops}
+            backendURL={process?.env?.BACKEND_URL}
           />
           <footer className="mt-4 sm:mt-6 flex items-center justify-center gap-2 text-xs text-[#8C7E68]">
             <span className="inline-block text-center h-px w-8 bg-[#E8DDC9]" />

@@ -37,3 +37,20 @@ type Attendance struct {
 	UserId    uuid.UUID `db:"fk_user_id"`
 	Attending bool      `db:"attending"`
 }
+
+type Party struct {
+	ID        int     `db:"party_id"`
+	UserId    string  `db:"fk_user_id"`
+	Attending bool    `db:"attending"`
+	Note      *string `db:"note"`
+}
+
+type PartyPop struct {
+	ID          int     `db:"party_pop_id"`
+	PartyId     int     `db:"fk_party_id"`
+	Age         int     `db:"age"`
+	FirstName   string  `db:"first_name"`
+	LastName    string  `db:"last_name"`
+	PhoneNumber *string `db:"phone_number"`
+	Allergies   *string `db:"allergies"`
+}

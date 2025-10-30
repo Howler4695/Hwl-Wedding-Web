@@ -7,7 +7,9 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/joho/godotenv"
 
@@ -62,6 +64,15 @@ func main() {
 	gin.SetMode(os.Getenv("GIN_MODE"))
 	router := gin.Default()
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"}, // add your prod origins too
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true, // only if you send cookies/Authorization and need them
+		MaxAge:           12 * time.Hour,
+	}))
 
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)

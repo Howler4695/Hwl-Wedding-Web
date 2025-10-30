@@ -47,11 +47,15 @@ export default function PartyBuilder({
   firstName,
   lastName,
   phoneNumber,
+  partyPop,
+  backendURL,
 }: {
   userId?: string;
   firstName?: string;
   lastName?: string;
   phoneNumber?: string;
+  partyPop?: any;
+  backendURL?: string;
 }) {
   const [members, setMembers] = useState<Member[]>([
     makeBlankMember({
@@ -102,26 +106,23 @@ export default function PartyBuilder({
       return;
     }
 
-    const payload = nonEmpty.map((m) => ({
-      firstName: m.firstName.trim(),
-      lastName: m.lastName.trim(),
+    const partyPeoplePayload = nonEmpty.map((m) => ({
+      first_name: m.firstName.trim(),
+      last_name: m.lastName.trim(),
       age: m.age ? Number(m.age) : null,
-      phoneNumber: m.phoneNumber.trim() || null,
+      phone_number: m.phoneNumber.trim() || null,
       allergies: m.allergies.trim() || null,
     }));
 
+    const finalPayload = { attending: true, party_people: partyPeoplePayload };
+
     try {
       setSubmitting(true);
-      // TODO: Replace with your API call
-      // await fetch("/api/party", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-      alert(
-        "Submitted party (" +
-          payload.length +
-          "):" +
-          JSON.stringify(payload, null, 2)
-      );
-      // Optionally clear after submit
-      // setMembers([makeBlankMember()]);
+      await fetch(`${backendURL}/party/update/${userId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(finalPayload),
+      });
     } catch (err: any) {
       setError(err?.message ?? "Something went wrong.");
     } finally {

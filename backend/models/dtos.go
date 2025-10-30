@@ -20,3 +20,17 @@ type UserCreateDTO struct {
 	Notes          string        `json:"notes"`
 	PlusOnes       []PlusOneName `json:"plusones"`
 }
+
+type PartyDTO struct {
+	Attending bool           `json:"attending"`
+	Note      *string        `json:"note,omitempty"`
+	Pop       *[]PartyPeople `json:"party_people"`
+}
+
+type PartyPeople struct {
+	Age         int     `json:"age"`
+	FirstName   string  `json:"first_name"`
+	LastName    string  `json:"last_name"`
+	PhoneNumber *string `json:"phone_number"`
+	Allergies   *string `json:"allergies"`
+}

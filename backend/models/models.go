@@ -46,11 +46,11 @@ type Party struct {
 }
 
 type PartyPop struct {
-	ID          string  `db:"party_pop_id"`
-	PartyId     int     `db:"fk_party_id"`
-	Age         int     `db:"age"`
-	FirstName   string  `db:"first_name"`
-	LastName    string  `db:"last_name"`
-	PhoneNumber *string `db:"phone_number"`
-	Allergies   *string `db:"allergies"`
+	ID          string  `db:"party_pop_id" json:"id"`
+	PartyId     int     `db:"fk_party_id" json:"partyId"`
+	Age         int     `db:"age" json:"age"`
+	FirstName   string  `db:"first_name" json:"firstName"`
+	LastName    string  `db:"last_name" json:"lastName"`
+	PhoneNumber *string `db:"phone_number" json:"phoneNumber"`
+	Allergies   *string `db:"allergies" json:"allergies"`
 }

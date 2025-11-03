@@ -20,7 +20,6 @@ export type Member = {
 
 const makeBlankMember = ({
   id,
-  numId,
   leader,
   firstName,
   lastName,
@@ -29,7 +28,6 @@ const makeBlankMember = ({
   allergies,
 }: {
   id?: string;
-  numId?: number;
   leader?: boolean;
   firstName?: string;
   lastName?: string;
@@ -88,15 +86,15 @@ export default function PartyBuilder({
     }
     const currentMembers: Member[] = [];
     for (const pop of partyPops) {
-      if (pop.ID === userId) {
+      if (pop?.id === userId) {
         currentMembers.unshift(
           makeBlankMember({
-            id: pop.ID,
-            firstName: pop?.FirstName,
-            lastName: pop?.LastName,
-            phoneNumber: pop?.PhoneNumber,
-            age: String(pop?.Age),
-            allergies: pop?.Allergies,
+            id: pop?.id,
+            firstName: pop?.firstName,
+            lastName: pop?.lastName,
+            phoneNumber: pop?.phoneNumber,
+            age: String(pop?.age),
+            allergies: pop?.allergies,
             leader: true,
           })
         );
@@ -105,12 +103,12 @@ export default function PartyBuilder({
 
       currentMembers.push(
         makeBlankMember({
-          id: pop.ID,
-          firstName: pop?.FirstName,
-          lastName: pop?.LastName,
-          phoneNumber: pop?.PhoneNumber,
-          age: String(pop?.Age),
-          allergies: pop?.Allergies,
+          id: pop.id,
+          firstName: pop?.firstName,
+          lastName: pop?.lastName,
+          phoneNumber: pop?.phoneNumber,
+          age: String(pop?.age),
+          allergies: pop?.allergies,
           leader: false,
         })
       );

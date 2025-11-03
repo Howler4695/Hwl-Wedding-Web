@@ -1,7 +1,8 @@
 import React from "react";
 
-import { MagCorners, PartyBuilder } from "@/components";
+import { MagCorners, PartyAddSubmitMobile, PartyBuilder } from "@/components";
 import { auth } from "@/auth";
+import { Member } from "@/components/PartyBuilder/PartyBuilder";
 
 export default async function PartyBuilderPage() {
   const session = await auth();
@@ -29,7 +30,7 @@ export default async function PartyBuilderPage() {
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-4 sm:p-6]">
       <MagCorners />
       <section className="relative z-10 w-full max-w-6xl pb-16">
-        <div className="rounded-3xl border-2 border-white/10 bg-white/70 backdrop-blur-xl shadow-2xl p-4 sm:p-8">
+        <div className="rounded-3xl border-2 border-white/10 bg-white/90 shadow-2xl p-4 sm:p-8">
           <header className="mb-4 sm:mb-6">
             <p className="mb-1 text-[11px] uppercase tracking-[0.35em] text-[#6B725E]">
               Party Builder
@@ -49,9 +50,10 @@ export default async function PartyBuilderPage() {
             firstName={userInfo.FirstName}
             lastName={userInfo.LastName}
             phoneNumber={contactInfo.PhoneNumber}
-            partyPop={partyPops}
+            partyPops={partyPops as Member[]}
             backendURL={process?.env?.BACKEND_URL}
           />
+
           <footer className="mt-4 sm:mt-6 flex items-center justify-center gap-2 text-xs text-[#8C7E68]">
             <span className="inline-block text-center h-px w-8 bg-[#E8DDC9]" />
             <span>email help@thehowles.love with any questions or issues</span>

@@ -68,7 +68,10 @@ export default async function HomePage() {
             Welcome
           </p>
           <h1 className="font-serif text-4xl leading-tight sm:text-6xl">
-            {`${userInfo.FirstName} ${userInfo.LastName}`}
+            {userInfo?.Firstname === undefined &&
+            userInfo?.LastName === undefined
+              ? null
+              : `${userInfo?.FirstName} ${userInfo?.LastName}`}
           </h1>
           <div className="mx-auto my-5 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
           <p className="text-[#4F5E50]">

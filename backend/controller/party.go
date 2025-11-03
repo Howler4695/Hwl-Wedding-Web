@@ -29,7 +29,7 @@ func (ct *Controller) UpdateParty(c *gin.Context) {
 
 	mPops := []models.PartyPop{}
 	for _, members := range *newPartyInfo.Pop {
-		mPops = append(mPops, models.PartyPop{PartyId: newParty.ID, FirstName: members.FirstName, LastName: members.LastName, Age: members.Age, PhoneNumber: members.PhoneNumber, Allergies: members.Allergies})
+		mPops = append(mPops, models.PartyPop{ID: members.ID, PartyId: newParty.ID, FirstName: members.FirstName, LastName: members.LastName, Age: members.Age, PhoneNumber: members.PhoneNumber, Allergies: members.Allergies})
 	}
 	if err := ct.Repo.UpdatePartyPop(&mPops); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

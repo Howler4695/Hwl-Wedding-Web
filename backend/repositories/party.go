@@ -26,28 +26,28 @@ func (r *Repo) nilPointerCheckStr(ptr *string) string {
 }
 
 func (r *Repo) UpdatePartyPop(pops *[]models.PartyPop) error {
-	popRows := make([][]interface{}, len(*pops))
-	for i, a := range *pops {
-		phoneNumber := r.nilPointerCheckStr(a.PhoneNumber)
-		allergies := r.nilPointerCheckStr(a.Allergies)
-		popRows[i] = []interface{}{a.PartyId, a.FirstName, a.LastName, a.Age, phoneNumber, allergies}
-	}
+	// popRows := make([][]interface{}, len(*pops))
+	// for i, a := range *pops {
+	// 	phoneNumber := r.nilPointerCheckStr(a.PhoneNumber)
+	// 	allergies := r.nilPointerCheckStr(a.Allergies)
+	// 	popRows[i] = []interface{}{a.PartyId, a.FirstName, a.LastName, a.Age, phoneNumber, allergies}
+	// }
 
-	_, err := r.PgPool.CopyFrom(context.Background(), pgx.Identifier{"party_pop"}, []string{"fk_party_id", "first_name", "last_name", "age", "phone_number", "allergies"}, pgx.CopyFromRows(popRows))
-	if err != nil {
-		var overErr error
-		for _, p := range *pops {
-			_, err := r.PgPool.Exec(context.Background(), "insert into party_pop(fk_party_id, first_name, last_name, age, phone_number, allergies) values($1, $2, $3, $4, $5, $6) on conflict (party_pop_id) do update set first_name = excluded.first_name, last_name = excluded.last_name, age = excluded.age, phone_number = excluded.phone_number, allergies = excluded.allergies", p.PartyId, p.FirstName, p.LastName, p.Age, p.PhoneNumber, p.Allergies)
-			if err != nil {
-				overErr = err
-			}
-
-		}
-		if overErr != nil {
-			return overErr
+	// _, err := r.PgPool.CopyFrom(context.Background(), pgx.Identifier{"party_pop"}, []string{"fk_party_id", "first_name", "last_name", "age", "phone_number", "allergies"}, pgx.CopyFromRows(popRows))
+	// if err != nil {
+	var overErr error
+	for _, p := range *pops {
+		_, err := r.PgPool.Exec(context.Background(), "insert into party_pop(party_pop_id, fk_party_id, first_name, last_name, age, phone_number, allergies) values($1, $2, $3, $4, $5, $6, $7) on conflict (party_pop_id) do update set first_name = excluded.first_name, last_name = excluded.last_name, age = excluded.age, phone_number = excluded.phone_number, allergies = excluded.allergies", p.ID, p.PartyId, p.FirstName, p.LastName, p.Age, p.PhoneNumber, p.Allergies)
+		if err != nil {
+			overErr = err
 		}
 
 	}
+	if overErr != nil {
+		return overErr
+	}
+
+	// }
 
 	return nil
 }

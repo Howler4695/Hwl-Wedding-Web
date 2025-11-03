@@ -25,6 +25,8 @@ const makeBlankMember = ({
   firstName,
   lastName,
   phoneNumber,
+  age,
+  allergies,
 }: {
   id?: string;
   numId?: number;
@@ -32,13 +34,15 @@ const makeBlankMember = ({
   firstName?: string;
   lastName?: string;
   phoneNumber?: string;
+  age?: string;
+  allergies?: string;
 }): Member => ({
   id: id || (globalThis as any).crypto?.randomUUID?.(),
   firstName: firstName ?? "",
   lastName: lastName ?? "",
-  age: "",
+  age: age ?? "",
   phoneNumber: phoneNumber ?? "",
-  allergies: "",
+  allergies: allergies ?? "",
   leader: leader ?? false,
 });
 
@@ -47,25 +51,18 @@ export default function PartyBuilder({
   firstName,
   lastName,
   phoneNumber,
-  partyPop,
+  partyPops,
   backendURL,
 }: {
   userId?: string;
   firstName?: string;
   lastName?: string;
   phoneNumber?: string;
-  partyPop?: any;
+  partyPops: Member[];
   backendURL?: string;
 }) {
-  const [members, setMembers] = useState<Member[]>([
-    makeBlankMember({
-      id: userId,
-      firstName,
-      lastName,
-      phoneNumber,
-      leader: true,
-    }),
-  ]);
+  const [members, setMembers] = useState<Member[]>([]);
+  const [membersToRemove, setMembersToRemove] = useState<Member[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const total = useMemo(() => members.length, [members]);
@@ -75,6 +72,52 @@ export default function PartyBuilder({
     const t = setTimeout(() => setError(null), 10000);
     return () => clearTimeout(t);
   }, [error]);
+
+  useEffect(() => {
+    if (partyPops.length === 0) {
+      setMembers([
+        makeBlankMember({
+          id: userId,
+          firstName,
+          lastName,
+          phoneNumber,
+          leader: true,
+        }),
+      ]);
+      return;
+    }
+    const currentMembers: Member[] = [];
+    for (const pop of partyPops) {
+      if (pop.ID === userId) {
+        currentMembers.unshift(
+          makeBlankMember({
+            id: pop.ID,
+            firstName: pop?.FirstName,
+            lastName: pop?.LastName,
+            phoneNumber: pop?.PhoneNumber,
+            age: String(pop?.Age),
+            allergies: pop?.Allergies,
+            leader: true,
+          })
+        );
+        continue;
+      }
+
+      currentMembers.push(
+        makeBlankMember({
+          id: pop.ID,
+          firstName: pop?.FirstName,
+          lastName: pop?.LastName,
+          phoneNumber: pop?.PhoneNumber,
+          age: String(pop?.Age),
+          allergies: pop?.Allergies,
+          leader: false,
+        })
+      );
+    }
+
+    setMembers(() => [...currentMembers]);
+  }, [partyPops, setMembers]);
 
   function updateMember(id: string, patch: Partial<Member>) {
     setMembers((prev) =>
@@ -107,9 +150,10 @@ export default function PartyBuilder({
     }
 
     const partyPeoplePayload = nonEmpty.map((m) => ({
+      id: m.id,
       first_name: m.firstName.trim(),
       last_name: m.lastName.trim(),
-      age: m.age ? Number(m.age) : null,
+      age: m.age ? Number(m.age) : 0,
       phone_number: m.phoneNumber.trim() || null,
       allergies: m.allergies.trim() || null,
     }));

@@ -28,6 +28,7 @@ type PartyDTO struct {
 }
 
 type PartyPeople struct {
+	ID          string  `json:"id"`
 	Age         int     `json:"age"`
 	FirstName   string  `json:"first_name"`
 	LastName    string  `json:"last_name"`

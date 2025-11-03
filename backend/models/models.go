@@ -46,7 +46,7 @@ type Party struct {
 }
 
 type PartyPop struct {
-	ID          int     `db:"party_pop_id"`
+	ID          string  `db:"party_pop_id"`
 	PartyId     int     `db:"fk_party_id"`
 	Age         int     `db:"age"`
 	FirstName   string  `db:"first_name"`

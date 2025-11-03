@@ -84,9 +84,10 @@ export default function PartyRow({
             <PartyLabel id={m.id} text="Phone Number" />
             <input
               id={`phone-${m.id}`}
-              type="number"
+              type="text"
               step={1}
               inputMode="tel"
+              pattern="^(?:\+1\s?)?(?:\([2-9]\d{2}\)|[2-9]\d{2})[\s.-]?[2-9]\d{2}[\s.-]?\d{4}$"
               value={m.phoneNumber}
               onChange={(e) =>
                 m.leader ||

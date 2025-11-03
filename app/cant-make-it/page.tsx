@@ -1,37 +1,44 @@
+import { auth } from "@/auth";
 import { MagCorners } from "@/components";
 import { redirect } from "next/navigation";
 
 export default async function WeddingRSVPFormPage() {
+  const session = await auth();
+  const userId = session?.user?.id;
+
   async function createRSVP(formData: FormData) {
     "use server";
 
-    const firstName = String(formData.get("firstName"));
-    const lastName = String(formData.get("lastName"));
-    const email = String(formData.get("email") || "");
-    const phone = String(formData.get("phone") || "");
     const notes = String(formData.get("notes") || "");
 
     const payload = {
-      firstName,
-      lastName,
-      email,
-      phone_number: phone,
       notes,
       attending: false,
     };
 
-    const res = await fetch("http://localhost:8090/user/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    const res = await fetch(
+      `${process.env.BACKEND_URL}/party/update/${userId}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    );
 
     if (!res.ok) {
-      throw new Error(`Submission failed (${res.status})`);
+      throw new Error(
+        `Submission failed (${res.status})\n Contact help@thehowles.love for support`
+      );
     }
 
     redirect("/");
   }
+
+  const partyJ = await fetch(`${process.env.BACKEND_URL}/party/${userId}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const party = await partyJ.json();
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
@@ -52,63 +59,16 @@ export default async function WeddingRSVPFormPage() {
           </p>
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
 
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <label className="flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                First Name
-              </span>
-              <input
-                name="firstName"
-                required
-                placeholder="Hannah"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                Last Name
-              </span>
-              <input
-                name="lastName"
-                required
-                placeholder="Kounter"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                Email
-              </span>
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="hannah.kounter@example.com"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-            <label className="flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                Phone
-              </span>
-              <input
-                type="phone"
-                name="phone"
-                placeholder="(555) 123-4567"
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
-              />
-            </label>
-          </div>
-
           <div className="mt-4 grid grid-cols-1 gap-4">
             <label className="flex flex-col">
               <span className="mb-1 text-sm font-medium text-[#4F5E50]">
-                Why you can&apos;t make it / Not for the couple (optional)
+                Why you can&apos;t make it / Note for the couple (optional)
               </span>
               <textarea
                 name="notes"
                 placeholder="You can let us know why you can't make it?"
-                rows={3}
+                rows={5}
+                defaultValue={party?.notes}
                 className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
               />
             </label>

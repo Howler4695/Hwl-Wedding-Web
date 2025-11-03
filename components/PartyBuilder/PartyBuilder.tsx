@@ -92,9 +92,9 @@ export default function PartyBuilder({
         currentMembers.unshift(
           makeBlankMember({
             id: pop?.id,
-            firstName: pop?.firstName,
-            lastName: pop?.lastName,
-            phoneNumber: pop?.phoneNumber,
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber,
             age: String(pop?.age),
             allergies: pop?.allergies,
             leader: true,

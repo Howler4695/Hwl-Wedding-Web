@@ -1,7 +1,11 @@
 import { auth } from "@/auth";
 
 export default auth((req) => {
-  if (!req.auth && req.nextUrl.pathname !== "/auth/signin") {
+  if (
+    !req.auth &&
+    req.nextUrl.pathname !== "/auth/signin" &&
+    req.nextUrl.pathname !== "/"
+  ) {
     const newUrl = new URL("/auth/signin", req.nextUrl.origin);
     return Response.redirect(newUrl);
   }
@@ -9,6 +13,6 @@ export default auth((req) => {
 
 export const config = {
   matcher: [
-    "/((?!api/auth/|auth/signin|_next/static|_next/image|favicon.ico|__nextjs_font|images/|).*)",
+    "/((?!api/auth/|auth/signin|_next/static|_next/image|favicon.ico|__nextjs_font|images/).*)",
   ],
 };

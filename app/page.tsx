@@ -8,11 +8,17 @@ import {
   Countdown,
   AddCalenderButton,
   MagCorners,
+  FullPageModal,
 } from "@/components";
 import Image from "next/image";
 import { auth } from "@/auth";
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ attending?: string }>;
+}) {
+  const attending = (await searchParams)?.attending;
   const COUPLE = "Hannah & Hayden";
   const WEDDING_DATE = "2026-05-16T16:30:00-05:00";
   const CITY_STATE = "Saint Francisville, Louisiana";
@@ -279,6 +285,26 @@ export default async function HomePage() {
           <span className="inline-block h-px w-8 bg-[#E8DDC9]" />
         </div>
       </footer>
+      {attending === "true" && (
+        <FullPageModal
+          title="Thanks for RSVPing!"
+          text="We're excited to celebrate our union with you. We'll send you updates for the wedding via email and text. If you need to edit your rsvp, you can do so at any time. If you need to conact us please email us at help@thehowles.love."
+          primaryHref="/"
+          primaryText="Close"
+          secondaryHref="/rsvp"
+          secondaryText="Edit RSVP"
+        />
+      )}
+      {attending === "false" && (
+        <FullPageModal
+          title="We're sorry you can't make it"
+          text="Thanks for letting us know you can't make it. If you ever find you can make it, you can change edit your rsvp at any time. Please contact help@thehowles.love if you need assistance."
+          primaryHref="/"
+          primaryText="Close"
+          secondaryHref="/rsvp"
+          secondaryText="Edit RSVP"
+        />
+      )}
     </main>
   );
 }

@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { MagCorners } from "@/components";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function WeddingRSVPFormPage() {
@@ -24,7 +25,7 @@ export default async function WeddingRSVPFormPage() {
         `Submission failed (${err})\nContact help@thehowles.love`
       );
     }
-    redirect("/");
+    redirect("/?attending=true");
   }
 
   const partyJ = await fetch(`${process.env.BACKEND_URL}/party/${userId}`, {

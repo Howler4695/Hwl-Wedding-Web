@@ -31,7 +31,7 @@ export default async function WeddingRSVPFormPage() {
       );
     }
 
-    redirect("/");
+    redirect("/?attending=false");
   }
 
   const partyJ = await fetch(`${process.env.BACKEND_URL}/party/${userId}`, {

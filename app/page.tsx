@@ -29,11 +29,20 @@ export default async function HomePage({
   const session = await auth();
   const userId = session?.user?.id;
 
-  const userJ = await fetch(`${process.env.BACKEND_URL}/user/${userId}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  const userInfo = await userJ.json();
+  let userInfo;
+  let party;
+  if (userId) {
+    const userJ = await fetch(`${process.env.BACKEND_URL}/user/${userId}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    const partyJ = await fetch(`${process.env.BACKEND_URL}/party/${userId}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    userInfo = await userJ.json();
+    party = await partyJ.json();
+  }
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b  text-[#2E4E3F]">
@@ -45,7 +54,7 @@ export default async function HomePage({
         </div>
         <nav className="hidden gap-6 text-sm text-white/80 sm:flex">
           <Link href="/rsvp" className="hover:text-white">
-            RSVP
+            {party?.id ? "Edit RSVP" : "RSVP"}
           </Link>
           <Link href="#events" className="hover:text-white">
             Photos
@@ -93,7 +102,7 @@ export default async function HomePage({
               href="/rsvp"
               className="sm:inline-flex items-center justify-center hidden rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
             >
-              RSVP Now
+              {party?.id ? "Edit RSVP" : "RSVP Now"}
             </Link>
             <AddCalenderButton />
           </div>
@@ -272,7 +281,9 @@ export default async function HomePage({
           href="/rsvp"
           className="block w-full rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-center text-white shadow-lg"
         >
-          RSVP for {formatDateShort(WEDDING_DATE)}
+          {party?.id
+            ? "Edit RSVP"
+            : `RSVP for ${formatDateShort(WEDDING_DATE)}`}
         </Link>
       </div>
 

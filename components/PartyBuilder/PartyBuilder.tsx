@@ -7,6 +7,7 @@ import {
   PartyAddSubmitMobile,
 } from "./AddSubmitButtons";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export type Member = {
   id: string;
@@ -59,6 +60,7 @@ export default function PartyBuilder({
   partyPops: Member[];
   backendURL?: string;
 }) {
+  const router = useRouter();
   const [members, setMembers] = useState<Member[]>([]);
   const [membersToRemove, setMembersToRemove] = useState<Member[]>([]);
   const [submitting, setSubmitting] = useState(false);
@@ -165,6 +167,7 @@ export default function PartyBuilder({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(finalPayload),
       });
+      router.push("/register");
     } catch (err: any) {
       setError(err?.message ?? "Something went wrong.");
     } finally {

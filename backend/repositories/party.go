@@ -68,3 +68,12 @@ func (r *Repo) GetPartyPopByUserId(userId string) (*[]models.PartyPop, error) {
 	}
 	return &partyPop, nil
 }
+
+func (r *Repo) GetPartyByUserId(userId string) (*models.Party, error) {
+	row, err := r.PgPool.Query(context.Background(), "select * from party as p where p.fk_user_id = $1", userId)
+	party, err := pgx.CollectExactlyOneRow(row, pgx.RowToStructByName[models.Party])
+	if err != nil {
+		return nil, err
+	}
+	return &party, nil
+}

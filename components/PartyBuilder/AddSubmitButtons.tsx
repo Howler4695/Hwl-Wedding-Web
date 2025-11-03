@@ -23,7 +23,7 @@ export const PartyAddSubmitDesktop = ({
       disabled={submitting}
       className="inline-flex items-center justify-center rounded-2xl bg-[#2E4E3F] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#CAA55A] focus:ring-offset-2 disabled:opacity-60"
     >
-      {submitting ? "Submitting…" : "Submit"}
+      {submitting ? "Submitting…" : "Finalize Party"}
     </button>
   </div>
 );
@@ -50,7 +50,7 @@ export const PartyAddSubmitMobile = ({
         disabled={submitting}
         className="flex-1 inline-flex items-center justify-center rounded-2xl bg-[#2E4E3F] px-4 py-3 text-sm font-semibold text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CAA55A] disabled:opacity-60"
       >
-        {submitting ? "Submitting…" : "Submit"}
+        {submitting ? "Submitting…" : "Finalize Party"}
       </button>
     </div>
   </div>

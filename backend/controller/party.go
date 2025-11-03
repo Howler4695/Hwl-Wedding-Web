@@ -19,11 +19,21 @@ func (ct *Controller) UpdateParty(c *gin.Context) {
 		return
 	}
 
-	mParty := models.Party{UserId: userId, Attending: newPartyInfo.Attending, Note: newPartyInfo.Note}
+	mParty := models.Party{UserId: userId}
+	if newPartyInfo.Attending != nil {
+		mParty.Attending = newPartyInfo.Attending
+	}
+	if newPartyInfo.Note != nil {
+		mParty.Note = newPartyInfo.Note
+	}
 
 	newParty, err := ct.Repo.UpdateParty(&mParty)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if newPartyInfo.Pop == nil {
+		c.JSON(http.StatusOK, gin.H{"body": "ok"})
 		return
 	}
 
@@ -50,4 +60,16 @@ func (ct *Controller) GetPartyPops(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, &partyPops)
+}
+
+func (ct *Controller) GetParty(c *gin.Context) {
+	userId := c.Param("user_id")
+
+	party, err := ct.Repo.GetPartyByUserId(userId)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		log.Println(err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, &party)
 }

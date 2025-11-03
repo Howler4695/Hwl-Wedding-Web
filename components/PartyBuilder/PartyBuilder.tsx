@@ -158,7 +158,7 @@ export default function PartyBuilder({
       allergies: m.allergies.trim() || null,
     }));
 
-    const finalPayload = { attending: true, party_people: partyPeoplePayload };
+    const finalPayload = { party_people: partyPeoplePayload };
 
     try {
       setSubmitting(true);

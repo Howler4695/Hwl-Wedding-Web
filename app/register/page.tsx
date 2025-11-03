@@ -1,48 +1,37 @@
+import { auth } from "@/auth";
 import { MagCorners } from "@/components";
 import { redirect } from "next/navigation";
 
-function splitName(full: string) {
-  const trimmed = (full || "").trim();
-  if (!trimmed) return { firstname: "", lastname: "" };
-  const parts = trimmed.split(/\s+/);
-  if (parts.length === 1) return { firstname: parts[0], lastname: "" };
-  return {
-    firstname: parts.slice(0, -1).join(" "),
-    lastname: parts.slice(-1).join(" "),
-  };
-}
-
-function parseGuestNames(raw: string) {
-  return raw
-    .split("\n")
-    .map((s) => s.trim())
-    .filter(Boolean)
-    .map((n) => splitName(n));
-}
-
 export default async function WeddingRSVPFormPage() {
+  const session = await auth();
+  const userId = session?.user?.id;
+
   async function createRSVP(formData: FormData) {
     "use server";
 
     const notes = String(formData.get("notes") || "");
 
-    const payload = {
-      notes,
-      attending: true,
-    };
+    const finalPayload = { attending: true, notes };
 
-    const res = await fetch(`${process.env.BACKEND_URL}/user/create`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    if (!res.ok) {
-      throw new Error(`Submission failed (${res.status})`);
+    try {
+      await fetch(`${process.env.BACKEND_URL}/party/update/${userId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(finalPayload),
+      });
+    } catch (err: any) {
+      throw new Error(
+        `Submission failed (${err})\nContact help@thehowles.love`
+      );
     }
-
     redirect("/");
   }
+
+  const partyJ = await fetch(`${process.env.BACKEND_URL}/party/${userId}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const party = await partyJ.json();
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
@@ -67,8 +56,9 @@ export default async function WeddingRSVPFormPage() {
               </span>
               <textarea
                 name="notes"
-                placeholder="Anything else we should know?"
-                rows={3}
+                placeholder="Anything you'd like to tell the couple before the wedding?"
+                rows={5}
+                defaultValue={party?.notes}
                 className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
               />
             </label>
@@ -78,7 +68,7 @@ export default async function WeddingRSVPFormPage() {
               type="submit"
               className="inline-flex items-center justify-center rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
             >
-              Submit details
+              Submit RSVP
             </button>
             <a
               href="/party-builder"
@@ -87,9 +77,11 @@ export default async function WeddingRSVPFormPage() {
               Back to Party Builder
             </a>
           </div>
-          <p className="mt-6 text-center text-xs text-[#8C7E68]">
-            Made by Hayden Howle
-          </p>
+          <footer className="mt-4 sm:mt-6 flex items-center justify-center gap-2 text-xs text-[#8C7E68]">
+            <span className="inline-block text-center h-px w-8 bg-[#E8DDC9]" />
+            <span>email help@thehowles.love with any questions or issues</span>
+            <span className="inline-block h-px w-8 bg-[#E8DDC9]" />
+          </footer>
         </form>
       </section>
     </main>

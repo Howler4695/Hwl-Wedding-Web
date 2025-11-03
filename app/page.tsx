@@ -263,7 +263,7 @@ export default async function HomePage() {
       </div>
       <div className="fixed bottom-4 left-0 right-0 z-20 px-4 sm:hidden">
         <Link
-          href="/register"
+          href="/rsvp"
           className="block w-full rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-center text-white shadow-lg"
         >
           RSVP for {formatDateShort(WEDDING_DATE)}

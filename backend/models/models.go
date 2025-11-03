@@ -39,10 +39,10 @@ type Attendance struct {
 }
 
 type Party struct {
-	ID        int     `db:"party_id"`
-	UserId    string  `db:"fk_user_id"`
-	Attending bool    `db:"attending"`
-	Note      *string `db:"note"`
+	ID        int     `db:"party_id" json:"id"`
+	UserId    string  `db:"fk_user_id" json:"userId"`
+	Attending *bool   `db:"attending" json:"attending"`
+	Note      *string `db:"note" json:"notes"`
 }
 
 type PartyPop struct {

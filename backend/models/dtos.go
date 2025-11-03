@@ -22,8 +22,8 @@ type UserCreateDTO struct {
 }
 
 type PartyDTO struct {
-	Attending bool           `json:"attending"`
-	Note      *string        `json:"note,omitempty"`
+	Attending *bool          `json:"attending"`
+	Note      *string        `json:"notes,omitempty"`
 	Pop       *[]PartyPeople `json:"party_people"`
 }
 

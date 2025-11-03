@@ -5,7 +5,7 @@ import PartyRemove from "./RemoveButton";
 import { Member } from "./PartyBuilder";
 
 const inputStyles =
-  "w-full rounded-xl border border-[#9FB39E] bg-white/80 px-3 py-3 text-sm text-[#2E4E3F] placeholder-[#7A846F] focus:border-[#CAA55A] focus:outline-none focus:ring-2 focus:ring-[#CAA55A]/40";
+  "w-full rounded-xl border border-[#9FB39E] bg-white/80 px-3 py-3 text-sm text-black placeholder:text-slate-300 focus:border-[#CAA55A] focus:outline-none focus:ring-2 focus:ring-[#CAA55A]/40";
 
 export default function PartyRow({
   members,
@@ -25,7 +25,7 @@ export default function PartyRow({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.15 }}
-          className="grid grid-cols-2 md:grid-cols-12 items-center gap-3 px-4 py-3 border-b last:border-b-0 border-[#E8DDC9]"
+          className="grid grid-cols-2 md:grid-cols-12 items-center gap-3 px-4 py-3 border-b-8 md:border-b last:border-b-0 border-[#E8DDC9]"
         >
           <div className="md:col-span-2">
             <PartyLabel id={m.id} text="First Name*" />

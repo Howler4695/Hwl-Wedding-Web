@@ -73,7 +73,7 @@ export default function PartyBuilder({
   }, [error]);
 
   useEffect(() => {
-    if (partyPops.length === 0) {
+    if (partyPops?.length === 0 || !partyPops) {
       setMembers([
         makeBlankMember({
           id: userId,

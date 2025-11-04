@@ -13,6 +13,6 @@ export default auth((req) => {
 
 export const config = {
   matcher: [
-    "/((?!api/auth/|auth/signin|_next/static|_next/image|favicon.ico|__nextjs_font|images/).*)",
+    "/((?!api/auth/|auth/signin|_next/static|_next/image|favicon.ico|__nextjs_font|images/|magnolia_no_stem.svg).*)",
   ],
 };

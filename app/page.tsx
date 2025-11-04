@@ -309,7 +309,7 @@ export default async function HomePage({
       {attending === "false" && (
         <FullPageModal
           title="We're sorry you can't make it"
-          text="Thanks for letting us know you can't make it. If you ever find you can make it, you can change edit your rsvp at any time. Please contact help@thehowles.love if you need assistance."
+          text="Thanks for letting us know you can't make it. If you ever find you can make it, you can edit your rsvp at any time. Please contact help@thehowles.love if you need assistance."
           primaryHref="/"
           primaryText="Close"
           secondaryHref="/rsvp"

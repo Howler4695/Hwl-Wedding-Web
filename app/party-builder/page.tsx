@@ -55,7 +55,7 @@ export default async function PartyBuilderPage() {
             lastName={userInfo.LastName}
             phoneNumber={contactInfo.PhoneNumber}
             partyPops={partyPops as Member[]}
-            backendURL={process?.env?.BACKEND_URL}
+            backendURL={process?.env?.CLIENT_BACKEND_URL}
           />
 
           <footer className="mt-4 sm:mt-6 flex items-center justify-center gap-2 text-xs text-[#8C7E68]">

@@ -62,7 +62,7 @@ export default function PartyBuilder({
 }) {
   const router = useRouter();
   const [members, setMembers] = useState<Member[]>([]);
-  const [membersToRemove, setMembersToRemove] = useState<Member[]>([]);
+  const [membersToRemove, setMembersToRemove] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const total = useMemo(() => members.length, [members]);
@@ -126,6 +126,7 @@ export default function PartyBuilder({
   }
   function removeMember(id: string) {
     setMembers((prev) => prev.filter((m) => m.id !== id));
+    setMembersToRemove((prev) => [...prev, id]);
   }
   function addMember() {
     setMembers((prev) => [...prev, makeBlankMember({})]);
@@ -158,7 +159,10 @@ export default function PartyBuilder({
       allergies: m.allergies.trim() || null,
     }));
 
-    const finalPayload = { party_people: partyPeoplePayload };
+    const finalPayload = {
+      party_people: partyPeoplePayload,
+      people_to_remove: membersToRemove,
+    };
 
     try {
       setSubmitting(true);

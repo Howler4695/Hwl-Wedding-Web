@@ -27,21 +27,36 @@ func (ct *Controller) UpdateParty(c *gin.Context) {
 		mParty.Note = newPartyInfo.Note
 	}
 
-	newParty, err := ct.Repo.UpdateParty(&mParty)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	if newPartyInfo.Pop == nil {
-		c.JSON(http.StatusOK, gin.H{"body": "ok"})
-		return
+	var newParty *models.Party
+	if mParty.Attending != nil {
+		party, err := ct.Repo.UpdateParty(&mParty)
+		newParty = party
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+	} else {
+		party, err := ct.Repo.GetPartyByUserId(userId)
+		newParty = party
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
 	}
 
 	mPops := []models.PartyPop{}
-	for _, members := range *newPartyInfo.Pop {
-		mPops = append(mPops, models.PartyPop{ID: members.ID, PartyId: newParty.ID, FirstName: members.FirstName, LastName: members.LastName, Age: members.Age, PhoneNumber: members.PhoneNumber, Allergies: members.Allergies})
+	if newPartyInfo.Pop != nil {
+		for _, members := range *newPartyInfo.Pop {
+			mPops = append(mPops, models.PartyPop{ID: members.ID, PartyId: newParty.ID, FirstName: members.FirstName, LastName: members.LastName, Age: members.Age, PhoneNumber: members.PhoneNumber, Allergies: members.Allergies})
+		}
+		if err := ct.Repo.UpdatePartyPop(&mPops); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			log.Println(err.Error())
+			return
+		}
 	}
-	if err := ct.Repo.UpdatePartyPop(&mPops); err != nil {
+
+	if err := ct.Repo.DeletePartyPops(newPartyInfo.PopToRemove); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		log.Println(err.Error())
 		return

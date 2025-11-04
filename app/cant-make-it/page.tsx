@@ -55,7 +55,7 @@ export default async function WeddingRSVPFormPage() {
             We&apos;re sad to hear you can&apos;t make it
           </h1>
           <p className="mt-2 text-lg text-[#2E4E3F]">
-            Submit your absense so we know you're not coming.
+            Submit your absense so we know you&apos;re not coming.
           </p>
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
 
@@ -74,7 +74,7 @@ export default async function WeddingRSVPFormPage() {
             </label>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
             <button
               type="submit"
               className="inline-flex items-center justify-center rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"

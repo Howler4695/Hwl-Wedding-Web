@@ -25,7 +25,33 @@ func (r *Repo) nilPointerCheckStr(ptr *string) string {
 	return *ptr
 }
 
+const deletePopsQuery = `
+		DELETE FROM party_pop
+		WHERE party_pop_id = ANY($1::uuid[])
+	`
+
+func (r *Repo) DeletePartyPops(popIds *[]string) error {
+	if popIds == nil {
+		return nil
+	}
+	if len(*popIds) == 0 {
+		return nil
+	}
+
+	_, err := r.PgPool.Exec(context.Background(), deletePopsQuery, *popIds)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (r *Repo) UpdatePartyPop(pops *[]models.PartyPop) error {
+	if pops == nil {
+		return nil
+	}
+	if len(*pops) == 0 {
+		return nil
+	}
 	// popRows := make([][]interface{}, len(*pops))
 	// for i, a := range *pops {
 	// 	phoneNumber := r.nilPointerCheckStr(a.PhoneNumber)

@@ -1,6 +1,5 @@
 import { auth } from "@/auth";
 import { MagCorners } from "@/components";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function WeddingRSVPFormPage() {
@@ -66,7 +65,7 @@ export default async function WeddingRSVPFormPage() {
               />
             </label>
           </div>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
             <button
               type="submit"
               className="inline-flex items-center justify-center rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"

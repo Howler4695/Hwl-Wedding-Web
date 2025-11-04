@@ -167,6 +167,7 @@ export default function PartyBuilder({
       setSubmitting(true);
       await fetch(`${backendURL}/party/update/${userId}`, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(finalPayload),
       });

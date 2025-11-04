@@ -55,7 +55,7 @@ export default async function WeddingRSVPFormPage() {
             We&apos;re sad to hear you can&apos;t make it
           </h1>
           <p className="mt-2 text-lg text-[#2E4E3F]">
-            Leave us your details so we know your not coming
+            Submit your absense so we know you're not coming.
           </p>
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
 

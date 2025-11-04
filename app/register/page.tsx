@@ -34,6 +34,8 @@ export default async function WeddingRSVPFormPage() {
   });
   const party = await partyJ.json();
 
+  const editMode = party?.attending === undefined ? false : true;
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
       <MagCorners />
@@ -46,7 +48,7 @@ export default async function WeddingRSVPFormPage() {
             Wedding Registration
           </p>
           <h1 className="font-serif text-3xl sm:text-4xl leading-tight text-[#2E4E3F]">
-            Final Details
+            {editMode ? "Update Details" : "Final Details"}
           </h1>
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
 

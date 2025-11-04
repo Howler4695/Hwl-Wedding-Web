@@ -27,6 +27,8 @@ export default async function PartyBuilderPage() {
   const userInfo = await userJ.json();
   const contactInfo = await contactsJ.json();
   const partyPops = await popJ.json();
+
+  const editMode = partyPops?.length > 0 ? true : false;
   return (
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-4 sm:p-6]">
       <Link href="/register" className="hidden" />
@@ -38,7 +40,7 @@ export default async function PartyBuilderPage() {
               Wedding Registration
             </p>
             <h1 className="font-serif text-3xl sm:text-4xl leading-tight text-[#2E4E3F]">
-              Create your party
+              {editMode ? "Update your party" : "Create your party"}
             </h1>
             <div className="mx-auto my-4 h-0.5 w-24 sm:w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
             <p className="text-sm sm:text-base text-[#4F5E50]">

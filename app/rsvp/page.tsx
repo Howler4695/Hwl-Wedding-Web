@@ -70,10 +70,7 @@ export default async function WeddingInvitePage() {
 
           <div className="mt-8 flex items-center justify-center gap-2 text-xs text-[#8C7E68]">
             <span className="inline-block h-px w-8 bg-[#E8DDC9]" />
-            <span>
-              Hannah Kounter · Hayden Howle · I don&apos;t know what to put ·
-              here
-            </span>
+            <span>email help@thehowles.love with any issues or questions.</span>
             <span className="inline-block h-px w-8 bg-[#E8DDC9]" />
           </div>
         </div>

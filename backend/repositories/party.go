@@ -7,8 +7,18 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
+const updatePartyQuery = `
+INSERT INTO party (fk_user_id, attending, note)
+VALUES ($1, $2, $3)
+ON CONFLICT (fk_user_id) DO UPDATE
+SET
+  attending = COALESCE(EXCLUDED.attending, party.attending),
+  note      = COALESCE(EXCLUDED.note,      party.note)
+RETURNING *;
+`
+
 func (r *Repo) UpdateParty(p *models.Party) (*models.Party, error) {
-	row, err := r.PgPool.Query(context.Background(), "insert into party(fk_user_id, attending, note) values($1, $2, $3) on conflict (fk_user_id) do update set attending = excluded.attending, note = excluded.note returning *", p.UserId, p.Attending, p.Note)
+	row, err := r.PgPool.Query(context.Background(), updatePartyQuery, p.UserId, p.Attending, p.Note)
 	party, err := pgx.CollectExactlyOneRow(row, pgx.RowToStructByName[models.Party])
 
 	if err != nil {

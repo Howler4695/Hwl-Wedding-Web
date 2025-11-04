@@ -28,9 +28,7 @@ export default async function WeddingInvitePage() {
             </p>
           )}
           <h1 className="font-serif text-4xl sm:text-5xl leading-tight text-[#2E4E3F]">
-            {editMode
-              ? "Edit RSVP"
-              : "Congrats you&apos;re invited to our wedding!"}
+            {editMode ? "Edit RSVP" : "Congrats you're invited to our wedding!"}
           </h1>
 
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />

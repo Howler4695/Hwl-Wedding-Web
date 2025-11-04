@@ -66,7 +66,7 @@ func main() {
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000"}, // add your prod origins too
+		AllowOrigins:     []string{os.Getenv("BACKEND_ORIGIN")}, // add your prod origins too
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},

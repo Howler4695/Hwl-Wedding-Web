@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PartyRow from "./Row";
 import {
   PartyAddSubmitDesktop,
@@ -36,7 +36,7 @@ const makeBlankMember = ({
   age?: string;
   allergies?: string;
 }): Member => ({
-  id: id || (globalThis as any).crypto?.randomUUID?.(),
+  id: id || globalThis.crypto?.randomUUID?.(),
   firstName: firstName ?? "",
   lastName: lastName ?? "",
   age: age ?? "",
@@ -65,7 +65,6 @@ export default function PartyBuilder({
   const [membersToRemove, setMembersToRemove] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const total = useMemo(() => members.length, [members]);
 
   useEffect(() => {
     if (!error) return;
@@ -117,7 +116,7 @@ export default function PartyBuilder({
     }
 
     setMembers(() => [...currentMembers]);
-  }, [partyPops, setMembers]);
+  }, [partyPops, setMembers, firstName, lastName, phoneNumber, userId]);
 
   function updateMember(id: string, patch: Partial<Member>) {
     setMembers((prev) =>
@@ -172,8 +171,11 @@ export default function PartyBuilder({
         body: JSON.stringify(finalPayload),
       });
       router.push("/register");
-    } catch (err: any) {
-      setError(err?.message ?? "Something went wrong.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err?.message ?? "Something went wrong.");
+      }
+      setError("Something went wrong.");
     } finally {
       setSubmitting(false);
     }

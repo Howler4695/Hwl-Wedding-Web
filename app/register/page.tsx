@@ -19,7 +19,7 @@ export default async function WeddingRSVPFormPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(finalPayload),
       });
-    } catch (err: any) {
+    } catch (err) {
       throw new Error(
         `Submission failed (${err})\nContact help@thehowles.love`
       );

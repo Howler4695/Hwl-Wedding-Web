@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { MagCorners } from "@/components";
+import { GET_OPTIONS } from "@/helpers";
 import { redirect } from "next/navigation";
 
 export default async function WeddingRSVPFormPage() {
@@ -16,7 +17,10 @@ export default async function WeddingRSVPFormPage() {
     try {
       await fetch(`${process.env.BACKEND_URL}/party/update/${userId}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session?.accessToken}`,
+        },
         body: JSON.stringify(finalPayload),
       });
     } catch (err) {
@@ -27,10 +31,10 @@ export default async function WeddingRSVPFormPage() {
     redirect("/?attending=true");
   }
 
-  const partyJ = await fetch(`${process.env.BACKEND_URL}/party/${userId}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
+  const partyJ = await fetch(
+    `${process.env.BACKEND_URL}/party/${userId}`,
+    GET_OPTIONS(session)
+  );
   const party = await partyJ.json();
 
   const editMode = party?.attending === undefined ? false : true;

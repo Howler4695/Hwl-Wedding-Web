@@ -8,6 +8,7 @@ import {
 } from "./AddSubmitButtons";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import {} from "@/auth";
 
 export type Member = {
   id: string;
@@ -52,13 +53,15 @@ export default function PartyBuilder({
   phoneNumber,
   partyPops,
   backendURL,
+  accessToken,
 }: {
   userId?: string;
   firstName?: string;
   lastName?: string;
   phoneNumber?: string;
-  partyPops: Member[];
+  partyPops?: Member[];
   backendURL?: string;
+  accessToken?: string;
 }) {
   const router = useRouter();
   const [members, setMembers] = useState<Member[]>([]);
@@ -168,7 +171,10 @@ export default function PartyBuilder({
       await fetch(`${backendURL}/party/update/${userId}`, {
         method: "POST",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
         body: JSON.stringify(finalPayload),
       });
       router.push("/register");

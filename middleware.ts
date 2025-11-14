@@ -1,5 +1,7 @@
 import { auth } from "@/auth";
 
+const ADMIN_PROTECTED = ["/"];
+
 export default auth((req) => {
   if (
     !req.auth &&
@@ -13,6 +15,6 @@ export default auth((req) => {
 
 export const config = {
   matcher: [
-    "/((?!api/auth/|auth/signin|_next/static|_next/image|favicon.ico|__nextjs_font|images/|magnolia_no_stem.svg).*)",
+    "/((?!api/auth/|auth/signin|auth/signout|_next/static|_next/image|favicon.ico|__nextjs_font|images/|magnolia_no_stem.svg).*)",
   ],
 };

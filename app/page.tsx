@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { formatDateLong, formatDateShort } from "@/helpers";
+import { formatDateLong, formatDateShort, GET_OPTIONS } from "@/helpers";
 import {
   Card,
   InfoCard,
@@ -33,20 +33,17 @@ export default async function HomePage({
   let party;
   let partyPops;
   if (userId) {
-    const userJ = await fetch(`${process.env.BACKEND_URL}/user/${userId}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    const partyJ = await fetch(`${process.env.BACKEND_URL}/party/${userId}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+    const userJ = await fetch(
+      `${process.env.BACKEND_URL}/user/${userId}`,
+      GET_OPTIONS(session)
+    );
+    const partyJ = await fetch(
+      `${process.env.BACKEND_URL}/party/${userId}`,
+      GET_OPTIONS(session)
+    );
     const popJ = await fetch(
       `${process.env.BACKEND_URL}/party/pops/${userId}`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
+      GET_OPTIONS(session)
     );
     userInfo = await userJ.json();
     party = await partyJ.json();

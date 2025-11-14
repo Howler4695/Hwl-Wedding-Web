@@ -8,6 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// func (ct *Controller) GetAllPartyInfo(c *gin.Context) {
+// 	c.GetHeader(-dd)
+// }
+
 func (ct *Controller) UpdateParty(c *gin.Context) {
 	userId := c.Param("user_id")
 

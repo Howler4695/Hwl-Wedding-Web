@@ -4,26 +4,24 @@ import { MagCorners, PartyBuilder } from "@/components";
 import { auth } from "@/auth";
 import { Member } from "@/components/PartyBuilder/PartyBuilder";
 import Link from "next/link";
+import { GET_OPTIONS } from "@/helpers";
 
 export default async function PartyBuilderPage() {
   const session = await auth();
   const userId = session?.user?.id;
 
-  const userJ = await fetch(`${process.env.BACKEND_URL}/user/${userId}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
+  const userJ = await fetch(
+    `${process.env.BACKEND_URL}/user/${userId}`,
+    GET_OPTIONS(session)
+  );
   const contactsJ = await fetch(
     `${process.env.BACKEND_URL}/user/contact/${userId}`,
-    {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    }
+    GET_OPTIONS(session)
   );
-  const popJ = await fetch(`${process.env.BACKEND_URL}/party/pops/${userId}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
+  const popJ = await fetch(
+    `${process.env.BACKEND_URL}/party/pops/${userId}`,
+    GET_OPTIONS(session)
+  );
   const userInfo = await userJ.json();
   const contactInfo = await contactsJ.json();
   const partyPops = await popJ.json();
@@ -56,6 +54,7 @@ export default async function PartyBuilderPage() {
             phoneNumber={contactInfo.PhoneNumber}
             partyPops={partyPops as Member[]}
             backendURL={process?.env?.CLIENT_BACKEND_URL}
+            accessToken={session?.accessToken}
           />
 
           <footer className="mt-4 sm:mt-6 flex items-center justify-center gap-2 text-xs text-[#8C7E68]">

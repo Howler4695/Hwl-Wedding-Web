@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MagCorners } from "@/components";
 import { auth } from "@/auth";
+import { GET_OPTIONS } from "@/helpers";
 
 export default async function WeddingInvitePage() {
   const dateText = "Saturday, May 16, 2026";
@@ -8,10 +9,10 @@ export default async function WeddingInvitePage() {
   const session = await auth();
   const userId = session?.user?.id;
 
-  const partyJ = await fetch(`${process.env.BACKEND_URL}/party/${userId}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
+  const partyJ = await fetch(
+    `${process.env.BACKEND_URL}/party/${userId}`,
+    GET_OPTIONS(session)
+  );
   const party = await partyJ.json();
 
   const editMode = party?.id ? true : false;

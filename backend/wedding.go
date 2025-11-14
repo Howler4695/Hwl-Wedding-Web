@@ -13,6 +13,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/joho/godotenv"
 
+	"wedding/auth"
 	"wedding/controller"
 	"wedding/repositories"
 	"wedding/routes"
@@ -79,6 +80,16 @@ func main() {
 		os.Exit(1)
 	}
 	defer pool.Close()
+
+	cognitoCFG := auth.CognitoConfig{
+		Region:     os.Getenv("COGNITO_REGION"),
+		UserPoolID: os.Getenv("COGNITO_USER_POOL_ID"),
+		ClientID:   os.Getenv("COGNITO_APP_CLIENT_ID"),
+	}
+
+	if err := auth.Init(cognitoCFG); err != nil {
+		log.Fatalf("Failed to init JWKS: %v", err)
+	}
 
 	repo := repositories.GetRepo(pool)
 	cont := &controller.Controller{Repo: repo, Services: &services.Services{}}

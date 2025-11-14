@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"wedding/auth"
 	"wedding/controller"
 
 	"github.com/gin-gonic/gin"
@@ -16,6 +17,7 @@ func (r *Routes) MapAllRoutes() {
 }
 
 func (r *Routes) mapUserRoutes() {
+	r.Router.Use(auth.AuthMiddleware())
 	r.Router.GET("/user/:user_id", r.Cont.GetUserInfo)
 	r.Router.GET("/user/contact/:user_id", r.Cont.GetUserContactInfo)
 	r.Router.GET("/party/pops/:user_id", r.Cont.GetPartyPops)

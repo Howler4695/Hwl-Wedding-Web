@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 export default function SignIn() {
   useEffect(() => {
-    signIn("cognito", { redirectTo: "/" });
+    signIn("cognito", { redirectTo: "/rsvp" });
   }, []);
 
   return <></>;

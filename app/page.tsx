@@ -31,6 +31,7 @@ export default async function HomePage({
 
   let userInfo;
   let party;
+  let partyPops;
   if (userId) {
     const userJ = await fetch(`${process.env.BACKEND_URL}/user/${userId}`, {
       method: "GET",
@@ -40,9 +41,24 @@ export default async function HomePage({
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
+    const popJ = await fetch(
+      `${process.env.BACKEND_URL}/party/pops/${userId}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     userInfo = await userJ.json();
     party = await partyJ.json();
+    partyPops = await popJ.json();
   }
+
+  const displayName =
+    userInfo?.Firstname === undefined && userInfo?.LastName === undefined
+      ? null
+      : partyPops.length > 1
+      ? `${userInfo?.LastName} Party`
+      : `${userInfo?.FirstName} ${userInfo?.LastName}`;
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b  text-[#2E4E3F]">
@@ -83,10 +99,7 @@ export default async function HomePage({
             Welcome
           </p>
           <h1 className="font-serif text-4xl leading-tight sm:text-6xl">
-            {userInfo?.Firstname === undefined &&
-            userInfo?.LastName === undefined
-              ? null
-              : `${userInfo?.FirstName} ${userInfo?.LastName}`}
+            {displayName}
           </h1>
           <div className="mx-auto my-5 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
           <p className="text-[#4F5E50]">

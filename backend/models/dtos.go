@@ -21,11 +21,21 @@ type UserCreateDTO struct {
 	PlusOnes       []PlusOneName `json:"plusones"`
 }
 
+type UserDTO struct {
+	FirstName   *string `json:"first_name"`
+	LastName    *string `json:"last_name"`
+	Address     *string `json:"address"`
+	PhoneNumber *string `json:"phone_number"`
+	Email       *string `json:"email"`
+}
+
 type PartyDTO struct {
+	ID          int            `json:"party_id,omitempty"`
 	Attending   *bool          `json:"attending"`
 	Note        *string        `json:"notes,omitempty"`
+	User        *UserDTO       `json:"owning_user,omitempty"`
+	PopToRemove *[]string      `json:"people_to_remove,omitempty"`
 	Pop         *[]PartyPeople `json:"party_people"`
-	PopToRemove *[]string      `json:"people_to_remove"`
 }
 
 type PartyPeople struct {

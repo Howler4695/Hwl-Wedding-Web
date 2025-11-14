@@ -7,6 +7,178 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
+func derefString(s *string) string {
+	if s == nil {
+		return ""
+	}
+	return *s
+}
+
+func (r *Repo) GetAllPartyInfo() (*[]models.PartyDTO, error) {
+	const q = `
+        -- use the SQL from above, same column order
+        SELECT
+            p.party_id,
+            p.attending,
+            p.note,
+            u.user_id,
+            u.first_name          AS user_first_name,
+            u.last_name           AS user_last_name,
+            (
+                COALESCE(a.address_line_one, '') ||
+                CASE WHEN a.address_line_two IS NOT NULL AND a.address_line_two <> '' 
+                     THEN ' ' || a.address_line_two ELSE '' END ||
+                CASE WHEN a.city IS NOT NULL AND a.city <> '' 
+                     THEN ', ' || a.city ELSE '' END ||
+                CASE WHEN a.state IS NOT NULL AND a.state <> '' 
+                     THEN ', ' || a.state ELSE '' END ||
+                CASE WHEN a.zip_code IS NOT NULL AND a.zip_code <> '' 
+                     THEN ' ' || a.zip_code ELSE '' END
+            ) AS address,
+            c.email,
+            c.phone_number        AS user_phone_number,
+            pp.party_pop_id       AS party_pop_id,
+            pp.first_name         AS pop_first_name,
+            pp.last_name          AS pop_last_name,
+            pp.age                AS pop_age,
+            pp.phone_number       AS pop_phone_number,
+            pp.allergies          AS pop_allergies
+        FROM party p
+        JOIN users u
+            ON u.user_id = p.fk_user_id
+        LEFT JOIN addresses a
+            ON a.fk_user_id = u.user_id
+        LEFT JOIN contacts c
+            ON c.fk_user_id = u.user_id
+        LEFT JOIN party_pop pp
+            ON pp.fk_party_id = p.party_id
+        ORDER BY p.party_id, pp.last_name, pp.first_name;
+    `
+	rows, err := r.PgPool.Query(context.Background(), q)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	parties := make(map[int]*models.PartyDTO)
+
+	for rows.Next() {
+		var (
+			partyID   int
+			attending *bool
+			note      *string
+			userID    string
+			userFirst *string
+			userLast  *string
+			address   *string
+			email     *string
+			userPhone *string
+
+			popID        *string
+			popFirst     *string
+			popLast      *string
+			popAge       *int
+			popPhone     *string
+			popAllergies *string
+		)
+
+		err := rows.Scan(
+			&partyID,
+			&attending,
+			&note,
+			&userID,
+			&userFirst,
+			&userLast,
+			&address,
+			&email,
+			&userPhone,
+			&popID,
+			&popFirst,
+			&popLast,
+			&popAge,
+			&popPhone,
+			&popAllergies,
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		// Get or create PartyDTO for this partyID
+		p, ok := parties[partyID]
+		if !ok {
+			p = &models.PartyDTO{
+				ID:        partyID,
+				Attending: attending,
+				Note:      note,
+				User: &models.UserDTO{
+					FirstName:   userFirst,
+					LastName:    userLast,
+					Address:     address,
+					PhoneNumber: userPhone,
+					Email:       email,
+				},
+				Pop: &[]models.PartyPeople{},
+			}
+
+			parties[partyID] = p
+		}
+
+		// If there is a party_pop row, append it
+		if popID != nil {
+			pp := models.PartyPeople{
+				ID:        *popID,
+				Age:       int(*popAge),
+				FirstName: derefString(popFirst),
+				LastName:  derefString(popLast),
+			}
+			if popPhone != nil {
+				pp.PhoneNumber = popPhone
+			}
+			if popAllergies != nil {
+				pp.Allergies = popAllergies
+			}
+
+			slice := append(*p.Pop, pp)
+			p.Pop = &slice
+		}
+	}
+
+	if rows.Err() != nil {
+		return nil, rows.Err()
+	}
+
+	// Flatten map → slice
+	out := make([]models.PartyDTO, 0, len(parties))
+	for _, p := range parties {
+		out = append(out, *p)
+	}
+
+	return &out, nil
+
+}
+
+func (r *Repo) GetAllPartyPops() (*[]models.PartyPop, error) {
+	rows, err := r.PgPool.Query(context.Background(), "SELECT * FROM party_pop")
+	partyPops, err := pgx.CollectRows(rows, pgx.RowToStructByName[models.PartyPop])
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &partyPops, err
+}
+
+func (r *Repo) GetAllParties() (*[]models.Party, error) {
+	rows, err := r.PgPool.Query(context.Background(), "SELECT * FROM party")
+	parties, err := pgx.CollectRows(rows, pgx.RowToStructByName[models.Party])
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &parties, err
+}
+
 const updatePartyQuery = `
 INSERT INTO party (fk_user_id, attending, note)
 VALUES ($1, $2, $3)

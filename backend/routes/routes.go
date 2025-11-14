@@ -24,5 +24,6 @@ func (r *Routes) mapUserRoutes() {
 	r.Router.GET("/party/:user_id", r.Cont.GetParty)
 	r.Router.POST("/user/create", r.Cont.CreateUserInitial)
 	r.Router.POST("/party/update/:user_id", r.Cont.UpdateParty)
+	r.Router.GET("/admin/allpartyinfo", auth.AuthMiddleware("Admin"), r.Cont.GetAllPartyInfo)
 	// r.Router.PATCH("/user/update", controller.UpdateUser)
 }

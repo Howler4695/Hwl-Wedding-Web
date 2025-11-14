@@ -8,9 +8,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// func (ct *Controller) GetAllPartyInfo(c *gin.Context) {
-// 	c.GetHeader(-dd)
-// }
+func (ct *Controller) GetAllPartyInfo(c *gin.Context) {
+	parties, err := ct.Repo.GetAllPartyInfo()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, &parties)
+}
 
 func (ct *Controller) UpdateParty(c *gin.Context) {
 	userId := c.Param("user_id")

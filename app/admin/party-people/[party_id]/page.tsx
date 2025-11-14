@@ -1,9 +1,12 @@
 import { auth } from "@/auth";
 import { checkIsAdminPage } from "@/helpers/Auth";
+import { RegistryButton } from "@/components";
 import { GET_OPTIONS } from "@/helpers";
 import Link from "next/link";
 
-export default async function Admin() {
+export default async function AdminPartyPeople(props: {
+  params: Promise<{ party_id: string }>;
+}) {
   const session = await auth();
   checkIsAdminPage(session);
   const userId = session?.user?.id;
@@ -13,47 +16,45 @@ export default async function Admin() {
     GET_OPTIONS(session)
   );
   const allParties = await partiesJ.json();
-  console.log(allParties);
+  const party = allParties.find(async (party) => {
+    if (party.party_id == (await props.params).party_id) {
+      return party;
+    }
+  });
 
+  console.log(party);
   return (
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
-      <section className="relative z-10 w-full max-w-6xl pb-16">
+      <section className="relative z-10 w-full max-w-6xl pb-16 ">
+        {party.owning_user.first_name} {party.owning_user.last_name} Party
         <div className="rounded-3xl border-2 border-white/10 bg-white/90 shadow-2xl p-4 sm:p-8">
-          <div className="rounded-2xl border border-[#E7D9BF] bg-white/60">
+          <div className="rounded-2xl border border-[#E7D9BF] bg-white/60 ">
             <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] px-4 py-3 text-xs font-medium uppercase tracking-wider text-[#6B725E]">
               <div className="col-span-2">Name</div>
-              <div className="col-span-3">Email</div>
+              <div className="col-span-1">Age</div>
               <div className="col-span-2">Phone Number</div>
-              <div className="col-span-4">Address</div>
+              <div className="col-span-7">Allergies/Accessibility</div>
             </div>
           </div>
-          {allParties?.map((party: any) => {
+          {party?.party_people?.map((partyPeople: any) => {
             return (
               <Link href={`/admin/party-people/${party?.party_id}`}>
                 <div
-                  key={party.party_id}
-                  className="grid grid-cols-2 grid-rows-2 md:grid-cols-12  items-center gap-3 px-4 py-3 border-b-8 md:border-b last:border-b-0 border-[#E8DDC9]"
+                  key={party.id}
+                  className="grid grid-cols-2  md:grid-cols-12  items-center gap-3 px-4 py-3 border-b-8 md:border-b last:border-b-0 border-[#E8DDC9]"
                 >
                   <div className="col-span-1 text-black">
-                    {party.owning_user.first_name}
+                    {partyPeople.first_name}
                   </div>
                   <div className="col-span-1 text-black">
-                    {party.owning_user.last_name}
+                    {partyPeople.last_name}
                   </div>
-                  <div className="col-span-3 text-black">
-                    {party.owning_user.email}
-                  </div>
+                  <div className="col-span-1 text-black">{partyPeople.age}</div>
                   <div className="col-span-2 text-black">
-                    {party.owning_user.phone_number}
+                    {partyPeople.phone_number}
                   </div>
-                  <div className="col-span-5 text-black">
-                    {party.owning_user.address}
-                  </div>
-                  <div className="col-span-2 text-black">
-                    attending: {party.attending.toString()}
-                  </div>
-                  <div className="col-span-10 text-black">
-                    notes: {party.notes}
+                  <div className="col-span-7 text-black">
+                    {partyPeople.allergies}
                   </div>
                 </div>
               </Link>

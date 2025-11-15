@@ -32,7 +32,7 @@ export default function Countdown({
 function TimeCell({ label, value }: { label: string; value: number }) {
   return (
     <div className="rounded-2xl border border-[#E8DDC9] bg-white/60 p-3 text-center">
-      <div className="font-serif text-2xl sm:text-3xl text-[#2E4E3F]">
+      <div className="font-serif text-xl xs:text-2xl sm:text-3xl text-[#2E4E3F]">
         {String(value).padStart(2, "0")}
       </div>
       <div className="mt-1 text-[6px] xs:text-[7px] sm:text-[10px] uppercase tracking-[0.25em] text-[#6B725E]">

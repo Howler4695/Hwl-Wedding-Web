@@ -7,5 +7,10 @@ export default function SignIn() {
     signIn("cognito", { redirectTo: "/rsvp" });
   }, []);
 
-  return <></>;
+  return (
+    <main style={{ padding: "2rem", textAlign: "center" }}>
+      <h1>Signing in</h1>
+      <p>Contact help@thehowles.love if you have any issues.</p>
+    </main>
+  );
 }

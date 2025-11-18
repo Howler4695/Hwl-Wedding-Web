@@ -69,7 +69,7 @@ export default async function HomePage({
           <Link href="/rsvp" className="hover:text-white">
             {party?.id ? "Edit RSVP" : "RSVP"}
           </Link>
-          <Link href="#events" className="hover:text-white">
+          {/* <Link href="#events" className="hover:text-white">
             Photos
           </Link>
           <Link href="#events" className="hover:text-white">
@@ -77,7 +77,7 @@ export default async function HomePage({
           </Link>
           <Link href="#travel" className="hover:text-white">
             Travel
-          </Link>
+          </Link> */}
           <Link
             href="https://www.amazon.com/wedding/share/thehowles"
             className="hover:text-white"
@@ -163,6 +163,15 @@ export default async function HomePage({
             />
           ))}
         </div>
+        <p className="text-xs text-white/90 mt-1">
+          {"Courtesy of "}
+          <a
+            className="text-blue-400 cursor-pointer"
+            href="https://ericlincoln.com/"
+          >
+            Eric Lincoln
+          </a>
+        </p>
       </section>
 
       <section className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6">

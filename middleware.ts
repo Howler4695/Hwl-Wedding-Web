@@ -27,6 +27,6 @@ export default auth((req) => {
 
 export const config = {
   matcher: [
-    "/((?!api/auth/|auth/signin|auth/signout|auth/reauth|_next/static|_next/image|favicon.ico|__nextjs_font|images/|magnolia_no_stem.svg).*)",
+    "/((?!api/auth/|auth/signin|auth/signout|auth/reauth|_next/static|_next/image|favicon.ico|__nextjs_font|images/|magnolia_no_stem.svg|front_pic_0.jpg|front_pic_1.jpg|front_pic_2.jpg|front_pic_3.jpg).*)",
   ],
 };

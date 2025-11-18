@@ -6,18 +6,26 @@ export default function Countdown({
 }: {
   weddingTarget: string;
 }) {
-  const target = useMemo(() => new Date(weddingTarget), [weddingTarget]);
-  const [now, setNow] = useState<Date>(new Date());
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
+  const target = useMemo(
+    () => new Date(weddingTarget).getTime(),
+    [weddingTarget]
+  );
+  const [now, setNow] = useState<number>(Date.now());
+  const diff = Math.max(0, target - now);
 
-  const diff = Math.max(0, target.getTime() - now.getTime());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, [setNow]);
+
+  const [seconds, setSeconds] = useState<number>(0);
+  useEffect(() => {
+    setSeconds(Math.floor((diff / 1000) % 60));
+  }, [setSeconds, diff]);
+
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
 
   return (
     <div className="grid grid-cols-4 gap-2 sm:gap-4">

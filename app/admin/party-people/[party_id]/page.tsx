@@ -1,6 +1,5 @@
 import { auth } from "@/auth";
 import { checkIsAdminPage } from "@/helpers/Auth";
-import { RegistryButton } from "@/components";
 import { GET_OPTIONS } from "@/helpers";
 import Link from "next/link";
 
@@ -9,20 +8,18 @@ export default async function AdminPartyPeople(props: {
 }) {
   const session = await auth();
   checkIsAdminPage(session);
-  const userId = session?.user?.id;
 
   const partiesJ = await fetch(
     `${process.env.BACKEND_URL}/admin/allpartyinfo`,
     GET_OPTIONS(session)
   );
   const allParties = await partiesJ.json();
-  const party = allParties.find(async (party) => {
+  const party = allParties.find(async (party: { party_id: string }) => {
     if (party.party_id == (await props.params).party_id) {
       return party;
     }
   });
 
-  console.log(party);
   return (
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
       <section className="relative z-10 w-full max-w-6xl pb-16 ">
@@ -36,30 +33,40 @@ export default async function AdminPartyPeople(props: {
               <div className="col-span-7">Allergies/Accessibility</div>
             </div>
           </div>
-          {party?.party_people?.map((partyPeople: any) => {
-            return (
-              <Link href={`/admin/party-people/${party?.party_id}`}>
-                <div
+          {party?.party_people?.map(
+            (partyPeople: {
+              first_name: string;
+              last_name: string;
+              phone_number: string;
+              allergies: string;
+              age: string;
+            }) => {
+              return (
+                <Link
                   key={party.id}
-                  className="grid grid-cols-2  md:grid-cols-12  items-center gap-3 px-4 py-3 border-b-8 md:border-b last:border-b-0 border-[#E8DDC9]"
+                  href={`/admin/party-people/${party?.party_id}`}
                 >
-                  <div className="col-span-1 text-black">
-                    {partyPeople.first_name}
+                  <div className="grid grid-cols-2  md:grid-cols-12  items-center gap-3 px-4 py-3 border-b-8 md:border-b last:border-b-0 border-[#E8DDC9]">
+                    <div className="col-span-1 text-black">
+                      {partyPeople.first_name}
+                    </div>
+                    <div className="col-span-1 text-black">
+                      {partyPeople.last_name}
+                    </div>
+                    <div className="col-span-1 text-black">
+                      {partyPeople.age}
+                    </div>
+                    <div className="col-span-2 text-black">
+                      {partyPeople.phone_number}
+                    </div>
+                    <div className="col-span-7 text-black">
+                      {partyPeople.allergies}
+                    </div>
                   </div>
-                  <div className="col-span-1 text-black">
-                    {partyPeople.last_name}
-                  </div>
-                  <div className="col-span-1 text-black">{partyPeople.age}</div>
-                  <div className="col-span-2 text-black">
-                    {partyPeople.phone_number}
-                  </div>
-                  <div className="col-span-7 text-black">
-                    {partyPeople.allergies}
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+                </Link>
+              );
+            }
+          )}
         </div>
       </section>
     </main>

@@ -17,7 +17,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       let refreshToken = "";
       if (account) {
-        token.tokenId = account.id_token;
         token.accessToken = account.access_token;
         token.userId = account.providerAccountId;
         token.expires_at = account.expires_at;

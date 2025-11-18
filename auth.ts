@@ -9,43 +9,35 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   callbacks: {
     authorized: async ({ auth }) => {
-      try {
-        return !!auth;
-      } catch (e) {
-        console.error("Error authorized:", e);
-      }
+      return !!auth;
     },
     async jwt({ token, user, account, profile }) {
-      try {
-        if (user) {
-          token.name = user.name;
-        }
-        if (account) {
-          token.tokenId = account.id_token;
-          token.accessToken = account.access_token;
-          token.userId = account.providerAccountId;
-          token.expires_at = account.expires_at;
-          token.refresh_token = account.refresh_token;
-        }
-        if (profile) {
-          token.groups = profile["cognito:groups"];
-          token.name = `${profile?.given_name} ${profile?.family_name}`;
-        }
+      if (user) {
+        token.name = user.name;
+      }
+      let refreshToken = "";
+      if (account) {
+        token.tokenId = account.id_token;
+        token.accessToken = account.access_token;
+        token.userId = account.providerAccountId;
+        token.expires_at = account.expires_at;
+        refreshToken = token.refresh_token as string;
+      }
+      if (profile) {
+        token.groups = profile["cognito:groups"];
+        token.name = `${profile?.given_name} ${profile?.family_name}`;
+      }
 
-        if (!token.expires_at) {
-          return await refreshCognitoAccessToken(token);
-        }
+      if (!token.expires_at) {
+        return await refreshCognitoAccessToken(token, refreshToken);
+      }
 
-        const now = Date.now();
-        if (now < Number(token.expires_at) * 1000) {
-          return token;
-        }
-
-        return await refreshCognitoAccessToken(token);
-      } catch (e) {
-        console.error("Error JWT:", e);
+      const now = Date.now();
+      if (now < Number(token.expires_at) * 1000) {
         return token;
       }
+
+      return await refreshCognitoAccessToken(token, refreshToken);
     },
     session({ session, token }) {
       session.user.id = token.userId as string;
@@ -67,9 +59,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
 });
 
-async function refreshCognitoAccessToken(token: JWT): Promise<JWT> {
+async function refreshCognitoAccessToken(
+  token: JWT,
+  refreshToken?: string
+): Promise<JWT> {
   try {
-    if (!token.refresh_token) {
+    if (!refreshToken) {
       throw new Error("Missing refresh_token");
     }
 
@@ -90,7 +85,7 @@ async function refreshCognitoAccessToken(token: JWT): Promise<JWT> {
         grant_type: "refresh_token",
         client_id: clientId,
         ...(clientSecret ? { client_secret: clientSecret } : {}),
-        refresh_token: token.refresh_token as string,
+        refresh_token: refreshToken,
       }),
     });
 
@@ -104,7 +99,7 @@ async function refreshCognitoAccessToken(token: JWT): Promise<JWT> {
       ...token,
       access_token: tokens.access_token,
       expires_at: Math.floor(Date.now() / 1000 + tokens.expires_in),
-      refresh_token: tokens.refresh_token ?? token.refresh_token,
+      refresh_token: tokens.refresh_token ?? refreshToken,
       error: undefined,
     };
   } catch (error) {

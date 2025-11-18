@@ -9,34 +9,43 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   callbacks: {
     authorized: async ({ auth }) => {
-      return !!auth;
+      try {
+        return !!auth;
+      } catch (e) {
+        console.error("Error authorized:", e);
+      }
     },
     async jwt({ token, user, account, profile }) {
-      if (user) {
-        token.name = user.name;
-      }
-      if (account) {
-        token.tokenId = account.id_token;
-        token.accessToken = account.access_token;
-        token.userId = account.providerAccountId;
-        token.expires_at = account.expires_at;
-        token.refresh_token = account.refresh_token;
-      }
-      if (profile) {
-        token.groups = profile["cognito:groups"];
-        token.name = `${profile?.given_name} ${profile?.family_name}`;
-      }
+      try {
+        if (user) {
+          token.name = user.name;
+        }
+        if (account) {
+          token.tokenId = account.id_token;
+          token.accessToken = account.access_token;
+          token.userId = account.providerAccountId;
+          token.expires_at = account.expires_at;
+          token.refresh_token = account.refresh_token;
+        }
+        if (profile) {
+          token.groups = profile["cognito:groups"];
+          token.name = `${profile?.given_name} ${profile?.family_name}`;
+        }
 
-      if (!token.expires_at) {
+        if (!token.expires_at) {
+          return await refreshCognitoAccessToken(token);
+        }
+
+        const now = Date.now();
+        if (now < Number(token.expires_at) * 1000) {
+          return token;
+        }
+
         return await refreshCognitoAccessToken(token);
-      }
-
-      const now = Date.now();
-      if (now < Number(token.expires_at) * 1000) {
+      } catch (e) {
+        console.error("Error JWT:", e);
         return token;
       }
-
-      return await refreshCognitoAccessToken(token);
     },
     session({ session, token }) {
       session.user.id = token.userId as string;

@@ -48,17 +48,19 @@ export default async function AdminPartyPeople(props: {
                   className="grid grid-cols-2 md:grid-cols-12 items-center gap-3 px-4 py-3 border-b-8 md:border-b-2 last:border-b-0 border-[#E8DDC9]"
                 >
                   <div className="col-span-1 text-black">
-                    {partyPeople.first_name}
+                    {partyPeople?.first_name}
                   </div>
                   <div className="col-span-1 text-black">
-                    {partyPeople.last_name}
+                    {partyPeople?.last_name}
                   </div>
-                  <div className="col-span-1 text-black">{partyPeople.age}</div>
+                  <div className="col-span-1 text-black">
+                    {partyPeople?.age}
+                  </div>
                   <div className="col-span-2 text-black">
-                    {partyPeople.phone_number}
+                    {partyPeople?.phone_number}
                   </div>
                   <div className="col-span-7 text-black">
-                    {partyPeople.allergies}
+                    {partyPeople?.allergies}
                   </div>
                 </div>
               );

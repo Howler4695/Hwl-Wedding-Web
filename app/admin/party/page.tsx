@@ -61,30 +61,30 @@ export default async function Admin() {
             }) => {
               return (
                 <Link
-                  key={party.party_id}
+                  key={party?.party_id}
                   href={`/admin/party-people/${party?.party_id}`}
                   className="grid grid-cols-2 grid-rows-2 md:grid-cols-12  items-center gap-3 px-4 py-3 border-b-8 md:border-b-2 last:border-b-0 border-[#E8DDC9]"
                 >
                   <div className="col-span-1 text-black">
-                    {party.owning_user.first_name}
+                    {party?.owning_user?.first_name}
                   </div>
                   <div className="col-span-1 text-black">
-                    {party.owning_user.last_name}
+                    {party?.owning_user?.last_name}
                   </div>
                   <div className="col-span-3 text-black">
-                    {party.owning_user.email}
+                    {party?.owning_user?.email}
                   </div>
                   <div className="col-span-2 text-black">
-                    {party.owning_user.phone_number}
+                    {party?.owning_user?.phone_number}
                   </div>
                   <div className="col-span-5 text-black">
-                    {party.owning_user.address}
+                    {party?.owning_user?.address}
                   </div>
                   <div className="col-span-2 text-black">
-                    attending: {party.attending.toString()}
+                    attending: {party?.attending?.toString()}
                   </div>
                   <div className="col-span-10 text-black">
-                    notes: {party.notes}
+                    notes: {party?.notes}
                   </div>
                 </Link>
               );

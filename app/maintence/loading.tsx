@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { MagCorners } from "@/components";
-import { redirect } from "next/navigation";
 
 export default async function WeddingInvitePageLoading() {
   return (

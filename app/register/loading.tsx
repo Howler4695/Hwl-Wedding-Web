@@ -1,58 +1,17 @@
-import { auth } from "@/auth";
 import { MagCorners } from "@/components";
-import { GET_OPTIONS } from "@/helpers";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 export default async function WeddingRSVPFormPage() {
-  const session = await auth();
-  const userId = session?.user?.id;
-
-  async function createRSVP(formData: FormData) {
-    "use server";
-
-    const notes = String(formData.get("notes") || "");
-
-    const finalPayload = { attending: true, notes };
-
-    try {
-      await fetch(`${process.env.BACKEND_URL}/party/update/${userId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session?.accessToken}`,
-        },
-        body: JSON.stringify(finalPayload),
-      });
-    } catch (err) {
-      throw new Error(
-        `Submission failed (${err})\nContact help@thehowles.love`
-      );
-    }
-    redirect("/?attending=true");
-  }
-
-  const partyJ = await fetch(
-    `${process.env.BACKEND_URL}/party/${userId}`,
-    GET_OPTIONS(session)
-  );
-  const party = await partyJ.json();
-
-  const editMode = party?.attending === undefined ? false : true;
-
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
       <MagCorners />
       <section className="relative z-10 w-full max-w-3xl">
-        <form
-          action={createRSVP}
-          className="rounded-3xl border border-[#E8DDC9] bg-white/90 shadow-xl p-8 sm:p-10"
-        >
+        <div className="rounded-3xl border border-[#E8DDC9] bg-white/90 shadow-xl p-8 sm:p-10">
           <p className="mb-2 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">
             Wedding Registration
           </p>
           <h1 className="font-serif text-3xl sm:text-4xl leading-tight text-[#2E4E3F]">
-            {editMode ? "Update Details" : "Final Details"}
+            {"Loading"}
           </h1>
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
 
@@ -65,7 +24,7 @@ export default async function WeddingRSVPFormPage() {
                 name="notes"
                 placeholder="Anything you'd like to tell the couple before the wedding?"
                 rows={5}
-                defaultValue={party?.notes}
+                defaultValue={""}
                 className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
               />
             </label>
@@ -73,6 +32,7 @@ export default async function WeddingRSVPFormPage() {
           <div className="mt-8 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
             <button
               type="submit"
+              disabled={true}
               className="inline-flex items-center justify-center rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
             >
               Submit RSVP
@@ -89,7 +49,7 @@ export default async function WeddingRSVPFormPage() {
             <span>email help@thehowles.love with any questions or issues</span>
             <span className="inline-block h-px w-8 bg-[#E8DDC9]" />
           </footer>
-        </form>
+        </div>
       </section>
     </main>
   );

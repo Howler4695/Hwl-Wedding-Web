@@ -87,10 +87,8 @@ export default function PartyRow({
               type="text"
               step={1}
               inputMode="tel"
-              pattern="^(?:\+1\s?)?(?:\([2-9]\d{2}\)|[2-9]\d{2})[\s.-]?[2-9]\d{2}[\s.-]?\d{4}$"
               value={m.phoneNumber}
               onChange={(e) =>
-                m.leader ||
                 updateMember(m.id, {
                   phoneNumber: e.target.value,
                 })

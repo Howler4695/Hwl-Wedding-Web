@@ -50,7 +50,6 @@ export default function PartyBuilder({
   userId,
   firstName,
   lastName,
-  phoneNumber,
   partyPops,
   backendURL,
   accessToken,
@@ -58,7 +57,6 @@ export default function PartyBuilder({
   userId?: string;
   firstName?: string;
   lastName?: string;
-  phoneNumber?: string;
   partyPops?: Member[];
   backendURL?: string;
   accessToken?: string;
@@ -82,7 +80,6 @@ export default function PartyBuilder({
           id: userId,
           firstName,
           lastName,
-          phoneNumber,
           leader: true,
         }),
       ]);
@@ -96,7 +93,7 @@ export default function PartyBuilder({
             id: pop?.id,
             firstName: firstName,
             lastName: lastName,
-            phoneNumber: phoneNumber,
+            phoneNumber: pop?.phoneNumber,
             age: String(pop?.age),
             allergies: pop?.allergies,
             leader: true,
@@ -119,7 +116,7 @@ export default function PartyBuilder({
     }
 
     setMembers(() => [...currentMembers]);
-  }, [partyPops, setMembers, firstName, lastName, phoneNumber, userId]);
+  }, [partyPops, setMembers, firstName, lastName, userId]);
 
   function updateMember(id: string, patch: Partial<Member>) {
     setMembers((prev) =>
@@ -151,14 +148,21 @@ export default function PartyBuilder({
       setError("Each member must have a first name, last name, and age set.");
       return;
     }
+    const partyLeader = nonEmpty.find((m) => m?.leader === true);
+    if (!partyLeader?.phoneNumber) {
+      setError(
+        `${partyLeader?.firstName.trim()} ${partyLeader?.lastName.trim()} must have a valid phone number set`
+      );
+      return;
+    }
 
     const partyPeoplePayload = nonEmpty.map((m) => ({
-      id: m.id,
-      first_name: m.firstName.trim(),
-      last_name: m.lastName.trim(),
-      age: m.age ? Number(m.age) : 0,
-      phone_number: m.phoneNumber.trim() || null,
-      allergies: m.allergies.trim() || null,
+      id: m?.id,
+      first_name: m?.firstName.trim(),
+      last_name: m?.lastName.trim(),
+      age: m?.age ? Number(m?.age) : 0,
+      phone_number: m?.phoneNumber?.trim() || null,
+      allergies: m?.allergies?.trim() || null,
     }));
 
     const finalPayload = {

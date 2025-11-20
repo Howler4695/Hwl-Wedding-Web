@@ -52,7 +52,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Cognito({
       authorization: {
-        params: { scope: "openid email phone profile" },
+        params: { scope: "openid email profile" },
       },
     }),
   ],

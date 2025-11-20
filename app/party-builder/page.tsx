@@ -14,16 +14,11 @@ export default async function PartyBuilderPage() {
     `${process.env.BACKEND_URL}/user/${userId}`,
     GET_OPTIONS(session)
   );
-  const contactsJ = await fetch(
-    `${process.env.BACKEND_URL}/user/contact/${userId}`,
-    GET_OPTIONS(session)
-  );
   const popJ = await fetch(
     `${process.env.BACKEND_URL}/party/pops/${userId}`,
     GET_OPTIONS(session)
   );
   const userInfo = await userJ.json();
-  const contactInfo = await contactsJ.json();
   const partyPops = await popJ.json();
 
   const editMode = partyPops?.length > 0 ? true : false;
@@ -49,9 +44,8 @@ export default async function PartyBuilderPage() {
 
           <PartyBuilder
             userId={userId}
-            firstName={userInfo.FirstName}
-            lastName={userInfo.LastName}
-            phoneNumber={contactInfo.PhoneNumber}
+            firstName={userInfo?.FirstName}
+            lastName={userInfo?.LastName}
             partyPops={partyPops as Member[]}
             backendURL={process?.env?.CLIENT_BACKEND_URL}
             accessToken={session?.accessToken}

@@ -7,7 +7,7 @@ interface ReauthPageProps {
 }
 
 export default function ReauthPage({ searchParams }: ReauthPageProps) {
-  const from = searchParams.from ?? "/";
+  const from = searchParams?.from ?? "/";
 
   return <ReauthClient from={from} />;
 }

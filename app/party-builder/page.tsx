@@ -50,8 +50,8 @@ export default async function PartyBuilderPage() {
             accessToken={session?.accessToken}
           />
 
-          <footer className="mt-4 sm:mt-6 flex items-center justify-center gap-2 text-xs text-[#8C7E68]">
-            <span className="inline-block text-center h-px w-8 bg-[#E8DDC9]" />
+          <footer className="mt-4 sm:mt-6 flex text-center items-center justify-center gap-2 text-xs text-[#8C7E68]">
+            <span className="inline-block h-px w-8 bg-[#E8DDC9]" />
             <span>email help@thehowles.love with any questions or issues</span>
             <span className="inline-block h-px w-8 bg-[#E8DDC9]" />
           </footer>

@@ -37,8 +37,7 @@ export default async function PartyBuilderPage() {
             </h1>
             <div className="mx-auto my-4 h-0.5 w-24 sm:w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
             <p className="text-sm sm:text-base text-[#4F5E50]">
-              Add family members or plus ones below. Phone numbers and allergies
-              are optional
+              {`Add family members or plus ones below. Phone numbers and allergies are optional. A Phone Number must be provided for your party leader ${userInfo?.FirstName} ${userInfo?.LastName}`}
             </p>
           </header>
 

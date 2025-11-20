@@ -65,7 +65,7 @@ export default async function WeddingInvitePage() {
             </Link>
           </div>
 
-          <div className="mt-8 flex items-center justify-center gap-2 text-xs text-[#8C7E68]">
+          <div className="mt-8 flex items-center text-center justify-center gap-2 text-xs text-[#8C7E68]">
             <span className="inline-block h-px w-8 bg-[#E8DDC9]" />
             <span>email help@thehowles.love with any issues or questions.</span>
             <span className="inline-block h-px w-8 bg-[#E8DDC9]" />

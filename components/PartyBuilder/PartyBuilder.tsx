@@ -9,6 +9,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import {} from "@/auth";
+import { isValidUSPhoneNumber } from "@/helpers";
 
 export type Member = {
   id: string;
@@ -152,6 +153,17 @@ export default function PartyBuilder({
     if (!partyLeader?.phoneNumber) {
       setError(
         `${partyLeader?.firstName.trim()} ${partyLeader?.lastName.trim()} must have a valid phone number set`
+      );
+      return;
+    }
+
+    // Validate phone number on backend
+    const invalidPhoneNumber = nonEmpty.find(
+      (m) => m?.phoneNumber && !isValidUSPhoneNumber(m?.phoneNumber?.trim())
+    );
+    if (invalidPhoneNumber) {
+      setError(
+        `${invalidPhoneNumber?.firstName} ${invalidPhoneNumber?.lastName} has an invalid US phone number`
       );
       return;
     }

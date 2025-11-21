@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
 import { JWT } from "next-auth/jwt";
 import Cognito from "next-auth/providers/cognito";
-import { redirect } from "next/navigation";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {

@@ -1,11 +1,8 @@
 import React from "react";
 
-import { MagCorners } from "@/components";
-
 export default async function PartyBuilderPage() {
   return (
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-4 sm:p-6]">
-      <MagCorners />
       <section className="relative z-10 w-full max-w-6xl pb-16">
         <div className="rounded-3xl border-2 border-white/10 bg-white/90 shadow-2xl p-4 sm:p-8">
           <header className="mb-4 sm:mb-6">

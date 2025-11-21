@@ -1,10 +1,8 @@
-import { MagCorners } from "@/components";
 import Link from "next/link";
 
 export default async function WeddingRSVPFormPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
-      <MagCorners />
       <section className="relative z-10 w-full max-w-3xl">
         <div className="rounded-3xl border border-[#E8DDC9] bg-white/70 backdrop-blur-xl shadow-xl p-8 sm:p-10">
           <p className="mb-2 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">

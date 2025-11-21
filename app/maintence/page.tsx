@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { MagCorners } from "@/components";
 import { redirect } from "next/navigation";
 
 export default async function WeddingInvitePage() {
@@ -8,8 +7,6 @@ export default async function WeddingInvitePage() {
   }
   return (
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
-      <MagCorners />
-
       <section className="relative z-10 w-full max-w-2xl">
         <div className="rounded-3xl border-2 border-white/10  bg-white/70 backdrop-blur-xl shadow-2xl p-10 ">
           <p className="mb-2 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">

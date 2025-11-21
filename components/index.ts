@@ -21,3 +21,4 @@ export {
 } from "./PartyBuilder/AddSubmitButtons";
 export { default as PartyBuilder } from "./PartyBuilder/PartyBuilder";
 export { default as FullPageModal } from "./Modal/Modal";
+export { StaticImages as StaticImages } from "./Images/StaticImages";

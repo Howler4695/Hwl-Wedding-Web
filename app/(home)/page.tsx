@@ -7,10 +7,9 @@ import {
   AccordionItem,
   Countdown,
   AddCalenderButton,
-  MagCorners,
   FullPageModal,
+  StaticImages,
 } from "@/components";
-import Image from "next/image";
 import { auth } from "@/auth";
 
 export default async function HomePage({
@@ -59,8 +58,6 @@ export default async function HomePage({
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b  text-[#2E4E3F]">
-      <MagCorners />
-
       <header className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
         <div className="font-serif text-xl sm:text-2xl text-white/90">
           Hannah & Hayden&apos;s Wedding
@@ -149,29 +146,7 @@ export default async function HomePage({
 
       <section className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6">
         <h2 className="font-serif text-3xl text-white/90">Photos</h2>
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-4">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <Image
-              src={`/front_pic_${i}.jpg`}
-              alt={`image_${i}`}
-              width={4000}
-              height={4000}
-              key={i}
-              className="aspect-square rounded-xl border border-[#E8DDC9] bg-white/60"
-              placeholder="blur"
-              blurDataURL={`/blur.png`}
-            />
-          ))}
-        </div>
-        <p className="text-xs text-white/90 mt-1">
-          {"Courtesy of "}
-          <a
-            className="text-blue-400 cursor-pointer"
-            href="https://ericlincoln.com/"
-          >
-            Eric Lincoln
-          </a>
-        </p>
+        <StaticImages />
       </section>
 
       <section className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6">

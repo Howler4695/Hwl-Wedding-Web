@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import { MagCorners } from "@/components";
 import { GET_OPTIONS } from "@/helpers";
 import { redirect } from "next/navigation";
 
@@ -46,7 +45,6 @@ export default async function WeddingRSVPFormPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
-      <MagCorners />
       <section className="relative z-10 w-full max-w-3xl">
         <form
           action={createRSVP}

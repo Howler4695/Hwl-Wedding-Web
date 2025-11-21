@@ -15,7 +15,7 @@ export const MagCorners = () => (
         loading="lazy"
         fetchPriority="low"
         placeholder="empty"
-        className="object-contain "
+        className="object-contain"
       />
     </div>
     <div

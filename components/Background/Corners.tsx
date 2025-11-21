@@ -13,7 +13,6 @@ export const MagCorners = () => (
         fill
         sizes="288px"
         className="object-contain"
-        priority
       />
     </div>
     <div
@@ -26,7 +25,6 @@ export const MagCorners = () => (
         fill
         sizes="288px"
         className="object-contain"
-        priority
       />
     </div>
   </>

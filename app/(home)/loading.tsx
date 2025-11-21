@@ -8,7 +8,6 @@ import {
   Countdown,
   AddCalenderButton,
 } from "@/components";
-import Image from "next/image";
 import { LoadingStaticImages } from "@/components/Images/StaticImages";
 
 export default async function HomePage() {

@@ -48,7 +48,7 @@ export default async function WeddingRSVPFormPage() {
       <section className="relative z-10 w-full max-w-3xl">
         <form
           action={createRSVP}
-          className="rounded-3xl border border-[#E8DDC9] bg-white/70 backdrop-blur-xl shadow-xl p-8 sm:p-10"
+          className="card-no-blur border border-[#E8DDC9] p-8 sm:p-10"
         >
           <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#6B725E]">
             Wedding Registration

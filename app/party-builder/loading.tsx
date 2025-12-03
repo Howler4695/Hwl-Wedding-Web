@@ -4,12 +4,12 @@ export default async function PartyBuilderPage() {
   return (
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-4 sm:p-6]">
       <section className="relative z-10 w-full max-w-6xl pb-16">
-        <div className="rounded-3xl border-2 border-white/10 bg-white/90 shadow-2xl p-4 sm:p-8">
+        <div className="card-no-blur border-2 border-white/10 p-4 sm:p-8">
           <header className="mb-4 sm:mb-6">
             <p className="mb-2 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">
               Wedding Registration
             </p>
-            <h1 className="text-3xl sm:text-4xl leading-tight text-[#2E4E3F]">
+            <h1 className="skeleton-glow text-3xl sm:text-4xl leading-tight">
               {"Loading"}
             </h1>
             <div className="mx-auto my-4 h-0.5 w-24 sm:w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
@@ -30,6 +30,8 @@ export default async function PartyBuilderPage() {
                   <div className="col-span-1 text-right">Remove</div>
                 </div>
               </div>
+
+              <div className="skeleton-glow h-[246px] rounded-2xl" />
 
               <div className="hidden sm:flex items-center justify-between pt-2">
                 <button

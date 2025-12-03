@@ -2,7 +2,7 @@
 
 :root {
   --background: #4a5544;
-  --foreground: #171717;
+  --foreground: #2e4e3f;
 }
 
 @theme inline {
@@ -18,12 +18,134 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #4a5544;
-    --foreground: #ededed;
+    --foreground: #2e4e3f;
   }
+}
+
+@utility naked-backdrop-halo {
+  position: relative;
+  display: inline-block;
+  border-radius: 9999px;
+}
+
+.naked-backdrop-halo::before {
+  content: "";
+  position: absolute;
+
+  inset-inline: -15%; /* horizontal */
+  inset-block: -0.35em; /* vertical */
+
+  border-radius: inherit;
+  z-index: -1;
+
+  background: radial-gradient(120% 60% at 50% 50%, rgba(251, 182, 206, 0.75));
+  filter: blur(14px);
+  opacity: 0.9;
+}
+
+@utility skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(240 240 240 / 1);
+  color: transparent;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@utility skeleton-glow {
+  position: relative;
+  overflow: hidden;
+  background-color: rgb(235 235 235 / 0.75);
+  color: transparent;
+  border-radius: 0.5rem;
+  animation: skeletonGlow 1.6s ease-in-out infinite;
+}
+
+@keyframes skeletonGlow {
+  0% {
+    background-color: rgba(235, 235, 235, 0.75);
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    background-color: rgba(235, 235, 235, 0.75);
+  }
+}
+
+@utility naked-backdrop {
+  @apply rounded-3xl bg-white/10 backdrop-blur-xs p-1.5;
+}
+
+@utility naked-text {
+  @apply text-black/70;
+}
+
+@utility card {
+  @apply rounded-2xl border border-[#E8DDC9] bg-white/20 md:bg-white/40 shadow-xl backdrop-blur-xl;
+}
+
+@utility heading-1 {
+  @apply font-heading font-bold text-4xl;
+}
+
+@utility heading-2 {
+  @apply font-heading font-semibold text-3xl;
+}
+
+@utility heading-3 {
+  @apply font-heading font-medium text-2xl;
+}
+
+@utility heading-4 {
+  @apply font-heading font-medium text-xl;
+}
+
+@utility bg-toile-center {
+  background-image: url("/img/background_seam.jpg");
+  background-repeat: repeat-y;
+  background-position: top center;
+  background-size: 120vw auto;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  h1 {
+    @apply heading-1;
+  }
+
+  h2 {
+    @apply heading-2;
+  }
+
+  h3 {
+    @apply heading-3;
+  }
+
+  h4 {
+    @apply heading-4;
+  }
 }

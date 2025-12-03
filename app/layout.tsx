@@ -46,8 +46,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${quicksand.variable} antialiased`}
       >
-        <MagCorners />
-        {children}
+        {/* <MagCorners /> */}
+        <div className="min-h-screen bg-toile-center">{children}</div>
       </body>
     </html>
   );

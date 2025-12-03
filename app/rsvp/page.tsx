@@ -19,13 +19,13 @@ export default async function WeddingInvitePage() {
   return (
     <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
       <section className="relative z-10 w-full max-w-2xl">
-        <div className="rounded-3xl border-2 border-white/10  bg-white/70 backdrop-blur-xl shadow-2xl p-10 ">
+        <div className="card p-10">
           {editMode ?? (
-            <p className="mb-2 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">
+            <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#6B725E]">
               Official Invitation
             </p>
           )}
-          <h1 className="font-serif text-4xl sm:text-5xl leading-tight text-[#2E4E3F]">
+          <h1 className="text-4xl sm:text-5xl leading-tight text-[#2E4E3F] text-center">
             {editMode ? "Edit RSVP" : "Congrats you're invited to our wedding!"}
           </h1>
 

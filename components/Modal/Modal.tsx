@@ -24,19 +24,16 @@ export default function FullPageModal({
     >
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
       <div className="relative z-10 flex h-full w-full items-start justify-center">
-        <div className="relative mt-8 w-full max-w-2xl rounded-2xl bg-white/90 p-6 shadow-xl sm:mt-16 sm:p-8">
-          <h1
-            id="modal-title"
-            className="mb-3 text-2xl font-semibold tracking-tight text-[#2E4E3F]"
-          >
+        <div className="relative mt-8 w-full max-w-2xl rounded-2xl bg-white/90 p-6 shadow-xl sm:mt-16 sm:p-8 self-center">
+          <h2 id="modal-title" className="mb-3 tracking-tight text-[#2E4E3F]">
             {title}
-          </h1>
+          </h2>
 
           <div className="prose prose-slate max-w-none text-[15px] leading-7 text-[#2E4E3F]">
             <p>{text}</p>
           </div>
 
-          <div className="mt-6 flex gap-2">
+          <div className="mt-6 flex gap-2 justify-center md:justify-normal">
             <Link
               href={primaryHref}
               className="inline-flex items-center justify-center rounded-lg border-[#9FB39E] bg-[#2E4E3F] text-center shadow-lg px-4 py-2 text-sm font-medium text-white hover:bg-[#9FB39E] focus:outline-none focus:ring-2 focus:ring-slate-400"

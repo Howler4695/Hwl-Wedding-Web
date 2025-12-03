@@ -103,6 +103,10 @@
   @apply rounded-2xl border border-[#E8DDC9] bg-white/20 md:bg-white/40 shadow-xl backdrop-blur-xl;
 }
 
+@utility card-no-blur {
+  @apply rounded-2xl border border-[#E8DDC9] bg-white/90 shadow-xl;
+}
+
 @utility heading-1 {
   @apply font-heading font-bold text-4xl;
 }

@@ -13,7 +13,7 @@ export default async function WeddingInvitePage() {
             Maintenance
           </p>
 
-          <h1 className="font-serif text-2xl sm:text-5xl leading-tight text-[#2E4E3F]">
+          <h1 className="text-2xl sm:text-5xl leading-tight text-[#2E4E3F]">
             {"TheHowles.love is currently undergoing maintenance"}
           </h1>
 

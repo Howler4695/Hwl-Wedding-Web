@@ -8,7 +8,7 @@ export default async function WeddingRSVPFormPage() {
           <p className="mb-2 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">
             Wedding Registration
           </p>
-          <h1 className="font-serif text-3xl sm:text-4xl leading-tight text-[#2E4E3F]">
+          <h1 className="text-3xl sm:text-4xl leading-tight text-[#2E4E3F]">
             {"Loading"}
           </h1>
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />

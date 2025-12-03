@@ -5,7 +5,7 @@ import PartyRemove from "./RemoveButton";
 import { Member } from "./PartyBuilder";
 
 const inputStyles =
-  "w-full rounded-xl border border-[#9FB39E] bg-white/80 px-3 py-3 text-sm text-black placeholder:text-slate-300 focus:border-[#CAA55A] focus:outline-none focus:ring-2 focus:ring-[#CAA55A]/40";
+  "w-full rounded-xl border border-[#9FB39E] bg-white/90 px-3 py-3 text-sm text-black placeholder:text-slate-300 focus:border-[#CAA55A] focus:outline-none focus:ring-2 focus:ring-[#CAA55A]/40";
 
 export default function PartyRow({
   members,

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { formatDateLong, formatDateShort, GET_OPTIONS } from "@/helpers";
 import {
   Card,
@@ -9,6 +10,8 @@ import {
   AddCalenderButton,
   FullPageModal,
   StaticImages,
+  NakedHeader,
+  HomeBtfSkeleton,
 } from "@/components";
 import { auth } from "@/auth";
 
@@ -23,7 +26,6 @@ export default async function HomePage({
   const CITY_STATE = "Saint Francisville, Louisiana";
   // const CEREMONY_VENUE = "Grace Epicopal Church";
   // const RECEPTION_VENUE = "Propinquity";
-  const HAS_GOLD_OUTLINE = false;
 
   const session = await auth();
   const userId = session?.user?.id;
@@ -57,12 +59,12 @@ export default async function HomePage({
       : `${userInfo?.FirstName} ${userInfo?.LastName}`;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b  text-[#2E4E3F]">
-      <header className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-        <div className="font-serif text-xl sm:text-2xl text-white/90">
+    <main className="min-h-screen overflow-hidden">
+      <header className="z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+        <div className="font-heading font-bold text-xl sm:text-2xl naked-text">
           Hannah & Hayden&apos;s Wedding
         </div>
-        <nav className="hidden gap-6 text-sm text-white/80 sm:flex">
+        <nav className="hidden gap-6 text-sm naked-text sm:flex">
           <Link href="/rsvp" className="hover:text-white">
             {party?.id ? "Edit RSVP" : "RSVP"}
           </Link>
@@ -87,14 +89,15 @@ export default async function HomePage({
         </nav>
       </header>
 
-      <section className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6">
-        <Card pad={32} useGold={HAS_GOLD_OUTLINE}>
+      <section
+        id="welcome"
+        className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6"
+      >
+        <Card pad={32}>
           <p className="mb-1 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">
             Welcome
           </p>
-          <h1 className="font-serif text-4xl leading-tight sm:text-6xl">
-            {displayName}
-          </h1>
+          <h1 className="leading-tight">{displayName}</h1>
           <div className="mx-auto my-5 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
           <p className="text-[#4F5E50]">
             {formatDateLong(WEDDING_DATE)} · {CITY_STATE}
@@ -116,41 +119,19 @@ export default async function HomePage({
         </Card>
       </section>
 
-      {/* <section
-        id="events"
-        className="relative z-10 mx-auto mt-12 w-full max-w-6xl px-6"
+      <section
+        id="photos"
+        className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
       >
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <Card useGold={HAS_GOLD_OUTLINE}>
-            <h2 className="font-serif text-2xl sm:text-3xl">The Ceremony</h2>
-            <p className="mt-2 text-sm text-[#7A846F]">{CEREMONY_VENUE}</p>
-            <p className="mt-1 text-[#4F5E50]">4:30 PM · Grace Church</p>
-            <ul className="mt-4 list-disc pl-5 text-sm text-[#4F5E50]">
-              <li>Indoor Searting</li>
-              <li>Attire: Formal</li>
-              <li>Free Parking next to church</li>
-            </ul>
-          </Card>
-          <Card useGold={HAS_GOLD_OUTLINE}>
-            <h2 className="font-serif text-2xl sm:text-3xl">The Reception</h2>
-            <p className="mt-2 text-sm text-[#7A846F]">{RECEPTION_VENUE}</p>
-            <p className="mt-1 text-[#4F5E50]">6:00 PM · Dinner & Dancing</p>
-            <ul className="mt-4 list-disc pl-5 text-sm text-[#4F5E50]">
-              <li>Plated dinner</li>
-              <li>Bar · Dance Floor · Cornhole</li>
-              <li>A fun night to remember</li>
-            </ul>
-          </Card>
-        </div>
-      </section> */}
-
-      <section className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6">
-        <h2 className="font-serif text-3xl text-white/90">Photos</h2>
+        <NakedHeader text="Photos" />
         <StaticImages />
       </section>
 
-      <section className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6">
-        <h2 className="font-serif text-3xl text-white/80">Our Story</h2>
+      <section
+        id="story"
+        className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
+      >
+        <NakedHeader text="Our Story" />
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
           <StoryCard
             title="First Hello"
@@ -189,7 +170,7 @@ export default async function HomePage({
         id="travel"
         className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
       >
-        <h2 className="font-serif text-3xl text-white">Travel & Lodging</h2>
+        <NakedHeader text="Travel & Lodging" />
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
           <InfoCard
             label="Accommodations"
@@ -204,7 +185,7 @@ export default async function HomePage({
             text="You'll be driving, recommend car pooling with friends and family"
           />
         </div>
-        <div className="mt-6 rounded-2xl border border-[#E8DDC9] bg-white/60 p-4 text-sm text-[#4F5E50]">
+        <div className="card mt-6 p-4 text-sm text-[#4F5E50]">
           <p className="mb-2 font-medium text-[#2E4E3F]">
             Ceremony to Reception
           </p>
@@ -231,25 +212,12 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* <section
-        id="registry"
-        className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
-      >
-        <h2 className="font-serif text-3xl text-white/90">Registry</h2>
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <RegistryButton
-            href="https://www.amazon.com/wedding/share/thehowles"
-            label="Amazon"
-          />
-        </div>
-      </section> */}
-
       <section
         id="faqs"
         className="relative z-10 mx-auto mt-14 w-full max-w-3xl px-6"
       >
-        <h2 className="font-serif text-3xl text-white/90">FAQs</h2>
-        <div className="mt-4 divide-y divide-[#E8DDC9] rounded-2xl border border-[#E8DDC9] bg-white/60">
+        <NakedHeader text="FAQs" />
+        <div className="card mt-4 divide-y divide-[#E8DDC9]">
           <AccordionItem q="What's the dress code?" a="Cocktail Attire." />
           <AccordionItem
             q="Can I bring a guest?"
@@ -262,6 +230,7 @@ export default async function HomePage({
         </div>
       </section>
 
+      <footer className="relative z-10 mx-auto mt-16 w-full max-w-6xl px-6 pb-32 sm:pb-12" />
       <div className="fixed bottom-20 left-0 right-0 z-20 px-4 sm:hidden">
         <Link
           href="https://www.amazon.com/wedding/share/thehowles"
@@ -280,16 +249,6 @@ export default async function HomePage({
             : `RSVP for ${formatDateShort(WEDDING_DATE)}`}
         </Link>
       </div>
-
-      <footer className="relative z-10 mx-auto mt-16 w-full max-w-6xl px-6 pb-20 sm:pb-12">
-        <div className="mt-8 flex items-center justify-center gap-2 text-xs text-[#8C7E68]">
-          <span className="inline-block h-px w-8 bg-[#E8DDC9]" />
-          <span>
-            {COUPLE} · {CITY_STATE}
-          </span>
-          <span className="inline-block h-px w-8 bg-[#E8DDC9]" />
-        </div>
-      </footer>
       {attending === "true" && (
         <FullPageModal
           title="Thanks for RSVPing!"

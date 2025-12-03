@@ -22,12 +22,17 @@ const SquareImage = ({
 );
 
 const LincolnCredit = () => (
-  <p className="text-xs text-white/90 mt-1">
-    {"Courtesy of "}
-    <a className="text-blue-400 cursor-pointer" href="https://ericlincoln.com/">
-      Eric Lincoln
-    </a>
-  </p>
+  <div className="naked-backdrop-halo">
+    <div className="naked-text naked-backdrop-halo text-xs mt-1">
+      {"Courtesy of "}
+      <a
+        className="text-blue-400 cursor-pointer underline"
+        href="https://ericlincoln.com/"
+      >
+        Eric Lincoln
+      </a>
+    </div>
+  </div>
 );
 
 export const StaticImages = () => (
@@ -47,8 +52,8 @@ export const LoadingStaticImages = () => (
     <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-4">
       {Array.from({ length: 4 }).map((_, i) => (
         <div
-          key={i}
-          className="fill aspect-square rounded-xl border border-[#E8DDC9] bg-white/60"
+          key={`loading-static-image-${i}`}
+          className="fill aspect-square rounded-xl border border-[#E8DDC9] skeleton-glow"
         />
       ))}
     </div>

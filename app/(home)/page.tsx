@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Suspense } from "react";
 import { formatDateLong, formatDateShort, GET_OPTIONS } from "@/helpers";
 import {
   Card,
@@ -11,7 +10,6 @@ import {
   FullPageModal,
   StaticImages,
   NakedHeader,
-  HomeBtfSkeleton,
 } from "@/components";
 import { auth } from "@/auth";
 
@@ -21,7 +19,6 @@ export default async function HomePage({
   searchParams?: Promise<{ attending?: string }>;
 }) {
   const attending = (await searchParams)?.attending;
-  const COUPLE = "Hannah & Hayden";
   const WEDDING_DATE = "2026-05-16T16:30:00-05:00";
   const CITY_STATE = "Saint Francisville, Louisiana";
   // const CEREMONY_VENUE = "Grace Epicopal Church";

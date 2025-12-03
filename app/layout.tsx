@@ -6,7 +6,6 @@ import {
   Quicksand,
 } from "next/font/google";
 import "./globals.css";
-import { MagCorners } from "@/components";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,7 +45,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${quicksand.variable} antialiased`}
       >
-        {/* <MagCorners /> */}
         <div className="min-h-screen bg-toile-center">{children}</div>
       </body>
     </html>

@@ -1,16 +1,13 @@
-"use client";
-import { signIn } from "next-auth/react";
-import { useEffect } from "react";
+import SignInClient from "./SignInClient";
 
-export default function SignIn() {
-  useEffect(() => {
-    signIn("cognito", { redirectTo: "/rsvp" });
-  }, []);
+interface SignInPageProps {
+  searchParams?: Promise<{
+    from?: string;
+  }>;
+}
 
-  return (
-    <main style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>Signing in</h1>
-      <p>Contact help@thehowles.love if you have any issues.</p>
-    </main>
-  );
+export default async function SignIn({ searchParams }: SignInPageProps) {
+  const from = (await searchParams)?.from ?? "/";
+
+  return <SignInClient from={from} />;
 }

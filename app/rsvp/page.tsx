@@ -17,7 +17,7 @@ export default async function WeddingInvitePage() {
   const editMode = party?.id ? true : false;
 
   return (
-    <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
+    <div className="relative center-page-no-scroll overflow-hidden flex items-center justify-center p-6">
       <section className="relative z-10 w-full max-w-2xl">
         <div className="card p-10">
           {editMode ?? (
@@ -67,6 +67,6 @@ export default async function WeddingInvitePage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

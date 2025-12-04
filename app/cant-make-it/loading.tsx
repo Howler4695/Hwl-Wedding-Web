@@ -1,6 +1,6 @@
 export default async function WeddingRSVPFormPageLoading() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
+    <main className="relative center-page-no-scroll overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
       <section className="relative z-10 w-full max-w-3xl">
         <div className="card-no-blur border border-[#E8DDC9] p-8 sm:p-10">
           <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#6B725E]">

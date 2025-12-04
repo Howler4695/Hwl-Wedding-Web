@@ -1,5 +1,10 @@
 import { formatDateLong } from "@/helpers";
-import { Card, NakedHeader, CountdownSkeleton } from "@/components";
+import {
+  Card,
+  NakedHeader,
+  CountdownSkeleton,
+  NavHeaderLoading,
+} from "@/components";
 import { LoadingStaticImages } from "@/components/Images/StaticImages";
 
 export default async function LoadingHomePage() {
@@ -8,17 +13,6 @@ export default async function LoadingHomePage() {
 
   return (
     <main className="min-h-screen overflow-hidden">
-      <header className="z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-        <div className="font-heading font-bold text-xl sm:text-2xl naked-text">
-          Hannah & Hayden&apos;s Wedding
-        </div>
-        <nav className="hidden gap-6 text-sm naked-text sm:flex">
-          <div className="skeleton-glow">{"RSVP"}</div>
-          <div className="skeleton-glow">Registry</div>
-          <div className="skeleton-glow">FAQ</div>
-        </nav>
-      </header>
-
       <section
         id="welcome"
         className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6"
@@ -38,7 +32,7 @@ export default async function LoadingHomePage() {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 justify-evenly sm:justify-normal">
-            <div className="skelton-glow sm:inline-flex items-center justify-center hidden rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2">
+            <div className="skeleton-glow sm:inline-flex items-center justify-center hidden rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 font-medium shadow transition-transform">
               {"RSVP Now"}
             </div>
             <div className="skeleton inline-flex items-center justify-center rounded-2xl  px-6 py-3 font-medium ">

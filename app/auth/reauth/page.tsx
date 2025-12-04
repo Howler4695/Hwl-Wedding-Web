@@ -1,13 +1,13 @@
 import ReauthClient from "./ReauthClient";
 
 interface ReauthPageProps {
-  searchParams: {
+  searchParams?: Promise<{
     from?: string;
-  };
+  }>;
 }
 
-export default function ReauthPage({ searchParams }: ReauthPageProps) {
-  const from = searchParams?.from ?? "/";
+export default async function ReauthPage({ searchParams }: ReauthPageProps) {
+  const from = (await searchParams)?.from ?? "/";
 
   return <ReauthClient from={from} />;
 }

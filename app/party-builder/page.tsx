@@ -25,7 +25,7 @@ export default async function PartyBuilderPage() {
 
   const registrationInstructions = `Add family members or plus ones below. Phone numbers and allergies are optional. A Phone Number must be provided for your party leader ${userInfo?.FirstName} ${userInfo?.LastName}.`;
   return (
-    <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-4 sm:p-6]">
+    <main className="relative center-page overflow-hidden flex items-center justify-center p-4 sm:p-6]">
       <Link href="/register" className="hidden" />
       <section className="relative z-10 w-full max-w-6xl pb-16">
         <div className="card-no-blur border-2 border-white/10 p-4 sm:p-8">

@@ -44,7 +44,7 @@ export default async function WeddingRSVPFormPage() {
   const party = await partyJ.json();
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
+    <main className="relative center-page-no-scroll overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
       <section className="relative z-10 w-full max-w-3xl">
         <form
           action={createRSVP}

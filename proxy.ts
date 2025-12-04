@@ -1,8 +1,6 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
-const ADMIN_PROTECTED = ["/"];
-
 // This is bad
 export default auth((req) => {
   if (process.env?.MAINTENCE_MODE === "true") {
@@ -14,8 +12,9 @@ export default auth((req) => {
     req.nextUrl.pathname !== "/auth/signin" &&
     req.nextUrl.pathname !== "/"
   ) {
-    const newUrl = new URL("/auth/signin", req.nextUrl.origin);
-    return NextResponse.redirect(newUrl);
+    const signInUrl = new URL("/auth/signin", req.nextUrl.origin);
+    signInUrl.searchParams.set("from", req.nextUrl.href);
+    return NextResponse.redirect(signInUrl);
   }
 
   const session = req.auth;

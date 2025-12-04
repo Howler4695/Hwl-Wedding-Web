@@ -10,6 +10,7 @@ import {
   FullPageModal,
   StaticImages,
   NakedHeader,
+  NavHeader,
 } from "@/components";
 import { auth } from "@/auth";
 
@@ -21,8 +22,6 @@ export default async function HomePage({
   const attending = (await searchParams)?.attending;
   const WEDDING_DATE = "2026-05-16T16:30:00-05:00";
   const CITY_STATE = "Saint Francisville, Louisiana";
-  // const CEREMONY_VENUE = "Grace Epicopal Church";
-  // const RECEPTION_VENUE = "Propinquity";
 
   const session = await auth();
   const userId = session?.user?.id;
@@ -56,36 +55,7 @@ export default async function HomePage({
       : `${userInfo?.FirstName} ${userInfo?.LastName}`;
 
   return (
-    <main className="min-h-screen overflow-hidden">
-      <header className="z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-        <div className="font-heading font-bold text-xl sm:text-2xl naked-text">
-          Hannah & Hayden&apos;s Wedding
-        </div>
-        <nav className="hidden gap-6 text-sm naked-text sm:flex">
-          <Link href="/rsvp" className="hover:text-white">
-            {party?.id ? "Edit RSVP" : "RSVP"}
-          </Link>
-          {/* <Link href="#events" className="hover:text-white">
-            Photos
-          </Link>
-          <Link href="#events" className="hover:text-white">
-            Details
-          </Link>
-          <Link href="#travel" className="hover:text-white">
-            Travel
-          </Link> */}
-          <Link
-            href="https://www.amazon.com/wedding/share/thehowles"
-            className="hover:text-white"
-          >
-            Registry
-          </Link>
-          <Link href="#faqs" className="hover:text-white">
-            FAQ
-          </Link>
-        </nav>
-      </header>
-
+    <div>
       <section
         id="welcome"
         className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6"
@@ -266,6 +236,6 @@ export default async function HomePage({
           secondaryText="Edit RSVP"
         />
       )}
-    </main>
+    </div>
   );
 }

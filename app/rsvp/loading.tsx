@@ -2,7 +2,7 @@ export default async function WeddingInvitePage() {
   const dateText = "Saturday, May 16, 2026";
 
   return (
-    <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
+    <main className="relative center-page-no-scroll overflow-hidden flex items-center justify-center p-6">
       <section className="relative z-10 w-full max-w-2xl">
         <div className="card p-10">
           <h1 className="skeleton-glow text-4xl sm:text-5xl leading-tight text-center">

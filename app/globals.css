@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #4a5544;
+  --background: rgba(253, 228, 208, 1);
   --foreground: #2e4e3f;
 }
 
@@ -10,14 +10,12 @@
   --color-foreground: var(--foreground);
   --font-heading: var(--font-cormorant);
   --font-body: var(--font-quicksand);
-
   --font-sans: var(--font-quicksand);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #4a5544;
+    --background: rgba(253, 228, 208, 1);
     --foreground: #2e4e3f;
   }
 }
@@ -91,6 +89,14 @@
   }
 }
 
+@utility center-page {
+  @apply min-h-[calc(100vh-5rem)];
+}
+
+@utility center-page-no-scroll {
+  @apply h-[calc(100vh-5rem)] max-h-[calc(100vh-5rem)];
+}
+
 @utility naked-backdrop {
   @apply rounded-3xl bg-white/10 backdrop-blur-xs p-1.5;
 }
@@ -127,7 +133,7 @@
   background-image: url("/img/background_seam.jpg");
   background-repeat: repeat-y;
   background-position: top center;
-  background-size: 120vw auto;
+  background-size: 105vw auto;
 }
 
 body {

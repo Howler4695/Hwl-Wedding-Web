@@ -40,7 +40,7 @@ export default async function WeddingRSVPFormPage() {
   const editMode = party?.attending === undefined ? false : true;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
+    <main className="relative center-page-no-scroll overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
       <section className="relative z-10 w-full max-w-3xl">
         <form action={createRSVP} className="card-no-blur p-8 sm:p-10">
           <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#6B725E]">

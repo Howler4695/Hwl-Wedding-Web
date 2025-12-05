@@ -27,3 +27,4 @@ export { CountdownSkeleton as CountdownSkeleton } from "./Countdown/CountdownSke
 export { HomeBtfSkeleton as HomeBtfSkeleton } from "./BtfSkeletons/HomeBtfSkeleton";
 export { NavHeader as NavHeader } from "./Navigation/Header";
 export { NavHeaderLoading as NavHeaderLoading } from "./Navigation/Header";
+export { NormalButton as NormalButton } from "./Buttons/RegistryButton";

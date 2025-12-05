@@ -56,10 +56,10 @@ export default async function AdminPartyPeople(props: {
                   <div className="col-span-1 text-black">
                     {partyPeople?.age}
                   </div>
-                  <div className="col-span-2 text-black">
+                  <div className="col-span-1 md:col-span-2 text-black">
                     {partyPeople?.phone_number}
                   </div>
-                  <div className="col-span-7 text-black">
+                  <div className="col-span-2 md:col-span-7 text-black">
                     {partyPeople?.allergies}
                   </div>
                 </div>

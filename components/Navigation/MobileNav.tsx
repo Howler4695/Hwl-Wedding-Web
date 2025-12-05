@@ -2,7 +2,13 @@
 import { useEffect, useState } from "react";
 import { NavLinks } from "./NavLinks";
 
-export const MobileNavButton = ({ edit }: { edit: boolean }) => {
+export const MobileNavButton = ({
+  edit,
+  showAdmin,
+}: {
+  edit: boolean;
+  showAdmin: boolean;
+}) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -61,7 +67,11 @@ export const MobileNavButton = ({ edit }: { edit: boolean }) => {
             Hannah & Hayden&apos;s Wedding
           </div>
           <nav className="mt-20 flex flex-col items-center gap-6 text-xl">
-            <NavLinks edit={edit} onNav={() => setOpen(!open)} />
+            <NavLinks
+              edit={edit}
+              onNav={() => setOpen(!open)}
+              showAdmin={showAdmin}
+            />
           </nav>
         </div>
       </div>

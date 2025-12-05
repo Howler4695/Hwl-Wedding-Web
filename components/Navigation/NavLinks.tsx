@@ -3,9 +3,11 @@ import Link from "next/link";
 export const NavLinks = ({
   edit,
   onNav,
+  showAdmin,
 }: {
   edit: boolean;
   onNav?: () => void;
+  showAdmin?: boolean;
 }) => (
   <>
     <Link href="/rsvp" className="text-nav" onClick={onNav} prefetch>
@@ -34,5 +36,25 @@ export const NavLinks = ({
     <Link href="/#faqs" className="text-nav" onClick={onNav}>
       FAQ
     </Link>
+    {showAdmin && (
+      <>
+        <Link
+          href="/admin"
+          className="text-nav"
+          onClick={onNav}
+          prefetch={false}
+        >
+          Admin Home
+        </Link>
+        <Link
+          href="/admin/party"
+          className="text-nav"
+          onClick={onNav}
+          prefetch={false}
+        >
+          Parties
+        </Link>
+      </>
+    )}
   </>
 );

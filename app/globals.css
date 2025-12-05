@@ -11,6 +11,7 @@
   --font-heading: var(--font-cormorant);
   --font-body: var(--font-quicksand);
   --font-sans: var(--font-quicksand);
+  --color-hannah-pink: rgba(251, 182, 206, 1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,6 +38,27 @@
   z-index: -1;
 
   background: radial-gradient(120% 60% at 50% 50%, rgba(251, 182, 206, 0.75));
+  filter: blur(14px);
+  opacity: 0.9;
+}
+
+@utility mobile-menu-backdrop {
+  position: relative;
+  display: inline-block;
+  border-radius: 9999px;
+}
+
+.mobile-menu-backdrop::before {
+  content: "";
+  position: absolute;
+
+  inset-inline: 30%; /* horizontal */
+  inset-block: -1.5em; /* vertical */
+
+  border-radius: inherit;
+  z-index: -1;
+
+  background: radial-gradient(120% 60% at 50% 50%, rgba(255, 255, 255, 0.75));
   filter: blur(14px);
   opacity: 0.9;
 }
@@ -87,6 +109,18 @@
   100% {
     background-color: rgba(235, 235, 235, 0.75);
   }
+}
+
+@utility text-nav {
+  @apply sm:hover:text-white text-white sm:text-black;
+}
+
+@utility hamburger-bar {
+  @apply h-0.5 w-6 bg-black rounded transition-all duration-300 z-60;
+}
+
+@utility section-offset {
+  @apply pt-8 sm:pt-22 sm:mt-[-2rem];
 }
 
 @utility center-page {

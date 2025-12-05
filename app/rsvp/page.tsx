@@ -41,6 +41,7 @@ export default async function WeddingInvitePage() {
               href="/party-builder"
               className="inline-flex items-center text-center justify-center rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
               aria-label="RSVP: You'll be there"
+              prefetch
             >
               {editMode
                 ? party?.attending
@@ -53,6 +54,7 @@ export default async function WeddingInvitePage() {
               href="/cant-make-it"
               className="inline-flex items-center text-center justify-center rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-6 py-3 text-[#6B725E] font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
               aria-label="RSVP: You can't make it"
+              prefetch
             >
               {editMode
                 ? party?.attending

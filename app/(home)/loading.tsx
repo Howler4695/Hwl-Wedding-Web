@@ -1,10 +1,5 @@
 import { formatDateLong } from "@/helpers";
-import {
-  Card,
-  NakedHeader,
-  CountdownSkeleton,
-  NavHeaderLoading,
-} from "@/components";
+import { Card, NakedHeader, CountdownSkeleton } from "@/components";
 import { LoadingStaticImages } from "@/components/Images/StaticImages";
 
 export default async function LoadingHomePage() {
@@ -12,7 +7,7 @@ export default async function LoadingHomePage() {
   const CITY_STATE = "Saint Francisville, Louisiana";
 
   return (
-    <main className="min-h-screen overflow-hidden">
+    <div className="min-h-screen overflow-hidden">
       <section
         id="welcome"
         className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6"
@@ -44,7 +39,7 @@ export default async function LoadingHomePage() {
 
       <section
         id="photos"
-        className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
+        className="relative z-10 mx-auto section-offset w-full max-w-6xl px-6"
       >
         <NakedHeader text="Photos" />
         <LoadingStaticImages />
@@ -52,7 +47,7 @@ export default async function LoadingHomePage() {
 
       <section
         id="story"
-        className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
+        className="relative z-10 mx-auto section-offset w-full max-w-6xl px-6"
       >
         <NakedHeader text="Our Story" />
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -67,7 +62,7 @@ export default async function LoadingHomePage() {
 
       <section
         id="travel"
-        className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
+        className="relative z-10 mx-auto section-offset w-full max-w-6xl px-6"
       >
         <NakedHeader text="Travel & Lodging" />
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -87,10 +82,10 @@ export default async function LoadingHomePage() {
 
       <section
         id="faqs"
-        className="relative z-10 mx-auto mt-14 w-full max-w-3xl px-6"
+        className="relative z-10 mx-auto section-offset w-full max-w-3xl px-6"
       >
         <NakedHeader text="FAQs" />
-        <div className="mt-4 skeleton-glow h-[144px]" />
+        <div className="mt-4 skeleton-glow h-[144px] rounded-2xl" />
       </section>
       <footer className="relative z-10 mx-auto mt-16 w-full max-w-6xl px-6 pb-36 sm:pb-16" />
 
@@ -104,6 +99,6 @@ export default async function LoadingHomePage() {
           RSVP
         </div>
       </div>
-    </main>
+    </div>
   );
 }

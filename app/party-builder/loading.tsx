@@ -2,7 +2,7 @@ import React from "react";
 
 export default async function PartyBuilderPage() {
   return (
-    <main className="relative center-page overflow-hidden flex items-center justify-center p-4 sm:p-6]">
+    <div className="relative center-page overflow-hidden flex items-center justify-center p-4 sm:p-6]">
       <section className="relative z-10 w-full max-w-6xl pb-16">
         <div className="card-no-blur border-2 border-white/10 p-4 sm:p-8">
           <header className="mb-4 sm:mb-6">
@@ -80,6 +80,6 @@ export default async function PartyBuilderPage() {
           </footer>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

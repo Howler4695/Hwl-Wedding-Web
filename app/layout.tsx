@@ -33,7 +33,9 @@ export default function RootLayout({
       >
         <div className="min-h-screen bg-toile-center">
           <NavHeader />
-          <main className="min-h-screen overflow-y-auto pt-20">{children}</main>
+          <main className="min-h-screen overflow-y-auto sm:pt-20">
+            {children}
+          </main>
         </div>
       </body>
     </html>

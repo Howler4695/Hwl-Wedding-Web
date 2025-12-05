@@ -1,40 +1,24 @@
-import Link from "next/link";
+import { MobileNavButton } from "./MobileNav";
+import { NavLinks } from "./NavLinks";
 
 export const NavHeader = ({ partyId }: { partyId?: string }) => (
-  <header className="fixed top-0 w-full z-50 mx-auto flex items-center justify-between px-4 py-6 bg-pink-200">
-    <div className="font-heading font-bold text-xl sm:text-2xl naked-text">
-      Hannah & Hayden&apos;s Wedding
+  <>
+    <header className="fixed hidden sm:flex top-0 w-full z-50 mx-auto items-center justify-between px-4 py-6 bg-pink-200">
+      <div className="font-heading font-bold text-xl sm:text-2xl naked-text">
+        Hannah & Hayden&apos;s Wedding
+      </div>
+      <nav className="hidden gap-6 text-sm naked-text sm:flex">
+        <NavLinks edit={!partyId} />
+      </nav>
+    </header>
+    <div className="sm:hidden fixed top-4 right-4 z-50">
+      <MobileNavButton edit={!partyId} />
     </div>
-    <nav className="hidden gap-6 text-sm naked-text sm:flex">
-      <Link href="/rsvp" className="hover:text-white">
-        {partyId ? "Edit RSVP" : "RSVP"}
-      </Link>
-      <Link href="/#photos" className="hover:text-white">
-        Photos
-      </Link>
-      <Link href="#story" className="hover:text-white">
-        Story
-      </Link>
-      <Link href="/#travel" className="hover:text-white">
-        Travel
-      </Link>
-      <Link href="#faqs" className="hover:text-white">
-        FAQ
-      </Link>
-      <a
-        href="https://www.amazon.com/wedding/share/thehowles"
-        className="hover:text-white"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Registry
-      </a>
-    </nav>
-  </header>
+  </>
 );
 
 export const NavHeaderLoading = () => (
-  <header className="z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+  <header className="z-10 mx-auto hidden sm:flex w-full max-w-6xl items-center justify-between px-6 py-4">
     <div className="font-heading font-bold text-xl sm:text-2xl naked-text">
       Hannah & Hayden&apos;s Wedding
     </div>

@@ -15,9 +15,9 @@ export default function SignInClient({ from }: { from?: string }) {
   }, [from]);
 
   return (
-    <main style={{ padding: "2rem", textAlign: "center" }}>
+    <div style={{ padding: "2rem", textAlign: "center" }}>
       <h1>Signing in</h1>
       <p>Contact help@thehowles.love if you have any issues.</p>
-    </main>
+    </div>
   );
 }

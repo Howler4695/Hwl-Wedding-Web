@@ -30,7 +30,7 @@ export default async function Admin() {
   );
 
   return (
-    <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
+    <div className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
       <section className="relative z-10 w-full max-w-6xl pb-16">
         <div className="rounded-3xl border-2 border-white/10 bg-white/90 shadow-2xl p-4 sm:p-8">
           <div className="mb-4 md:grid grid-cols-9 gap-3 border-[#E8DDC9] px-4 py-3 text-xl font-medium uppercase tracking-wider text-[#6B725E]">
@@ -92,6 +92,6 @@ export default async function Admin() {
           )}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

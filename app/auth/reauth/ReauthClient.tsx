@@ -15,10 +15,10 @@ export default function ReauthClient({ from }: { from: string }) {
   }, [from]);
 
   return (
-    <main style={{ padding: "2rem", textAlign: "center" }}>
+    <div style={{ padding: "2rem", textAlign: "center" }}>
       <h1>Reconnecting your session…</h1>
       <p>Youll be redirected to sign in again.</p>
       <p>Contact help@thehowles.love if you have any issues.</p>
-    </main>
+    </div>
   );
 }

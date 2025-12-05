@@ -85,10 +85,9 @@ export default async function HomePage({
           </div>
         </Card>
       </section>
-
       <section
         id="photos"
-        className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
+        className="relative z-10 mx-auto section-offset w-full max-w-6xl px-6"
       >
         <NakedHeader text="Photos" />
         <StaticImages />
@@ -96,7 +95,7 @@ export default async function HomePage({
 
       <section
         id="story"
-        className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
+        className="relative z-10 mx-auto section-offset w-full max-w-6xl px-6"
       >
         <NakedHeader text="Our Story" />
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -135,7 +134,7 @@ export default async function HomePage({
 
       <section
         id="travel"
-        className="relative z-10 mx-auto mt-14 w-full max-w-6xl px-6"
+        className="relative z-10 mx-auto section-offset w-full max-w-6xl px-6"
       >
         <NakedHeader text="Travel & Lodging" />
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -181,7 +180,7 @@ export default async function HomePage({
 
       <section
         id="faqs"
-        className="relative z-10 mx-auto mt-14 w-full max-w-3xl px-6"
+        className="relative z-10 mx-auto section-offset w-full max-w-3xl px-6"
       >
         <NakedHeader text="FAQs" />
         <div className="card mt-4 divide-y divide-[#E8DDC9]">
@@ -198,23 +197,32 @@ export default async function HomePage({
       </section>
 
       <footer className="relative z-10 mx-auto mt-16 w-full max-w-6xl px-6 pb-32 sm:pb-12" />
-      <div className="fixed bottom-20 left-0 right-0 z-20 px-4 sm:hidden">
-        <Link
-          href="https://www.amazon.com/wedding/share/thehowles"
-          className="block w-full rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] text-[#6B725E] px-6 py-3 text-center shadow-lg"
-        >
-          Registry
-        </Link>
-      </div>
+      {!party?.id && (
+        <div className="fixed bottom-20 left-0 right-0 z-20 px-4 sm:hidden">
+          <Link
+            href="https://www.amazon.com/wedding/share/thehowles"
+            className="block w-full rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] text-[#6B725E] px-6 py-3 text-center shadow-lg"
+          >
+            Registry
+          </Link>
+        </div>
+      )}
       <div className="fixed bottom-4 left-0 right-0 z-20 px-4 sm:hidden">
-        <Link
-          href="/rsvp"
-          className="block w-full rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-center text-white shadow-lg"
-        >
-          {party?.id
-            ? "Edit RSVP"
-            : `RSVP for ${formatDateShort(WEDDING_DATE)}`}
-        </Link>
+        {!party?.id ? (
+          <Link
+            href="/rsvp"
+            className="block w-full rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-center text-white shadow-lg"
+          >
+            {`RSVP for ${formatDateShort(WEDDING_DATE)}`}
+          </Link>
+        ) : (
+          <Link
+            href="https://www.amazon.com/wedding/share/thehowles"
+            className="block w-full rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] text-[#6B725E] px-6 py-3 text-center shadow-lg"
+          >
+            Registry
+          </Link>
+        )}
       </div>
       {attending === "true" && (
         <FullPageModal

@@ -21,7 +21,7 @@ export default async function AdminPartyPeople(props: {
   });
 
   return (
-    <main className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
+    <div className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
       <section className="relative z-10 w-full max-w-6xl pb-16 ">
         {party.owning_user.first_name} {party.owning_user.last_name} Party
         <div className="rounded-3xl border-2 border-white/10 bg-white/90 shadow-2xl p-4 sm:p-8">
@@ -68,6 +68,6 @@ export default async function AdminPartyPeople(props: {
           )}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

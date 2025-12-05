@@ -7,7 +7,7 @@ export default async function LoadingHomePage() {
   const CITY_STATE = "Saint Francisville, Louisiana";
 
   return (
-    <div className="min-h-screen overflow-hidden">
+    <div>
       <section
         id="welcome"
         className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6"
@@ -27,10 +27,10 @@ export default async function LoadingHomePage() {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 justify-evenly sm:justify-normal">
-            <div className="skeleton-glow sm:inline-flex items-center justify-center hidden rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 font-medium shadow transition-transform">
+            <div className="skeleton-glow sm:inline-flex items-center justify-center hidden rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 font-medium shadow">
               {"RSVP Now"}
             </div>
-            <div className="skeleton inline-flex items-center justify-center rounded-2xl  px-6 py-3 font-medium ">
+            <div className="skeleton-glow inline-flex items-center justify-center rounded-2xl px-6 py-3 font-medium border border-[#E7D9BF]">
               Add to Calendar
             </div>
           </div>

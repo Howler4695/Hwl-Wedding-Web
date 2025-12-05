@@ -8,9 +8,9 @@ export const CountdownSkeleton = () => (
 );
 
 const TimeCellSkeleton = () => (
-  <div className="rounded-2xl border border-[#E8DDC9] bg-white/60 p-3 text-center">
+  <div className="rounded-2xl border border-[#E8DDC9] bg-white/60 p-1 sm:p-3 text-center">
     <div className="skeleton-glow text-xl xs:text-2xl sm:text-3xl">00</div>
-    <div className="skeleton-glow mt-1 text-[6px] xs:text-[7px] sm:text-[10px] uppercase tracking-[0.25em]">
+    <div className="skeleton-glow mt-1 text-[6px] xs:text-[7px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.25em]">
       label
     </div>
   </div>

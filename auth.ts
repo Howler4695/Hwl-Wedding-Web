@@ -101,7 +101,6 @@ async function refreshCognitoAccessToken(
       error: undefined,
     };
   } catch (error) {
-    console.error("Error refreshing Cognito access token:", error);
     return {
       ...token,
       error: "RefreshTokenError",

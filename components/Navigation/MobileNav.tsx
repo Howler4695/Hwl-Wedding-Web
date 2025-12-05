@@ -21,11 +21,12 @@ export const MobileNavButton = ({
 
   return (
     <>
-      <div className="bg-hannah-pink rounded-full">
-        <button
-          className={`bg-pink-500/40 w-14 h-14 rounded-full flex flex-col gap-1 items-center justify-center shadow-2xl border border-gray-600
-          transition-all duration-300 z-70`}
-          onClick={() => setOpen(!open)}
+      <button
+        className="bg-hannah-pink rounded-full"
+        onClick={() => setOpen(!open)}
+      >
+        <div
+          className={`bg-pink-500/40 w-14 h-14 rounded-full flex flex-col gap-1 items-center justify-center shadow-2xl border border-gray-600`}
         >
           <span
             className={`hamburger-bar ${
@@ -40,8 +41,8 @@ export const MobileNavButton = ({
               open ? "-rotate-45 -translate-y-[6px]" : ""
             }`}
           />
-        </button>
-      </div>
+        </div>
+      </button>
 
       <div
         className={`
@@ -57,7 +58,7 @@ export const MobileNavButton = ({
       >
         <div
           className={`
-            fixed inset-0 z-50 h-screen overflow-y-auto 
+            fixed inset-0 h-screen overflow-y-auto 
             transition-opacity duration-300 delay-150
             ${open ? "opacity-100" : "opacity-0"}
             sm:hidden 
@@ -66,6 +67,11 @@ export const MobileNavButton = ({
           <div className="font-heading font-bold text-xl sm:text-2xl text-white px-4 pt-7">
             Hannah & Hayden&apos;s Wedding
           </div>
+          <button
+            className="fixed top-4 right-4 w-14 h-14 z-50 bg-transparent"
+            onClick={() => setOpen(false)}
+          />
+
           <nav className="mt-20 flex flex-col items-center gap-6 text-xl">
             <NavLinks
               edit={edit}

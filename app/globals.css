@@ -116,7 +116,7 @@
 }
 
 @utility hamburger-bar {
-  @apply h-0.5 w-6 bg-white/80 rounded transition-all duration-300 z-60;
+  @apply h-0.5 w-6 bg-white/80 rounded transition-all duration-300 z-50;
 }
 
 @utility section-offset {

@@ -29,9 +29,9 @@ export const NavHeader = async () => {
           <NavLinks edit={!!party?.id} showAdmin={isAdmin} />
         </nav>
       </header>
-      <div className="sm:hidden fixed top-4 right-4 z-50">
+      <header className="sm:hidden fixed top-4 right-4 z-50">
         <MobileNavButton edit={!!party?.id} showAdmin={isAdmin} />
-      </div>
+      </header>
     </>
   );
 };

@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
-// This is bad
 export default auth((req) => {
   if (process.env?.MAINTENCE_MODE === "true") {
     const newUrl = new URL("maintence", req.nextUrl.origin);

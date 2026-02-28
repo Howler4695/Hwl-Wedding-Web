@@ -4,7 +4,6 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
-	"fmt"
 	"log"
 	"os"
 	"time"
@@ -23,10 +22,7 @@ import (
 )
 
 func main() {
-	err := godotenv.Load(".env")
-	if err == nil {
-		fmt.Println(".env detected: using .env")
-	}
+	godotenv.Load(".env")
 
 	HOST_URL := os.Getenv("HOST_URL")
 
@@ -75,10 +71,6 @@ func main() {
 		MaxAge:           12 * time.Hour,
 	}))
 
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
-		os.Exit(1)
-	}
 	defer pool.Close()
 
 	cognitoCFG := auth.CognitoConfig{

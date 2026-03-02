@@ -3,4 +3,5 @@ export { formatDateShort as formatDateShort } from "./Dates";
 export { checkIsAdminPage as CheckIsAdminPage } from "./Auth";
 export { checkIsAdmin as CheckIsAdmin } from "./Auth";
 export { GET_OPTIONS as GET_OPTIONS } from "./Fetch";
+export { fetchWithRetry as fetchWithRetry } from "./Fetch";
 export { isValidUSPhoneNumber as isValidUSPhoneNumber } from "./Check";

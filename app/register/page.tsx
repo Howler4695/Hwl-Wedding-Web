@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
-import { GET_OPTIONS } from "@/helpers";
+import { GET_OPTIONS, fetchWithRetry } from "@/helpers";
+import type { Party } from "@/types/api";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -31,11 +32,11 @@ export default async function WeddingRSVPFormPage() {
     redirect("/?attending=true");
   }
 
-  const partyJ = await fetch(
+  const partyJ = await fetchWithRetry(
     `${process.env.BACKEND_URL}/party/${userId}`,
     GET_OPTIONS(session)
   );
-  const party = await partyJ.json();
+  const party: Party = await partyJ.json();
 
   const editMode = party?.attending === undefined ? false : true;
 

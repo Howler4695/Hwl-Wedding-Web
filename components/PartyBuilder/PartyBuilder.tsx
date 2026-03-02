@@ -8,8 +8,8 @@ import {
 } from "./AddSubmitButtons";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import {} from "@/auth";
 import { isValidUSPhoneNumber } from "@/helpers";
+import type { PartyPop } from "@/types/api";
 
 export type Member = {
   id: string;
@@ -58,7 +58,7 @@ export default function PartyBuilder({
   userId?: string;
   firstName?: string;
   lastName?: string;
-  partyPops?: Member[];
+  partyPops?: PartyPop[];
   backendURL?: string;
   accessToken?: string;
 }) {

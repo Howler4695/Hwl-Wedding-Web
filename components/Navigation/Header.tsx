@@ -3,12 +3,13 @@ import { MobileNavButton } from "./MobileNav";
 import { NavLinks } from "./NavLinks";
 import { GET_OPTIONS } from "@/helpers";
 import { checkIsAdmin } from "@/helpers/Auth";
+import type { Party } from "@/types/api";
 
 export const NavHeader = async () => {
   const session = await auth();
   const userId = session?.user?.id;
 
-  let party;
+  let party: Party | undefined;
   let isAdmin = false;
   if (userId) {
     isAdmin = checkIsAdmin(session);

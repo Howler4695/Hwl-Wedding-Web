@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { checkIsAdminPage } from "@/helpers/Auth";
 import { GET_OPTIONS } from "@/helpers";
+import type { PartyDTO } from "@/types/api";
 import Link from "next/link";
 
 export default async function Admin() {
@@ -11,23 +12,20 @@ export default async function Admin() {
     `${process.env.BACKEND_URL}/admin/allpartyinfo`,
     GET_OPTIONS(session)
   );
-  const allParties = await partiesJ.json();
+  const allParties: PartyDTO[] = await partiesJ.json();
 
-  //temp
   let partiesAttending = 0;
   let partiesNotAttending = 0;
   let popsAttending = 0;
 
-  allParties.map(
-    (party: { attending: boolean; party_people: { length: number } }) => {
-      if (party.attending === true) {
-        partiesAttending++;
-        popsAttending += party?.party_people?.length;
-      } else {
-        partiesNotAttending++;
-      }
+  for (const party of allParties) {
+    if (party.attending) {
+      partiesAttending++;
+      popsAttending += party.party_people?.length ?? 0;
+    } else {
+      partiesNotAttending++;
     }
-  );
+  }
 
   return (
     <div className="relative min-h-screen overflow-hidden flex items-center justify-center p-6">
@@ -46,50 +44,35 @@ export default async function Admin() {
               <div className="col-span-4">Address</div>
             </div>
           </div>
-          {allParties?.map(
-            (party: {
-              party_id: string;
-              attending: boolean;
-              notes: string;
-              owning_user: {
-                first_name: string;
-                last_name: string;
-                email: string;
-                phone_number: string;
-                address: string;
-              };
-            }) => {
-              return (
-                <Link
-                  key={party?.party_id}
-                  href={`/admin/party-people/${party?.party_id}`}
-                  className="grid grid-cols-2 md:grid-rows-2 md:grid-cols-12  items-center gap-3 px-4 py-3 border-b-8 md:border-b-2 last:border-b-0 border-[#E8DDC9]"
-                >
-                  <div className="col-span-1 text-black">
-                    {party?.owning_user?.first_name}
-                  </div>
-                  <div className="col-span-1 text-black">
-                    {party?.owning_user?.last_name}
-                  </div>
-                  <div className="col-span-2 md:col-span-3 text-black">
-                    {party?.owning_user?.email}
-                  </div>
-                  <div className="col-span-2 text-black">
-                    {party?.owning_user?.phone_number}
-                  </div>
-                  <div className="col-span-2 md:col-span-5 text-black">
-                    {party?.owning_user?.address}
-                  </div>
-                  <div className="col-span-2 text-black">
-                    attending: {party?.attending?.toString()}
-                  </div>
-                  <div className="col-span-2 md:col-span-10 text-black">
-                    notes: {party?.notes}
-                  </div>
-                </Link>
-              );
-            }
-          )}
+          {allParties.map((party) => (
+            <Link
+              key={party.party_id}
+              href={`/admin/party-people/${party.party_id}`}
+              className="grid grid-cols-2 md:grid-rows-2 md:grid-cols-12  items-center gap-3 px-4 py-3 border-b-8 md:border-b-2 last:border-b-0 border-[#E8DDC9]"
+            >
+              <div className="col-span-1 text-black">
+                {party.owning_user?.first_name}
+              </div>
+              <div className="col-span-1 text-black">
+                {party.owning_user?.last_name}
+              </div>
+              <div className="col-span-2 md:col-span-3 text-black">
+                {party.owning_user?.email}
+              </div>
+              <div className="col-span-2 text-black">
+                {party.owning_user?.phone_number}
+              </div>
+              <div className="col-span-2 md:col-span-5 text-black">
+                {party.owning_user?.address}
+              </div>
+              <div className="col-span-2 text-black">
+                attending: {party.attending?.toString()}
+              </div>
+              <div className="col-span-2 md:col-span-10 text-black">
+                notes: {party.notes}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
     </div>

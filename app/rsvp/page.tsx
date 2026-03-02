@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { auth } from "@/auth";
-import { GET_OPTIONS } from "@/helpers";
+import { GET_OPTIONS, fetchWithRetry } from "@/helpers";
+import type { Party } from "@/types/api";
 
 export default async function WeddingInvitePage() {
   const dateText = "Saturday, May 16, 2026";
@@ -8,13 +9,13 @@ export default async function WeddingInvitePage() {
   const session = await auth();
   const userId = session?.user?.id;
 
-  const partyJ = await fetch(
+  const partyJ = await fetchWithRetry(
     `${process.env.BACKEND_URL}/party/${userId}`,
     GET_OPTIONS(session)
   );
-  const party = await partyJ.json();
+  const party: Party = await partyJ.json();
 
-  const editMode = party?.id ? true : false;
+  const editMode = !!party?.id;
 
   return (
     <div className="relative center-page-no-scroll overflow-hidden flex items-center justify-center p-6">

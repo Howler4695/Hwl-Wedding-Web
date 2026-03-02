@@ -13,6 +13,7 @@ import {
   NavHeader,
 } from "@/components";
 import { auth } from "@/auth";
+import type { User, Party, PartyPop } from "@/types/api";
 
 export default async function HomePage({
   searchParams,
@@ -26,9 +27,9 @@ export default async function HomePage({
   const session = await auth();
   const userId = session?.user?.id;
 
-  let userInfo;
-  let party;
-  let partyPops;
+  let userInfo: User | undefined;
+  let party: Party | undefined;
+  let partyPops: PartyPop[] | undefined;
   if (userId) {
     const userJ = await fetch(
       `${process.env.BACKEND_URL}/user/${userId}`,
@@ -48,9 +49,9 @@ export default async function HomePage({
   }
 
   const displayName =
-    userInfo?.Firstname === undefined && userInfo?.LastName === undefined
+    userInfo?.FirstName === undefined && userInfo?.LastName === undefined
       ? null
-      : partyPops.length > 1
+      : partyPops && partyPops.length > 1
       ? `${userInfo?.LastName} Party`
       : `${userInfo?.FirstName} ${userInfo?.LastName}`;
 

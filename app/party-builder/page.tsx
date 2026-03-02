@@ -2,26 +2,26 @@ import React from "react";
 
 import { PartyBuilder } from "@/components";
 import { auth } from "@/auth";
-import { Member } from "@/components/PartyBuilder/PartyBuilder";
+import type { User, PartyPop } from "@/types/api";
 import Link from "next/link";
-import { GET_OPTIONS } from "@/helpers";
+import { GET_OPTIONS, fetchWithRetry } from "@/helpers";
 
 export default async function PartyBuilderPage() {
   const session = await auth();
   const userId = session?.user?.id;
 
-  const userJ = await fetch(
+  const userJ = await fetchWithRetry(
     `${process.env.BACKEND_URL}/user/${userId}`,
     GET_OPTIONS(session)
   );
-  const popJ = await fetch(
+  const popJ = await fetchWithRetry(
     `${process.env.BACKEND_URL}/party/pops/${userId}`,
     GET_OPTIONS(session)
   );
-  const userInfo = await userJ.json();
-  const partyPops = await popJ.json();
+  const userInfo: User = await userJ.json();
+  const partyPops: PartyPop[] = await popJ.json();
 
-  const editMode = partyPops?.length > 0 ? true : false;
+  const editMode = partyPops?.length > 0;
 
   const registrationInstructions = `Add family members or plus ones below. Phone numbers and allergies are optional. A Phone Number must be provided for your party leader ${userInfo?.FirstName} ${userInfo?.LastName}.`;
   return (
@@ -46,7 +46,7 @@ export default async function PartyBuilderPage() {
             userId={userId}
             firstName={userInfo?.FirstName}
             lastName={userInfo?.LastName}
-            partyPops={partyPops as Member[]}
+            partyPops={partyPops}
             backendURL={process?.env?.CLIENT_BACKEND_URL}
             accessToken={session?.accessToken}
           />

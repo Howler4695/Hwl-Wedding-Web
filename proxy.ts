@@ -18,7 +18,7 @@ export default auth((req) => {
 
   const session = req.auth;
 
-  if ((session as any)?.error === "RefreshTokenError") {
+  if (session?.error === "RefreshTokenError") {
     const reauthUrl = new URL("/auth/reauth", req.nextUrl.origin);
     reauthUrl.searchParams.set("from", req.nextUrl.href);
     return NextResponse.redirect(reauthUrl);

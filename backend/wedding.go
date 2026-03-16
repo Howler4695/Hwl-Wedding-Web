@@ -86,6 +86,16 @@ func main() {
 	repo := repositories.GetRepo(pool)
 	cont := &controller.Controller{Repo: repo, Services: &services.Services{}}
 
+	router.GET("/health", func(c *gin.Context) {
+		ctx, cancel := context.WithTimeout(c.Request.Context(), 30*time.Second)
+		defer cancel()
+		if err := pool.Ping(ctx); err != nil {
+			c.JSON(503, gin.H{"status": "error"})
+			return
+		}
+		c.JSON(200, gin.H{"status": "ok"})
+	})
+
 	rout := &routes.Routes{Router: router, Cont: cont}
 	rout.MapAllRoutes()
 

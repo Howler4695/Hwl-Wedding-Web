@@ -1,6 +1,9 @@
+import { ColdStartModal } from "@/components";
+
 export default async function WeddingRSVPFormPageLoading() {
   return (
     <div className="relative center-page-no-scroll overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
+      <ColdStartModal />
       <section className="relative z-10 w-full max-w-3xl">
         <div className="card-no-blur p-8 sm:p-10">
           <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#6B725E]">

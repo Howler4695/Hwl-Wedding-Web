@@ -7,29 +7,8 @@ export default function ColdStartModal() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("backend_warm")) return;
-
-    let showTimer: ReturnType<typeof setTimeout> | undefined;
-    let cancelled = false;
-
-    showTimer = setTimeout(() => {
-      if (!cancelled) setVisible(true);
-    }, 3000);
-
-    fetch("/api/health")
-      .then((res) => {
-        if (res.ok) sessionStorage.setItem("backend_warm", "1");
-      })
-      .finally(() => {
-        cancelled = true;
-        clearTimeout(showTimer);
-        setVisible(false);
-      });
-
-    return () => {
-      cancelled = true;
-      clearTimeout(showTimer);
-    };
+    const timer = setTimeout(() => setVisible(true), 3000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (

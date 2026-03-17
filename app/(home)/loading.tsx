@@ -1,5 +1,5 @@
 import { formatDateLong } from "@/helpers";
-import { Card, NakedHeader, CountdownSkeleton, ColdStartModal } from "@/components";
+import { Card, NakedHeader, CountdownSkeleton } from "@/components";
 import { LoadingStaticImages } from "@/components/Images/StaticImages";
 
 export default async function LoadingHomePage() {
@@ -8,7 +8,6 @@ export default async function LoadingHomePage() {
 
   return (
     <div>
-      <ColdStartModal />
       <section
         id="welcome"
         className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6"

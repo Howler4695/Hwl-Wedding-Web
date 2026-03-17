@@ -1,0 +1,16 @@
+[Unit]
+Description=HWL Wedding Go Backend
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/Hwl-Wedding-Web/backend
+EnvironmentFile=/home/ubuntu/Hwl-Wedding-Web/backend/.env
+ExecStart=/home/ubuntu/Hwl-Wedding-Web/backend/wedding-server
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

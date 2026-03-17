@@ -1,0 +1,15 @@
+[Unit]
+Description=HWL Wedding Next.js Frontend
+After=network.target wedding-backend.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/Hwl-Wedding-Web
+EnvironmentFile=/home/ubuntu/Hwl-Wedding-Web/.env.local
+ExecStart=/usr/bin/yarn start
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

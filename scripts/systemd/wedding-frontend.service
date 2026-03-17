@@ -6,8 +6,8 @@ After=network.target wedding-backend.service
 Type=simple
 User=ubuntu
 WorkingDirectory=/home/ubuntu/Hwl-Wedding-Web
-EnvironmentFile=/home/ubuntu/Hwl-Wedding-Web/.env.local
-ExecStart=/usr/bin/yarn start
+EnvironmentFile=/home/ubuntu/Hwl-Wedding-Web/.env.production
+ExecStart=/usr/local/bin/yarn start
 Restart=on-failure
 RestartSec=5
 

@@ -22,7 +22,7 @@ export default async function AdminPartyPeople(props: {
 
   return (
     <div className="relative min-h-screen overflow-hidden flex items-start justify-center p-4 sm:p-6 pt-8">
-      <section className="relative z-10 w-full max-w-5xl">
+      <section className="relative z-10 w-full max-w-5xl card-no-blur p-5 sm:p-6">
         <Link
           href="/admin/party"
           className="mb-1 inline-flex items-center gap-1 text-sm text-[#6B725E] hover:text-[#2E4E3F] transition-colors"
@@ -52,7 +52,7 @@ export default async function AdminPartyPeople(props: {
         </div>
 
         {/* Contact info */}
-        <div className="card-no-blur p-4 sm:p-5 mb-5">
+        <div className="rounded-xl border border-[#E8DDC9] bg-[#FDFAF5] p-4 sm:p-5 mb-5">
           <p className="mb-2 text-xs font-medium uppercase tracking-widest text-[#6B725E]">
             Contact Info
           </p>
@@ -77,7 +77,7 @@ export default async function AdminPartyPeople(props: {
             )}
           </div>
           {party?.notes && (
-            <div className="mt-3 rounded-lg border border-[#E8DDC9] bg-[#FDFAF5] p-3 text-sm">
+            <div className="mt-3 rounded-lg border border-[#E8DDC9] bg-white/60 p-3 text-sm">
               <span className="text-[#6B725E]">Notes: </span>
               <span className="text-[#2E4E3F]">{party.notes}</span>
             </div>
@@ -85,7 +85,7 @@ export default async function AdminPartyPeople(props: {
         </div>
 
         {/* Party members */}
-        <div className="card-no-blur overflow-hidden">
+        <div className="rounded-xl border border-[#E8DDC9] overflow-hidden">
           <div className="border-b border-[#E8DDC9] bg-[#FDFAF5] px-5 py-3">
             <p className="text-xs font-medium uppercase tracking-widest text-[#6B725E]">
               Party Members ({party?.party_people?.length ?? 0})
@@ -118,10 +118,10 @@ export default async function AdminPartyPeople(props: {
                   {person.age}
                 </div>
                 <div className="col-span-2 text-sm text-[#6B725E]">
-                  {person.phone_number || "—"}
+                  {person.phone_number || "\u2014"}
                 </div>
                 <div className="col-span-6 text-sm text-[#6B725E]">
-                  {person.allergies || "—"}
+                  {person.allergies || "\u2014"}
                 </div>
               </div>
 

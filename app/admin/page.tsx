@@ -3,6 +3,7 @@ import { checkIsAdminPage } from "@/helpers/Auth";
 import { GET_OPTIONS } from "@/helpers";
 import type { PartyDTO } from "@/types/api";
 import Link from "next/link";
+import { hasRealAllergy } from "@/helpers/allergies";
 
 export default async function Admin() {
   const session = await auth();
@@ -33,7 +34,7 @@ export default async function Admin() {
       partiesNoResponse++;
     }
     for (const person of party.party_people ?? []) {
-      if (person.allergies) peopleWithAllergies++;
+      if (hasRealAllergy(person.allergies)) peopleWithAllergies++;
     }
   }
 
@@ -66,13 +67,13 @@ export default async function Admin() {
 
   return (
     <div className="relative min-h-screen overflow-hidden flex items-center justify-center p-4 sm:p-6">
-      <section className="relative z-10 w-full max-w-4xl">
+      <section className="relative z-10 w-full max-w-4xl card-no-blur p-6 sm:p-8">
         <div className="mb-6 text-center">
           <h2 className="text-[#2E4E3F]">Admin Dashboard</h2>
           <div className="mx-auto mt-2 h-0.5 w-20 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
         </div>
 
-        <div className="card-no-blur p-4 sm:p-6 mb-6">
+        <div className="mb-6">
           <p className="mb-3 text-xs font-medium uppercase tracking-widest text-[#6B725E]">
             RSVP Overview
           </p>
@@ -80,7 +81,7 @@ export default async function Admin() {
             {stats.map((s) => (
               <div
                 key={s.label}
-                className="rounded-xl border border-[#E8DDC9] bg-white/60 px-4 py-3 text-center"
+                className="rounded-xl border border-[#E8DDC9] bg-[#FDFAF5] px-4 py-3 text-center"
               >
                 <div className={`text-2xl font-heading font-bold ${s.color}`}>
                   {s.value}
@@ -96,7 +97,7 @@ export default async function Admin() {
             <Link
               key={item.href}
               href={item.href}
-              className="card-no-blur flex flex-col gap-1 p-5 transition-transform hover:-translate-y-0.5 hover:shadow-lg"
+              className="flex flex-col gap-1 rounded-xl border border-[#E8DDC9] bg-[#FDFAF5] p-5 transition-transform hover:-translate-y-0.5 hover:shadow-lg"
             >
               <span className="font-heading text-lg font-semibold text-[#2E4E3F]">
                 {item.label}

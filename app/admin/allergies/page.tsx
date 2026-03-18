@@ -3,6 +3,7 @@ import { checkIsAdminPage } from "@/helpers/Auth";
 import { GET_OPTIONS } from "@/helpers";
 import type { PartyDTO, PartyPeople } from "@/types/api";
 import Link from "next/link";
+import { hasRealAllergy } from "@/helpers/allergies";
 
 interface AllergyEntry {
   person: PartyPeople;
@@ -26,7 +27,7 @@ export default async function AdminAllergies() {
       .filter(Boolean)
       .join(" ");
     for (const person of party.party_people ?? []) {
-      if (person.allergies) {
+      if (hasRealAllergy(person.allergies)) {
         entries.push({
           person,
           partyOwner: ownerName,
@@ -38,23 +39,26 @@ export default async function AdminAllergies() {
 
   return (
     <div className="relative min-h-screen overflow-hidden flex items-start justify-center p-4 sm:p-6 pt-8">
-      <section className="relative z-10 w-full max-w-4xl">
-        <Link
-          href="/admin"
-          className="mb-1 inline-flex items-center gap-1 text-sm text-[#6B725E] hover:text-[#2E4E3F] transition-colors"
-        >
-          ← Back to Dashboard
-        </Link>
+      <section className="relative z-10 w-full max-w-4xl card-no-blur overflow-hidden">
+        {/* Header */}
+        <div className="p-5 sm:p-6 pb-0">
+          <Link
+            href="/admin"
+            className="mb-1 inline-flex items-center gap-1 text-sm text-[#6B725E] hover:text-[#2E4E3F] transition-colors"
+          >
+            ← Back to Dashboard
+          </Link>
 
-        <div className="mb-5 flex items-center justify-between">
-          <h2 className="text-[#2E4E3F]">Allergies &amp; Accessibility</h2>
-          <span className="rounded-full border border-[#E8DDC9] bg-[#FDFAF5] px-3 py-1 text-sm text-[#6B725E]">
-            {entries.length} {entries.length === 1 ? "person" : "people"}
-          </span>
+          <div className="mb-5 flex items-center justify-between">
+            <h2 className="text-[#2E4E3F]">Allergies &amp; Accessibility</h2>
+            <span className="rounded-full border border-[#E8DDC9] bg-[#FDFAF5] px-3 py-1 text-sm text-[#6B725E]">
+              {entries.length} {entries.length === 1 ? "person" : "people"}
+            </span>
+          </div>
         </div>
 
         {entries.length > 0 ? (
-          <div className="card-no-blur overflow-hidden">
+          <div className="border-t border-[#E8DDC9]">
             {/* Desktop header */}
             <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] bg-[#FDFAF5] px-5 py-3 text-xs font-medium uppercase tracking-wider text-[#6B725E]">
               <div className="col-span-3">Guest</div>
@@ -110,7 +114,7 @@ export default async function AdminAllergies() {
             ))}
           </div>
         ) : (
-          <div className="card-no-blur px-5 py-12 text-center text-[#6B725E]">
+          <div className="border-t border-[#E8DDC9] px-5 py-12 text-center text-[#6B725E]">
             No guests have reported allergies or accessibility needs.
           </div>
         )}

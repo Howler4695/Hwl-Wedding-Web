@@ -49,21 +49,18 @@ export default async function AdminParties() {
 
   return (
     <div className="relative min-h-screen overflow-hidden flex items-start justify-center p-4 sm:p-6 pt-8">
-      <section className="relative z-10 w-full max-w-6xl">
-        <div className="mb-5 flex items-center justify-between">
-          <div>
-            <Link
-              href="/admin"
-              className="mb-1 inline-flex items-center gap-1 text-sm text-[#6B725E] hover:text-[#2E4E3F] transition-colors"
-            >
-              ← Back to Dashboard
-            </Link>
-            <h2 className="text-[#2E4E3F]">Guest List</h2>
-          </div>
-        </div>
+      <section className="relative z-10 w-full max-w-6xl card-no-blur overflow-hidden">
+        {/* Header area */}
+        <div className="p-5 sm:p-6 pb-0">
+          <Link
+            href="/admin"
+            className="mb-1 inline-flex items-center gap-1 text-sm text-[#6B725E] hover:text-[#2E4E3F] transition-colors"
+          >
+            ← Back to Dashboard
+          </Link>
+          <h2 className="text-[#2E4E3F] mb-4">Guest List</h2>
 
-        <div className="card-no-blur p-4 sm:p-5 mb-5">
-          <div className="flex flex-wrap gap-6 text-sm">
+          <div className="flex flex-wrap gap-6 text-sm mb-5">
             <div>
               <span className="text-[#6B725E]">Guests Attending: </span>
               <span className="font-semibold text-emerald-600">{popsAttending}</span>
@@ -83,7 +80,8 @@ export default async function AdminParties() {
           </div>
         </div>
 
-        <div className="card-no-blur overflow-hidden">
+        {/* Table */}
+        <div className="border-t border-[#E8DDC9]">
           {/* Desktop header */}
           <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] bg-[#FDFAF5] px-5 py-3 text-xs font-medium uppercase tracking-wider text-[#6B725E]">
             <div className="col-span-2">Name</div>
@@ -111,10 +109,10 @@ export default async function AdminParties() {
                   {party.owning_user?.email}
                 </div>
                 <div className="col-span-2 text-sm text-[#6B725E]">
-                  {party.owning_user?.phone_number || "—"}
+                  {party.owning_user?.phone_number || "\u2014"}
                 </div>
                 <div className="col-span-3 text-sm text-[#6B725E] truncate">
-                  {party.owning_user?.address || "—"}
+                  {party.owning_user?.address || "\u2014"}
                 </div>
                 <div className="col-span-1 text-sm text-[#6B725E]">
                   {party.party_people?.length ?? 0}

@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HWL Wedding
 
-## Getting Started
+Full-stack wedding RSVP application for thehowles.love.
 
-First, run the development server:
+## Tech Stack
 
+- **Frontend**: Next.js 16 (App Router, Turbopack), Tailwind CSS 4, Framer Motion
+- **Backend**: Go / Gin
+- **Database**: PostgreSQL 17 (pgx/v5)
+- **Auth**: AWS Cognito + NextAuth 5
+- **Infrastructure**: EC2 (t3.micro), Nginx, Let's Encrypt, systemd
+
+## Local Development
+
+### Prerequisites
+- Node.js 20+, Yarn
+- Go 1.24+
+- Docker (for local PostgreSQL)
+
+### Frontend
 ```bash
-npm run dev
-# or
+yarn install
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+Runs at http://localhost:3000.
+
+### Backend
+```bash
+cd backend
+docker-compose up -d   # start PostgreSQL
+go run wedding.go
+```
+Runs at http://localhost:8090.
+
+### Environment Variables
+
+**Frontend** (`.env.local`):
+```
+AUTH_SECRET=<secret>
+AUTH_URL=http://localhost:3000
+AUTH_TRUST_HOST=true
+AUTH_COGNITO_ID=<cognito-client-id>
+AUTH_COGNITO_SECRET=<cognito-client-secret>
+AUTH_COGNITO_ISSUER=<cognito-issuer-url>
+BACKEND_URL=http://localhost:8090
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Backend** (`backend/.env`):
+```
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_NAME=wedding
+AWS_REGION=us-east-2
+COGNITO_POOL_ID=<pool-id>
+HOST_URL=localhost:8090
+CORS_ORIGIN=http://localhost:3000
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Deployed on AWS EC2 with nginx reverse proxy and Let's Encrypt SSL.
 
-## Learn More
+```bash
+# From any machine with the SSH key:
+ssh -i ~/Downloads/hwl.pem ubuntu@3.150.189.231 "bash ~/Hwl-Wedding-Web/scripts/deploy.sh dev"
+```
 
-To learn more about Next.js, take a look at the following resources:
+See `scripts/` for setup and deployment scripts.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/                    # Next.js pages (App Router)
+  admin/                # Admin dashboard, guest list, allergies
+  auth/                 # Sign-in, sign-out, reauth
+  (home)/               # Landing page
+backend/
+  controller/           # HTTP handlers
+  services/             # Business logic
+  repositories/         # Database queries
+  models/               # Structs and DTOs
+  auth/                 # JWT validation middleware
+  SQL/                  # Schema and migrations
+components/             # Shared React components
+helpers/                # Fetch, auth, date, allergy utilities
+lambdas/UpdateUser/     # Cognito post-signup Lambda
+scripts/                # Deploy and infrastructure scripts
+```

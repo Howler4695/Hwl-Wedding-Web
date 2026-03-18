@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/gzip"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/joho/godotenv"
 
@@ -36,6 +37,10 @@ func main() {
 	cfg.ConnConfig.User = os.Getenv("DB_USER")
 	cfg.ConnConfig.Password = os.Getenv("DB_PASSWORD")
 	cfg.ConnConfig.TLSConfig = nil
+	cfg.MaxConns = 15
+	cfg.MinConns = 2
+	cfg.MaxConnLifetime = 5 * time.Minute
+	cfg.MaxConnIdleTime = 1 * time.Minute
 
 	if os.Getenv("DB_MODE") == "remote" {
 
@@ -62,6 +67,7 @@ func main() {
 	router := gin.Default()
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 
+	router.Use(gzip.Gzip(gzip.DefaultCompression))
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{os.Getenv("BACKEND_ORIGIN")}, // add your prod origins too
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
@@ -87,7 +93,7 @@ func main() {
 	cont := &controller.Controller{Repo: repo, Services: &services.Services{}}
 
 	router.GET("/health", func(c *gin.Context) {
-		ctx, cancel := context.WithTimeout(c.Request.Context(), 30*time.Second)
+		ctx, cancel := context.WithTimeout(c.Request.Context(), 5*time.Second)
 		defer cancel()
 		if err := pool.Ping(ctx); err != nil {
 			c.JSON(503, gin.H{"status": "error"})

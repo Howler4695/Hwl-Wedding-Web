@@ -1,8 +1,8 @@
 package models
 
 type PlusOneName struct {
-	FirstName string `json: "firstname"`
-	LastName  string `json: "lastname"`
+	FirstName string `json:"firstname"`
+	LastName  string `json:"lastname"`
 }
 
 type UserCreateDTO struct {

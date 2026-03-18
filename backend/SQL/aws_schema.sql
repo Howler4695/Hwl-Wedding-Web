@@ -44,3 +44,5 @@ CREATE TABLE IF NOT EXISTS party_pop (
     allergies TEXT,
     CONSTRAINT pary_pop_party_pop_id_unique UNIQUE (party_pop_id)
 );
+
+CREATE INDEX IF NOT EXISTS idx_party_pop_fk_party_id ON party_pop(fk_party_id);

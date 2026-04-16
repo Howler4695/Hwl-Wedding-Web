@@ -86,29 +86,6 @@ export default function Lightbox({
           </svg>
       </a>
 
-      {/* Close button - top right */}
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 z-10 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
-        aria-label="Close"
-        autoFocus
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
-
       {/* Navigation arrows */}
       {selectedIndex > 0 && (
         <button

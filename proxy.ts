@@ -9,8 +9,7 @@ export default auth((req) => {
   if (
     !req.auth &&
     req.nextUrl.pathname !== "/auth/signin" &&
-    req.nextUrl.pathname !== "/" &&
-    req.nextUrl.pathname !== "/gallery"
+    req.nextUrl.pathname !== "/"
   ) {
     const signInUrl = new URL("/auth/signin", req.nextUrl.origin);
     signInUrl.searchParams.set("from", req.nextUrl.href);

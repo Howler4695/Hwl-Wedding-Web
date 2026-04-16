@@ -1,5 +1,7 @@
 import { NakedHeader } from "@/components";
 import GalleryGrid from "@/components/Gallery/GalleryGrid";
+import { auth } from "@/auth";
+import { checkIsAdminPage } from "@/helpers/Auth";
 
 const S3_BUCKET_URL =
   "https://hwl-wedding-photos.s3.us-east-2.amazonaws.com";
@@ -35,6 +37,9 @@ export default async function GalleryPage({
 }: {
   searchParams?: Promise<{ photo?: string }>;
 }) {
+  const session = await auth();
+  checkIsAdminPage(session);
+
   const photos = await getGalleryPhotos();
   const openPhoto = (await searchParams)?.photo ?? null;
 

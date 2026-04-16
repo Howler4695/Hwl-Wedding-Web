@@ -19,12 +19,12 @@ export default function GalleryGrid({ photos }: { photos: string[] }) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.4, delay: i * 0.05 }}
+            transition={{ duration: 0.4, delay: Math.min(i * 0.05, 0.4) }}
             onClick={() => setSelectedIndex(i)}
           >
             <Image
               src={`/gallery/${photo}`}
-              alt=""
+              alt={`Photo ${i + 1}`}
               width={600}
               height={400}
               className="w-full h-auto block"

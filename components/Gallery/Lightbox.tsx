@@ -2,7 +2,7 @@
 
 import { useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 type LightboxProps = {
   photos: string[];
@@ -47,6 +47,8 @@ export default function Lightbox({
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center"
+      role="dialog"
+      aria-modal="true"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -63,6 +65,7 @@ export default function Lightbox({
         onClick={onClose}
         className="absolute top-4 right-4 z-10 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
         aria-label="Close"
+        autoFocus
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +147,7 @@ export default function Lightbox({
       >
         <Image
           src={`/gallery/${photo}`}
-          alt=""
+          alt={`Photo ${selectedIndex + 1} of ${photos.length}`}
           width={1200}
           height={800}
           className="max-h-[85vh] w-auto rounded-lg object-contain"

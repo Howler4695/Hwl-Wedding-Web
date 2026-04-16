@@ -1,15 +1,15 @@
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
 import { NakedHeader } from "@/components";
 import GalleryGrid from "@/components/Gallery/GalleryGrid";
 
 const PHOTO_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
 
-function getGalleryPhotos(): string[] {
+async function getGalleryPhotos(): Promise<string[]> {
   const dir = path.join(process.cwd(), "public", "gallery");
   try {
-    return fs
-      .readdirSync(dir)
+    const files = await fs.readdir(dir);
+    return files
       .filter((f) => PHOTO_EXTENSIONS.has(path.extname(f).toLowerCase()))
       .sort();
   } catch {
@@ -17,8 +17,8 @@ function getGalleryPhotos(): string[] {
   }
 }
 
-export default function GalleryPage() {
-  const photos = getGalleryPhotos();
+export default async function GalleryPage() {
+  const photos = await getGalleryPhotos();
 
   return (
     <div className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6 pb-16">

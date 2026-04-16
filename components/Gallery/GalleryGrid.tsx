@@ -1,0 +1,49 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import Lightbox from "./Lightbox";
+
+export default function GalleryGrid({ photos }: { photos: string[] }) {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  return (
+    <>
+      <div className="mt-6 columns-2 md:columns-3 lg:columns-4 gap-3">
+        {photos.map((photo, i) => (
+          <motion.div
+            key={photo}
+            layoutId={`gallery-photo-${photo}`}
+            className="mb-3 cursor-pointer overflow-hidden rounded-xl border border-[#E8DDC9] break-inside-avoid"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.4, delay: i * 0.05 }}
+            onClick={() => setSelectedIndex(i)}
+          >
+            <Image
+              src={`/gallery/${photo}`}
+              alt=""
+              width={600}
+              height={400}
+              className="w-full h-auto block"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            />
+          </motion.div>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {selectedIndex !== null && (
+          <Lightbox
+            photos={photos}
+            selectedIndex={selectedIndex}
+            onClose={() => setSelectedIndex(null)}
+            onNavigate={setSelectedIndex}
+          />
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

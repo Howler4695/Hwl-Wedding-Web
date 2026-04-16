@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { formatDateLong, formatDateShort, GET_OPTIONS } from "@/helpers";
 import {
   Card,
@@ -8,7 +9,6 @@ import {
   Countdown,
   AddCalenderButton,
   FullPageModal,
-  StaticImages,
   NakedHeader,
   NavHeader,
 } from "@/components";
@@ -90,8 +90,33 @@ export default async function HomePage({
         id="photos"
         className="relative z-10 mx-auto section-offset w-full max-w-6xl px-6"
       >
-        <NakedHeader text="Photos" />
-        <StaticImages />
+        <NakedHeader text="Gallery" />
+        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {["front_pic_0.jpg", "front_pic_1.jpg", "front_pic_2.jpg", "front_pic_3.jpg"].map((photo) => (
+            <Image
+              key={photo}
+              src={`/gallery/${photo}`}
+              alt=""
+              width={600}
+              height={600}
+              className="aspect-square rounded-xl border border-[#E8DDC9] bg-white/60 object-cover"
+            />
+          ))}
+        </div>
+        <div className="mt-2 flex flex-col items-center gap-1">
+          <p className="text-xs text-[#4F5E50]/70">
+            {"Courtesy of "}
+            <a className="text-blue-400 underline" href="https://ericlincoln.com/" target="_blank" rel="noopener noreferrer">
+              Eric Lincoln
+            </a>
+          </p>
+          <Link
+            href="/gallery"
+            className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-[#2E4E3F] underline underline-offset-4 hover:text-[#9CAF88]"
+          >
+            View Gallery
+          </Link>
+        </div>
       </section>
 
       <section

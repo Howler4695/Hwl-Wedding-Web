@@ -1,6 +1,5 @@
 import { formatDateLong } from "@/helpers";
 import { Card, NakedHeader, CountdownSkeleton } from "@/components";
-import { LoadingStaticImages } from "@/components/Images/StaticImages";
 
 export default async function LoadingHomePage() {
   const WEDDING_DATE = "2026-05-16T16:30:00-05:00";
@@ -41,8 +40,15 @@ export default async function LoadingHomePage() {
         id="photos"
         className="relative z-10 mx-auto section-offset w-full max-w-6xl px-6"
       >
-        <NakedHeader text="Photos" />
-        <LoadingStaticImages />
+        <NakedHeader text="Gallery" />
+        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className="aspect-square rounded-xl border border-[#E8DDC9] skeleton-glow"
+            />
+          ))}
+        </div>
       </section>
 
       <section

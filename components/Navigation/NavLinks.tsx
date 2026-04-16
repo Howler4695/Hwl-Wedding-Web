@@ -24,8 +24,8 @@ export const NavLinks = ({
     <Link href="/" className="text-nav" onClick={onNav}>
       Home
     </Link>
-    <Link href="/#photos" className="text-nav" onClick={onNav}>
-      Photos
+    <Link href="/gallery" className="text-nav" onClick={onNav}>
+      Gallery
     </Link>
     <Link href="/#story" className="text-nav" onClick={onNav}>
       Story

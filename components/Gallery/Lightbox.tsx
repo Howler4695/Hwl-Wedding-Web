@@ -61,15 +61,14 @@ export default function Lightbox({
         onClick={onClose}
       />
 
-      {/* Top bar: close + download */}
-      <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
-        <a
-          href={photo.fullRes}
-          download
-          className="rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
-          aria-label="Download full resolution"
-          onClick={(e) => e.stopPropagation()}
-        >
+      {/* Download button - top left */}
+      <a
+        href={photo.fullRes}
+        download
+        className="absolute top-4 left-4 z-10 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
+        aria-label="Download full resolution"
+        onClick={(e) => e.stopPropagation()}
+      >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -85,29 +84,30 @@ export default function Lightbox({
             <polyline points="7 10 12 15 17 10" />
             <line x1="12" y1="15" x2="12" y2="3" />
           </svg>
-        </a>
-        <button
-          onClick={onClose}
-          className="rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
-          aria-label="Close"
-          autoFocus
+      </a>
+
+      {/* Close button - top right */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 z-10 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
+        aria-label="Close"
+        autoFocus
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
-      </div>
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
 
       {/* Navigation arrows */}
       {selectedIndex > 0 && (

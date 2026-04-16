@@ -208,7 +208,7 @@ export default function PartyBuilder({
     <>
       <form id="party-form" onSubmit={handleSubmit} className="space-y-4">
         <div className="rounded-2xl border border-[#E7D9BF] bg-white/60">
-          <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] px-4 py-3 text-xs font-medium uppercase tracking-wider text-[#6B725E]">
+          <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] px-4 py-3 text-xs font-medium uppercase tracking-wider text-[#7A6B5C]">
             <div className="col-span-2">First name</div>
             <div className="col-span-2">Last name</div>
             <div className="col-span-1">Age</div>

@@ -26,7 +26,7 @@ export const MobileNavButton = ({
         onClick={() => setOpen(!open)}
       >
         <div
-          className={`bg-pink-500/40 w-14 h-14 rounded-full flex flex-col gap-1 items-center justify-center shadow-2xl border border-gray-600`}
+          className={`bg-[#A24E69]/40 w-14 h-14 rounded-full flex flex-col gap-1 items-center justify-center shadow-2xl border border-[#843E55]/40`}
         >
           <span
             className={`hamburger-bar ${
@@ -47,7 +47,7 @@ export const MobileNavButton = ({
       <div
         className={`
           fixed inset-0 z-40 md:hidden 
-          bg-pink-500/40 backdrop-blur-xl w-screen
+          bg-[#A24E69]/40 backdrop-blur-xl w-screen
           transition-[clip-path] duration-500 ease-out
           ${
             open

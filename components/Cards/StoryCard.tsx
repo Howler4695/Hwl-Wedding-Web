@@ -9,11 +9,11 @@ export default function StoryCard({
 }) {
   return (
     <div className="card p-6">
-      <p className="text-xs uppercase tracking-[0.25em] text-[#6B725E]">
+      <p className="text-xs uppercase tracking-[0.25em] text-[#7A6B5C]">
         {subtitle}
       </p>
-      <h3 className="mt-1 text-2xl text-[#2E4E3F]">{title}</h3>
-      <p className="mt-2 text-[#4F5E50]">{text}</p>
+      <h3 className="mt-1 text-2xl text-[#A24E69]">{title}</h3>
+      <p className="mt-2 text-[#5A4A42]">{text}</p>
     </div>
   );
 }

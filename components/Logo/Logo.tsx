@@ -2,7 +2,7 @@ import React from "react";
 
 /**
  * Magnolia Wedding Logo — inline SVG wordmark
- * Palette: ivory (#FFFAF2), leaf green (#2E4E3F), soft gold (#CAA55A/#B28B3F)
+ * Palette: ivory (#FFFAF2), leaf green (#A24E69), soft gold (#CAA55A/#B28B3F)
  *
  * Usage:
  *   import { LogoFull, LogoBadge } from "@/components/Logo";
@@ -25,7 +25,7 @@ export type LogoProps = {
 
 const DEFAULT_COLORS = {
   ivory: "#FFFAF2",
-  green: "#2E4E3F",
+  green: "#A24E69",
   goldA: "#EED593",
   goldB: "#CAA55A",
   stroke: "#D8CCB3",
@@ -73,7 +73,7 @@ export function LogoFull({
         <text
           x="0"
           y="188"
-          fill="#6B725E"
+          fill="#7A6B5C"
           fontFamily="Georgia, 'Times New Roman', serif"
           fontSize="28"
           letterSpacing="0.35em"
@@ -183,7 +183,7 @@ export function LogoBadge({
         x="210"
         y="310"
         textAnchor="middle"
-        fill="#6B725E"
+        fill="#7A6B5C"
         fontFamily="Georgia, 'Times New Roman', serif"
         fontSize="18"
         letterSpacing="0.35em"

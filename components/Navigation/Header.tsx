@@ -22,7 +22,7 @@ export const NavHeader = async () => {
 
   return (
     <>
-      <header className="fixed hidden sm:flex top-0 w-full z-50 mx-auto items-center justify-between px-4 py-6 bg-pink-200">
+      <header className="fixed hidden sm:flex top-0 w-full z-50 mx-auto items-center justify-between px-4 py-6 bg-[#FFF8EC]/90 backdrop-blur-md border-b border-[#E8DDC9]">
         <div className="font-heading font-bold text-xl sm:text-2xl naked-text">
           Hannah & Hayden&apos;s Wedding
         </div>

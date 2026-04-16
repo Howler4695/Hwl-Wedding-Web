@@ -17,7 +17,7 @@ export default function PartyInput({
       value={value}
       onChange={onChange}
       {...props}
-      className="w-full rounded-xl border border-[#9FB39E] bg-white/80 px-3 py-3 text-sm text-[#2E4E3F] placeholder-[#7A846F] focus:border-[#CAA55A] focus:outline-none focus:ring-2 focus:ring-[#CAA55A]/40"
+      className="w-full rounded-xl border border-[#843E55] bg-white/80 px-3 py-3 text-sm text-[#A24E69] placeholder-[#9C8B7A] focus:border-[#CAA55A] focus:outline-none focus:ring-2 focus:ring-[#CAA55A]/40"
     />
   );
 }

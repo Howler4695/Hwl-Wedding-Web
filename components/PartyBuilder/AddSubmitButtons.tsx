@@ -12,7 +12,7 @@ export const PartyAddSubmitDesktop = ({
     <button
       type="button"
       onClick={addMember}
-      className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-5 py-3 text-sm font-medium text-[#6B725E] shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow focus:outline-none focus:ring-2 focus:ring-[#CAA55A] focus:ring-offset-2"
+      className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-5 py-3 text-sm font-medium text-[#7A6B5C] shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow focus:outline-none focus:ring-2 focus:ring-[#CAA55A] focus:ring-offset-2"
     >
       <Plus className="h-4 w-4" />
       Add Member to Party
@@ -21,7 +21,7 @@ export const PartyAddSubmitDesktop = ({
     <button
       type="submit"
       disabled={submitting}
-      className="inline-flex items-center justify-center rounded-2xl bg-[#2E4E3F] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#CAA55A] focus:ring-offset-2 disabled:opacity-60"
+      className="inline-flex items-center justify-center rounded-2xl bg-[#A24E69] px-6 py-3 text-sm font-semibold text-[#FFF8EC] shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#CAA55A] focus:ring-offset-2 disabled:opacity-60"
     >
       {submitting ? "Submitting…" : "Finalize Party"}
     </button>
@@ -40,7 +40,7 @@ export const PartyAddSubmitMobile = ({
       <button
         type="button"
         onClick={addMember}
-        className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-4 py-3 text-sm font-medium text-[#6B725E] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CAA55A]"
+        className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-4 py-3 text-sm font-medium text-[#7A6B5C] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CAA55A]"
       >
         <Plus className="h-4 w-4" /> Add Member
       </button>
@@ -48,7 +48,7 @@ export const PartyAddSubmitMobile = ({
         type="submit"
         form="party-form"
         disabled={submitting}
-        className="flex-1 inline-flex items-center justify-center rounded-2xl bg-[#2E4E3F] px-4 py-3 text-sm font-semibold text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CAA55A] disabled:opacity-60"
+        className="flex-1 inline-flex items-center justify-center rounded-2xl bg-[#A24E69] px-4 py-3 text-sm font-semibold text-[#FFF8EC] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CAA55A] disabled:opacity-60"
       >
         {submitting ? "Submitting…" : "Finalize Party"}
       </button>

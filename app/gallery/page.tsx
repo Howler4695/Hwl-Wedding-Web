@@ -63,7 +63,7 @@ export default async function GalleryPage({
     : allPhotos.filter((p) => visibleSet.has(p.filename));
 
   return (
-    <div className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6 pb-16">
+    <div className="relative z-10 mx-auto mt-12 sm:mt-16 w-full max-w-6xl px-6 pb-16">
       <NakedHeader text="Gallery" />
       {photos.length > 0 ? (
         <GalleryGrid
@@ -73,14 +73,14 @@ export default async function GalleryPage({
           visiblePhotos={[...visibleSet]}
         />
       ) : (
-        <p className="mt-8 text-center text-[#4F5E50]">
+        <p className="mt-8 text-center text-[#5A4A42]">
           Photos coming soon.
         </p>
       )}
-      <p className="mt-4 text-center text-xs text-[#4F5E50]/70">
+      <p className="mt-4 text-center text-xs text-[#5A4A42]">
         {"Courtesy of "}
         <a
-          className="text-blue-400 underline"
+          className="text-[#A24E69] underline underline-offset-2 hover:text-[#C07F94] transition-colors"
           href="https://ericlincoln.com/"
           target="_blank"
           rel="noopener noreferrer"
@@ -89,7 +89,7 @@ export default async function GalleryPage({
         </a>
         {" & "}
         <a
-          className="text-blue-400 underline"
+          className="text-[#A24E69] underline underline-offset-2 hover:text-[#C07F94] transition-colors"
           href="#"
           target="_blank"
           rel="noopener noreferrer"

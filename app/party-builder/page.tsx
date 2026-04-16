@@ -30,14 +30,14 @@ export default async function PartyBuilderPage() {
       <section className="relative z-10 w-full max-w-6xl pb-16">
         <div className="card-no-blur border-2 border-white/10 p-4 sm:p-8">
           <header className="mb-4 sm:mb-6">
-            <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#6B725E]">
+            <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#7A6B5C]">
               Wedding Registration
             </p>
-            <h1 className="leading-tight text-[#2E4E3F]">
+            <h1 className="leading-tight text-[#A24E69]">
               {editMode ? "Update your party" : "Create your party"}
             </h1>
             <div className="mx-auto my-4 h-0.5 w-24 sm:w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
-            <p className="text-sm sm:text-base text-[#4F5E50]">
+            <p className="text-sm sm:text-base text-[#5A4A42]">
               {registrationInstructions}
             </p>
           </header>

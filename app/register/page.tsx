@@ -44,17 +44,17 @@ export default async function WeddingRSVPFormPage() {
     <div className="relative center-page-no-scroll overflow-hidden bg-gradient-to-b flex items-center justify-center p-6">
       <section className="relative z-10 w-full max-w-3xl">
         <form action={createRSVP} className="card-no-blur p-8 sm:p-10">
-          <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#6B725E]">
+          <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#7A6B5C]">
             Wedding Registration
           </p>
-          <h1 className="text-3xl sm:text-4xl leading-tight text-[#2E4E3F]">
+          <h1 className="text-3xl sm:text-4xl leading-tight text-[#A24E69]">
             {editMode ? "Update Details" : "Final Details"}
           </h1>
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
 
           <div className="mt-4 grid grid-cols-1 gap-4">
             <label className="flex flex-col">
-              <span className="mb-1 text-sm font-medium text-[#4F5E50]">
+              <span className="mb-1 text-sm font-medium text-[#5A4A42]">
                 Note for the couple
               </span>
               <textarea
@@ -62,20 +62,20 @@ export default async function WeddingRSVPFormPage() {
                 placeholder="Anything you'd like to tell the couple before the wedding?"
                 rows={5}
                 defaultValue={party?.notes}
-                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]"
+                className="rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#A24E69]"
               />
             </label>
           </div>
           <div className="mt-8 px-6 sm:px-0 flex flex-wrap items-center gap-3 justify-center sm:justify-start">
             <button
               type="submit"
-              className="inline-flex w-full sm:w-auto items-center justify-center rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
+              className="inline-flex w-full sm:w-auto items-center justify-center rounded-2xl border border-[#843E55] bg-[#A24E69] px-6 py-3 text-[#FFF8EC] font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
             >
               Submit RSVP
             </button>
             <Link
               href="/party-builder"
-              className="inline-flex w-full sm:w-auto items-center justify-center rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-6 py-3 text-[#6B725E] font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
+              className="inline-flex w-full sm:w-auto items-center justify-center rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-6 py-3 text-[#7A6B5C] font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
             >
               Back to Party Builder
             </Link>

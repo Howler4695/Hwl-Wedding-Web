@@ -44,14 +44,14 @@ export default async function AdminAllergies() {
         <div className="p-5 sm:p-6 pb-0">
           <Link
             href="/admin"
-            className="mb-1 inline-flex items-center gap-1 text-sm text-[#6B725E] hover:text-[#2E4E3F] transition-colors"
+            className="mb-1 inline-flex items-center gap-1 text-sm text-[#7A6B5C] hover:text-[#A24E69] transition-colors"
           >
             ← Back to Dashboard
           </Link>
 
           <div className="mb-5 flex items-center justify-between">
-            <h2 className="text-[#2E4E3F]">Allergies &amp; Accessibility</h2>
-            <span className="rounded-full border border-[#E8DDC9] bg-[#FDFAF5] px-3 py-1 text-sm text-[#6B725E]">
+            <h2 className="text-[#A24E69]">Allergies &amp; Accessibility</h2>
+            <span className="rounded-full border border-[#E8DDC9] bg-[#FDFAF5] px-3 py-1 text-sm text-[#7A6B5C]">
               {entries.length} {entries.length === 1 ? "person" : "people"}
             </span>
           </div>
@@ -60,7 +60,7 @@ export default async function AdminAllergies() {
         {entries.length > 0 ? (
           <div className="border-t border-[#E8DDC9]">
             {/* Desktop header */}
-            <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] bg-[#FDFAF5] px-5 py-3 text-xs font-medium uppercase tracking-wider text-[#6B725E]">
+            <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] bg-[#FDFAF5] px-5 py-3 text-xs font-medium uppercase tracking-wider text-[#7A6B5C]">
               <div className="col-span-3">Guest</div>
               <div className="col-span-3">Party</div>
               <div className="col-span-6">Allergies / Accessibility</div>
@@ -75,13 +75,13 @@ export default async function AdminAllergies() {
               >
                 {/* Desktop */}
                 <div className="hidden md:grid grid-cols-12 gap-3 items-center">
-                  <div className="col-span-3 font-medium text-[#2E4E3F]">
+                  <div className="col-span-3 font-medium text-[#A24E69]">
                     {entry.person.first_name} {entry.person.last_name}
                   </div>
                   <div className="col-span-3">
                     <Link
                       href={`/admin/party-people/${entry.partyId}`}
-                      className="text-sm text-[#6B725E] hover:text-[#2E4E3F] underline decoration-[#E8DDC9] underline-offset-2 transition-colors"
+                      className="text-sm text-[#7A6B5C] hover:text-[#A24E69] underline decoration-[#E8DDC9] underline-offset-2 transition-colors"
                     >
                       {entry.partyOwner}&apos;s Party
                     </Link>
@@ -96,12 +96,12 @@ export default async function AdminAllergies() {
                 {/* Mobile */}
                 <div className="md:hidden space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <span className="font-medium text-[#2E4E3F]">
+                    <span className="font-medium text-[#A24E69]">
                       {entry.person.first_name} {entry.person.last_name}
                     </span>
                     <Link
                       href={`/admin/party-people/${entry.partyId}`}
-                      className="text-xs text-[#6B725E] hover:text-[#2E4E3F] underline decoration-[#E8DDC9] underline-offset-2"
+                      className="text-xs text-[#7A6B5C] hover:text-[#A24E69] underline decoration-[#E8DDC9] underline-offset-2"
                     >
                       {entry.partyOwner}&apos;s Party
                     </Link>
@@ -114,7 +114,7 @@ export default async function AdminAllergies() {
             ))}
           </div>
         ) : (
-          <div className="border-t border-[#E8DDC9] px-5 py-12 text-center text-[#6B725E]">
+          <div className="border-t border-[#E8DDC9] px-5 py-12 text-center text-[#7A6B5C]">
             No guests have reported allergies or accessibility needs.
           </div>
         )}

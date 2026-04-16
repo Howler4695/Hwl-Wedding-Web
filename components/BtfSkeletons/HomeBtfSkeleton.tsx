@@ -26,8 +26,8 @@ export const HomeBtfSkeleton = () => (
         <InfoCardSkeleton />
         <InfoCardSkeleton />
       </div>
-      <div className="card mt-6 p-4 text-sm text-[#4F5E50]">
-        <p className="mb-2 font-medium text-[#2E4E3F]">Ceremony to Reception</p>
+      <div className="card mt-6 p-4 text-sm text-[#5A4A42]">
+        <p className="mb-2 font-medium text-[#A24E69]">Ceremony to Reception</p>
         <div className="grid place-items-center rounded-xl border border-[#E8DDC9] bg-white/60 p-2 sm:p-4 md:p-8 text-center overflow-hidden">
           <div className="skeleton-glow h-[300px] w-[270px] md:h-[450px] md:w-[600px]" />
         </div>

@@ -62,12 +62,12 @@ export default async function HomePage({
         className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6"
       >
         <Card pad={32}>
-          <p className="mb-1 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">
+          <p className="mb-1 text-[12px] uppercase tracking-[0.35em] text-[#7A6B5C]">
             Welcome
           </p>
           <h1 className="leading-tight">{displayName}</h1>
           <div className="mx-auto my-5 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
-          <p className="text-[#4F5E50]">
+          <p className="text-[#5A4A42]">
             {formatDateLong(WEDDING_DATE)} · {CITY_STATE}
           </p>
 
@@ -78,7 +78,7 @@ export default async function HomePage({
           <div className="mt-8 flex flex-wrap items-center gap-3 justify-evenly sm:justify-normal">
             <Link
               href="/rsvp"
-              className="sm:inline-flex items-center justify-center hidden rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
+              className="sm:inline-flex items-center justify-center hidden rounded-2xl border border-[#843E55] bg-[#A24E69] px-6 py-3 text-[#FFF8EC] font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
             >
               {party?.id ? "Edit RSVP" : "RSVP Now"}
             </Link>
@@ -106,21 +106,22 @@ export default async function HomePage({
           ))}
         </div>
         <div className="mt-2 flex flex-col items-center gap-1">
-          <p className="text-xs text-[#4F5E50]/70">
+          <p className="text-xs text-[#5A4A42]">
             {"Courtesy of "}
-            <a className="text-blue-400 underline" href="https://ericlincoln.com/" target="_blank" rel="noopener noreferrer">
+            <a className="text-[#A24E69] underline underline-offset-2 hover:text-[#C07F94] transition-colors" href="https://ericlincoln.com/" target="_blank" rel="noopener noreferrer">
               Eric Lincoln
             </a>
             {" & "}
-            <a className="text-blue-400 underline" href="#" target="_blank" rel="noopener noreferrer">
+            <a className="text-[#A24E69] underline underline-offset-2 hover:text-[#C07F94] transition-colors" href="#" target="_blank" rel="noopener noreferrer">
               Christine Kounter
             </a>
           </p>
           <Link
             href="/gallery"
-            className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-[#2E4E3F] underline underline-offset-4 hover:text-[#9CAF88]"
+            className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-[#A24E69] bg-[#FFF8EC] px-5 py-2 text-sm font-medium text-[#A24E69] shadow-sm transition-all hover:bg-[#A24E69] hover:text-[#FFF8EC] hover:shadow-md hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
           >
             View Gallery
+            <span aria-hidden="true" className="text-base leading-none">→</span>
           </Link>
         </div>
       </section>
@@ -183,8 +184,8 @@ export default async function HomePage({
             text="You'll be driving, recommend car pooling with friends and family"
           />
         </div>
-        <div className="card mt-6 p-4 text-sm text-[#4F5E50]">
-          <p className="mb-2 font-medium text-[#2E4E3F]">
+        <div className="card mt-6 p-4 text-sm text-[#5A4A42]">
+          <p className="mb-2 font-medium text-[#A24E69]">
             Ceremony to Reception
           </p>
           <div className="grid place-items-center rounded-xl border border-[#E8DDC9] bg-white/60 p-2 sm:p-4 md:p-8 text-center overflow-hidden">
@@ -233,7 +234,7 @@ export default async function HomePage({
         <div className="fixed bottom-20 left-0 right-0 z-20 px-4 sm:hidden">
           <Link
             href="https://www.amazon.com/wedding/share/thehowles"
-            className="block w-full rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] text-[#6B725E] px-6 py-3 text-center shadow-lg"
+            className="block w-full rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] text-[#7A6B5C] px-6 py-3 text-center shadow-lg"
           >
             Registry
           </Link>
@@ -243,14 +244,14 @@ export default async function HomePage({
         {!party?.id ? (
           <Link
             href="/rsvp"
-            className="block w-full rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-center text-white shadow-lg"
+            className="block w-full rounded-2xl border border-[#843E55] bg-[#A24E69] px-6 py-3 text-center text-[#FFF8EC] shadow-lg"
           >
             {`RSVP for ${formatDateShort(WEDDING_DATE)}`}
           </Link>
         ) : (
           <Link
             href="https://www.amazon.com/wedding/share/thehowles"
-            className="block w-full rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] text-[#6B725E] px-6 py-3 text-center shadow-lg"
+            className="block w-full rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] text-[#7A6B5C] px-6 py-3 text-center shadow-lg"
           >
             Registry
           </Link>

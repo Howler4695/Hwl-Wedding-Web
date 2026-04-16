@@ -6,14 +6,14 @@ export default async function PartyBuilderPage() {
       <section className="relative z-10 w-full max-w-6xl pb-16">
         <div className="card-no-blur border-2 border-white/10 p-4 sm:p-8">
           <header className="mb-4 sm:mb-6">
-            <p className="mb-2 text-[12px] uppercase tracking-[0.35em] text-[#6B725E]">
+            <p className="mb-2 text-[12px] uppercase tracking-[0.35em] text-[#7A6B5C]">
               Wedding Registration
             </p>
             <h1 className="skeleton-glow text-3xl sm:text-4xl leading-tight">
               {"Loading"}
             </h1>
             <div className="mx-auto my-4 h-0.5 w-24 sm:w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
-            <p className="text-sm sm:text-base text-[#4F5E50]">
+            <p className="text-sm sm:text-base text-[#5A4A42]">
               {`Add family members or plus ones below. Phone numbers and allergies are optional. A Phone Number must be provided for your party leader`}
             </p>
           </header>
@@ -21,7 +21,7 @@ export default async function PartyBuilderPage() {
           <>
             <div id="party-form" className="space-y-4">
               <div className="rounded-2xl border border-[#E7D9BF] bg-white/60">
-                <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] px-4 py-3 text-xs font-medium uppercase tracking-wider text-[#6B725E]">
+                <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] px-4 py-3 text-xs font-medium uppercase tracking-wider text-[#7A6B5C]">
                   <div className="col-span-2">First name</div>
                   <div className="col-span-2">Last name</div>
                   <div className="col-span-1">Age</div>
@@ -37,7 +37,7 @@ export default async function PartyBuilderPage() {
                 <button
                   type="button"
                   disabled={true}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-5 py-3 text-sm font-medium text-[#6B725E] shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow focus:outline-none focus:ring-2 focus:ring-[#CAA55A] focus:ring-offset-2"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-5 py-3 text-sm font-medium text-[#7A6B5C] shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow focus:outline-none focus:ring-2 focus:ring-[#CAA55A] focus:ring-offset-2"
                 >
                   Add Member to Party
                 </button>
@@ -45,7 +45,7 @@ export default async function PartyBuilderPage() {
                 <button
                   type="submit"
                   disabled={true}
-                  className="inline-flex items-center justify-center rounded-2xl bg-[#2E4E3F] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#CAA55A] focus:ring-offset-2 disabled:opacity-60"
+                  className="inline-flex items-center justify-center rounded-2xl bg-[#A24E69] px-6 py-3 text-sm font-semibold text-[#FFF8EC] shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#CAA55A] focus:ring-offset-2 disabled:opacity-60"
                 >
                   {"Finalize Party"}
                 </button>
@@ -57,7 +57,7 @@ export default async function PartyBuilderPage() {
                 <button
                   type="button"
                   disabled={true}
-                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-4 py-3 text-sm font-medium text-[#6B725E] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CAA55A]"
+                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-4 py-3 text-sm font-medium text-[#7A6B5C] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CAA55A]"
                 >
                   Add Member
                 </button>
@@ -65,7 +65,7 @@ export default async function PartyBuilderPage() {
                   type="submit"
                   form="party-form"
                   disabled={true}
-                  className="flex-1 inline-flex items-center justify-center rounded-2xl bg-[#2E4E3F] px-4 py-3 text-sm font-semibold text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CAA55A] disabled:opacity-60"
+                  className="flex-1 inline-flex items-center justify-center rounded-2xl bg-[#A24E69] px-4 py-3 text-sm font-semibold text-[#FFF8EC] shadow-sm focus:outline-none focus:ring-2 focus:ring-[#CAA55A] disabled:opacity-60"
                 >
                   {"Finalize Party"}
                 </button>

@@ -79,7 +79,7 @@ export default function GalleryGrid({
                 }}
                 className={`absolute top-2 left-2 w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${
                   visible.has(photo.filename)
-                    ? "bg-[#2E4E3F] border-[#2E4E3F] text-white"
+                    ? "bg-[#A24E69] border-[#A24E69] text-[#FFF8EC]"
                     : "bg-white/80 border-gray-400"
                 }`}
                 aria-label={

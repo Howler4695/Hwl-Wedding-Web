@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #9CAF88;
-  --foreground: #2e4e3f;
+  --background: #869A78;
+  --foreground: #5A4A42;
 }
 
 @theme inline {
@@ -11,13 +11,13 @@
   --font-heading: var(--font-cormorant);
   --font-body: var(--font-quicksand);
   --font-sans: var(--font-quicksand);
-  --color-hannah-pink: rgba(251, 182, 206, 1);
+  --color-hannah-pink: rgba(232, 221, 201, 1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #9CAF88;
-    --foreground: #2e4e3f;
+    --background: #869A78;
+    --foreground: #5A4A42;
   }
 }
 
@@ -37,9 +37,9 @@
   border-radius: inherit;
   z-index: -1;
 
-  background: radial-gradient(120% 60% at 50% 50%, rgba(251, 182, 206, 0.75));
+  background: radial-gradient(120% 60% at 50% 50%, rgba(255, 248, 236, 0.95));
   filter: blur(14px);
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 @utility mobile-menu-backdrop {
@@ -136,15 +136,15 @@
 }
 
 @utility naked-text {
-  @apply text-black/70;
+  @apply text-[#3A2E2E];
 }
 
 @utility card {
-  @apply rounded-2xl border border-[#E8DDC9] bg-white/20 md:bg-white/40 shadow-xl backdrop-blur-xl;
+  @apply rounded-2xl border border-[#E8DDC9] bg-[#FFF8EC]/85 md:bg-[#FFF8EC]/90 shadow-xl backdrop-blur-md;
 }
 
 @utility card-no-blur {
-  @apply rounded-2xl border border-[#E8DDC9] bg-white/90 shadow-xl;
+  @apply rounded-2xl border border-[#E8DDC9] bg-[#FFF8EC]/95 shadow-xl;
 }
 
 @utility heading-1 {

@@ -54,28 +54,28 @@ export default async function AdminParties() {
         <div className="p-5 sm:p-6 pb-0">
           <Link
             href="/admin"
-            className="mb-1 inline-flex items-center gap-1 text-sm text-[#6B725E] hover:text-[#2E4E3F] transition-colors"
+            className="mb-1 inline-flex items-center gap-1 text-sm text-[#7A6B5C] hover:text-[#A24E69] transition-colors"
           >
             ← Back to Dashboard
           </Link>
-          <h2 className="text-[#2E4E3F] mb-4">Guest List</h2>
+          <h2 className="text-[#A24E69] mb-4">Guest List</h2>
 
           <div className="flex flex-wrap gap-6 text-sm mb-5">
             <div>
-              <span className="text-[#6B725E]">Guests Attending: </span>
+              <span className="text-[#7A6B5C]">Guests Attending: </span>
               <span className="font-semibold text-emerald-600">{popsAttending}</span>
             </div>
             <div>
-              <span className="text-[#6B725E]">Parties Attending: </span>
+              <span className="text-[#7A6B5C]">Parties Attending: </span>
               <span className="font-semibold text-emerald-600">{partiesAttending}</span>
             </div>
             <div>
-              <span className="text-[#6B725E]">Parties Declined: </span>
+              <span className="text-[#7A6B5C]">Parties Declined: </span>
               <span className="font-semibold text-red-500">{partiesNotAttending}</span>
             </div>
             <div>
-              <span className="text-[#6B725E]">Total Parties: </span>
-              <span className="font-semibold text-[#2E4E3F]">{allParties.length}</span>
+              <span className="text-[#7A6B5C]">Total Parties: </span>
+              <span className="font-semibold text-[#A24E69]">{allParties.length}</span>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default async function AdminParties() {
         {/* Table */}
         <div className="border-t border-[#E8DDC9]">
           {/* Desktop header */}
-          <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] bg-[#FDFAF5] px-5 py-3 text-xs font-medium uppercase tracking-wider text-[#6B725E]">
+          <div className="hidden md:grid grid-cols-12 gap-3 border-b border-[#E8DDC9] bg-[#FDFAF5] px-5 py-3 text-xs font-medium uppercase tracking-wider text-[#7A6B5C]">
             <div className="col-span-2">Name</div>
             <div className="col-span-3">Email</div>
             <div className="col-span-2">Phone</div>
@@ -102,19 +102,19 @@ export default async function AdminParties() {
             >
               {/* Desktop layout */}
               <div className="hidden md:grid grid-cols-12 gap-3 items-center">
-                <div className="col-span-2 font-medium text-[#2E4E3F]">
+                <div className="col-span-2 font-medium text-[#A24E69]">
                   {party.owning_user?.first_name} {party.owning_user?.last_name}
                 </div>
-                <div className="col-span-3 text-sm text-[#6B725E] truncate">
+                <div className="col-span-3 text-sm text-[#7A6B5C] truncate">
                   {party.owning_user?.email}
                 </div>
-                <div className="col-span-2 text-sm text-[#6B725E]">
+                <div className="col-span-2 text-sm text-[#7A6B5C]">
                   {party.owning_user?.phone_number || "\u2014"}
                 </div>
-                <div className="col-span-3 text-sm text-[#6B725E] truncate">
+                <div className="col-span-3 text-sm text-[#7A6B5C] truncate">
                   {party.owning_user?.address || "\u2014"}
                 </div>
-                <div className="col-span-1 text-sm text-[#6B725E]">
+                <div className="col-span-1 text-sm text-[#7A6B5C]">
                   {party.party_people?.length ?? 0}
                 </div>
                 <div className="col-span-1">
@@ -125,22 +125,22 @@ export default async function AdminParties() {
               {/* Mobile layout */}
               <div className="md:hidden space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <span className="font-medium text-[#2E4E3F]">
+                  <span className="font-medium text-[#A24E69]">
                     {party.owning_user?.first_name} {party.owning_user?.last_name}
                   </span>
                   {attendingBadge(party.attending)}
                 </div>
                 {party.owning_user?.email && (
-                  <div className="text-sm text-[#6B725E]">{party.owning_user.email}</div>
+                  <div className="text-sm text-[#7A6B5C]">{party.owning_user.email}</div>
                 )}
-                <div className="flex gap-4 text-sm text-[#6B725E]">
+                <div className="flex gap-4 text-sm text-[#7A6B5C]">
                   {party.owning_user?.phone_number && (
                     <span>{party.owning_user.phone_number}</span>
                   )}
                   <span>Party of {party.party_people?.length ?? 0}</span>
                 </div>
                 {party.notes && (
-                  <div className="text-xs text-[#6B725E]/70 italic">
+                  <div className="text-xs text-[#7A6B5C]/70 italic">
                     Note: {party.notes}
                   </div>
                 )}
@@ -149,7 +149,7 @@ export default async function AdminParties() {
           ))}
 
           {allParties.length === 0 && (
-            <div className="px-5 py-12 text-center text-[#6B725E]">
+            <div className="px-5 py-12 text-center text-[#7A6B5C]">
               No parties have been created yet.
             </div>
           )}

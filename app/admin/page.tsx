@@ -39,11 +39,11 @@ export default async function Admin() {
   }
 
   const stats = [
-    { label: "Total Guests", value: popsAttending, color: "text-[#2E4E3F]" },
+    { label: "Total Guests", value: popsAttending, color: "text-[#A24E69]" },
     { label: "Parties Attending", value: partiesAttending, color: "text-emerald-600" },
     { label: "Parties Declined", value: partiesNotAttending, color: "text-red-500" },
     { label: "No Response", value: partiesNoResponse, color: "text-amber-500" },
-    { label: "Total People", value: totalPeople, color: "text-[#6B725E]" },
+    { label: "Total People", value: totalPeople, color: "text-[#7A6B5C]" },
     { label: "With Allergies", value: peopleWithAllergies, color: "text-orange-500" },
   ];
 
@@ -69,12 +69,12 @@ export default async function Admin() {
     <div className="relative min-h-screen overflow-hidden flex items-center justify-center p-4 sm:p-6">
       <section className="relative z-10 w-full max-w-4xl card-no-blur p-6 sm:p-8">
         <div className="mb-6 text-center">
-          <h2 className="text-[#2E4E3F]">Admin Dashboard</h2>
+          <h2 className="text-[#A24E69]">Admin Dashboard</h2>
           <div className="mx-auto mt-2 h-0.5 w-20 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
         </div>
 
         <div className="mb-6">
-          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-[#6B725E]">
+          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-[#7A6B5C]">
             RSVP Overview
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -86,7 +86,7 @@ export default async function Admin() {
                 <div className={`text-2xl font-heading font-bold ${s.color}`}>
                   {s.value}
                 </div>
-                <div className="mt-0.5 text-xs text-[#6B725E]">{s.label}</div>
+                <div className="mt-0.5 text-xs text-[#7A6B5C]">{s.label}</div>
               </div>
             ))}
           </div>
@@ -99,10 +99,10 @@ export default async function Admin() {
               href={item.href}
               className="flex flex-col gap-1 rounded-xl border border-[#E8DDC9] bg-[#FDFAF5] p-5 transition-transform hover:-translate-y-0.5 hover:shadow-lg"
             >
-              <span className="font-heading text-lg font-semibold text-[#2E4E3F]">
+              <span className="font-heading text-lg font-semibold text-[#A24E69]">
                 {item.label}
               </span>
-              <span className="text-sm text-[#6B725E]">
+              <span className="text-sm text-[#7A6B5C]">
                 {item.description}
               </span>
             </Link>

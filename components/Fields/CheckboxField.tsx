@@ -8,10 +8,10 @@ export default function CheckboxField({
   onChange: (v: boolean) => void;
 }) {
   return (
-    <label className="flex items-center gap-2 rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F]">
+    <label className="flex items-center gap-2 rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#A24E69]">
       <input
         type="checkbox"
-        className="accent-[#2E4E3F]"
+        className="accent-[#A24E69]"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
       />

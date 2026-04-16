@@ -22,25 +22,25 @@ export default async function WeddingInvitePage() {
       <section className="relative z-10 w-full max-w-2xl">
         <div className="card p-10">
           {editMode ?? (
-            <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#6B725E]">
+            <p className="mb-2 text-[12px] uppercase tracking-[0.1em] text-[#7A6B5C]">
               Official Invitation
             </p>
           )}
-          <h1 className="text-4xl sm:text-5xl leading-tight text-[#2E4E3F] text-center">
+          <h1 className="text-4xl sm:text-5xl leading-tight text-[#A24E69] text-center">
             {editMode ? "Edit RSVP" : "Congrats you're invited to our wedding!"}
           </h1>
 
           <div className="mx-auto my-6 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
 
-          <p className="text-lg text-[#4F5E50]">{dateText}</p>
-          <p className="mt-1 text-sm text-[#7A846F]">
+          <p className="text-lg text-[#5A4A42]">{dateText}</p>
+          <p className="mt-1 text-sm text-[#9C8B7A]">
             {"You can edit your rsvp at anytime."}
           </p>
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Link
               href="/party-builder"
-              className="inline-flex items-center text-center justify-center rounded-2xl border border-[#9FB39E] bg-[#2E4E3F] px-6 py-3 text-white font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
+              className="inline-flex items-center text-center justify-center rounded-2xl border border-[#843E55] bg-[#A24E69] px-6 py-3 text-[#FFF8EC] font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
               aria-label="RSVP: You'll be there"
               prefetch
             >
@@ -53,7 +53,7 @@ export default async function WeddingInvitePage() {
 
             <Link
               href="/cant-make-it"
-              className="inline-flex items-center text-center justify-center rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-6 py-3 text-[#6B725E] font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
+              className="inline-flex items-center text-center justify-center rounded-2xl border border-[#E7D9BF] bg-[#FFF8EC] px-6 py-3 text-[#7A6B5C] font-medium shadow transition-transform hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#CAA55A] focus-visible:ring-offset-2"
               aria-label="RSVP: You can't make it"
               prefetch
             >

@@ -15,13 +15,13 @@ export default function SelectField({
 }) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-1 block text-sm font-medium text-[#4F5E50]">
+      <span className="mb-1 block text-sm font-medium text-[#5A4A42]">
         {label}
       </span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#2E4E3F] shadow-sm outline-none focus:border-[#CAA55A] focus:ring-2 focus:ring-[#CAA55A]"
+        className="w-full rounded-2xl border border-[#E8DDC9] bg-white px-4 py-3 text-[#A24E69] shadow-sm outline-none focus:border-[#CAA55A] focus:ring-2 focus:ring-[#CAA55A]"
       >
         <option value="" disabled>
           {placeholder}

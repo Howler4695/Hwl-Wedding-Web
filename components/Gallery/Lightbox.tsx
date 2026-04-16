@@ -57,7 +57,7 @@ export default function Lightbox({
     >
       {/* Backdrop */}
       <motion.div
-        className="absolute inset-0 bg-[#9CAF88]/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-[#869A78]/60 backdrop-blur-sm"
         onClick={onClose}
       />
 

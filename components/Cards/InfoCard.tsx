@@ -7,10 +7,10 @@ export default function InfoCard({
 }) {
   return (
     <div className="card p-5">
-      <p className="text-sm uppercase tracking-widest text-[#6B725E]">
+      <p className="text-sm uppercase tracking-widest text-[#7A6B5C]">
         {label}
       </p>
-      <p className="mt-1 text-[#4F5E50]">{text}</p>
+      <p className="mt-1 text-[#5A4A42]">{text}</p>
     </div>
   );
 }

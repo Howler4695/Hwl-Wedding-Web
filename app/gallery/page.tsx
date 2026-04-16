@@ -43,6 +43,15 @@ export default async function GalleryPage() {
         >
           Eric Lincoln
         </a>
+        {" & "}
+        <a
+          className="text-blue-400 underline"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Christine Kounter
+        </a>
       </p>
     </div>
   );

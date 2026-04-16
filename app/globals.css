@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: rgba(253, 228, 208, 1);
+  --background: #9CAF88;
   --foreground: #2e4e3f;
 }
 
@@ -16,7 +16,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: rgba(253, 228, 208, 1);
+    --background: #9CAF88;
     --foreground: #2e4e3f;
   }
 }
@@ -161,13 +161,6 @@
 
 @utility heading-4 {
   @apply font-heading font-medium text-xl;
-}
-
-@utility bg-toile-center {
-  background-image: url("/img/background_seam.jpg");
-  background-repeat: repeat-y;
-  background-position: top center;
-  background-size: 105vw auto;
 }
 
 body {

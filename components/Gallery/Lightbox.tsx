@@ -146,13 +146,14 @@ export default function Lightbox({
         }}
       >
         <Image
-          src={`/gallery/${photo}`}
+          src={photo}
           alt={`Photo ${selectedIndex + 1} of ${photos.length}`}
           width={1200}
           height={800}
           className="max-h-[85vh] w-auto rounded-lg object-contain"
           sizes="90vw"
           priority
+          unoptimized
         />
       </motion.div>
     </motion.div>

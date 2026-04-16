@@ -1,20 +1,23 @@
-import fs from "fs/promises";
-import path from "path";
 import { NakedHeader } from "@/components";
 import GalleryGrid from "@/components/Gallery/GalleryGrid";
 
-const PHOTO_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp"]);
+const S3_BUCKET_URL =
+  "https://hwl-wedding-photos.s3.us-east-2.amazonaws.com";
+const PHOTO_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp"];
 
 async function getGalleryPhotos(): Promise<string[]> {
-  const dir = path.join(process.cwd(), "public", "gallery");
-  try {
-    const files = await fs.readdir(dir);
-    return files
-      .filter((f) => PHOTO_EXTENSIONS.has(path.extname(f).toLowerCase()))
-      .sort();
-  } catch {
-    return [];
-  }
+  const res = await fetch(
+    `${S3_BUCKET_URL}?list-type=2&prefix=gallery/`,
+    { next: { revalidate: 60 } }
+  );
+  const xml = await res.text();
+  const keys = [...xml.matchAll(/<Key>([^<]+)<\/Key>/g)]
+    .map((m) => m[1])
+    .filter((key) =>
+      PHOTO_EXTENSIONS.some((ext) => key.toLowerCase().endsWith(ext))
+    )
+    .sort();
+  return keys.map((key) => `${S3_BUCKET_URL}/${key}`);
 }
 
 export default async function GalleryPage() {

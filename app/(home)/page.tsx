@@ -95,11 +95,12 @@ export default async function HomePage({
           {["front_pic_0.jpg", "front_pic_1.jpg", "front_pic_2.jpg", "front_pic_3.jpg"].map((photo) => (
             <Image
               key={photo}
-              src={`/gallery/${photo}`}
+              src={`https://hwl-wedding-photos.s3.us-east-2.amazonaws.com/gallery/${photo}`}
               alt=""
               width={600}
               height={600}
               className="aspect-square rounded-xl border border-[#E8DDC9] bg-white/60 object-cover"
+              unoptimized
             />
           ))}
         </div>

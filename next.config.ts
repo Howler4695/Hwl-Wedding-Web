@@ -2,6 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "hwl-wedding-photos.s3.us-east-2.amazonaws.com",
+      },
+    ],
+  },
   headers: async () => [
     {
       source: "/(.*)",

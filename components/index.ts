@@ -27,3 +27,5 @@ export { HomeBtfSkeleton as HomeBtfSkeleton } from "./BtfSkeletons/HomeBtfSkelet
 export { NavHeader as NavHeader } from "./Navigation/Header";
 export { NavHeaderLoading as NavHeaderLoading } from "./Navigation/Header";
 export { NormalButton as NormalButton } from "./Buttons/RegistryButton";
+export { default as GalleryGrid } from "./Gallery/GalleryGrid";
+export { default as Lightbox } from "./Gallery/Lightbox";

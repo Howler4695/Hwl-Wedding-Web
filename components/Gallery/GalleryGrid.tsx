@@ -23,12 +23,13 @@ export default function GalleryGrid({ photos }: { photos: string[] }) {
             onClick={() => setSelectedIndex(i)}
           >
             <Image
-              src={`/gallery/${photo}`}
+              src={photo}
               alt={`Photo ${i + 1}`}
               width={600}
               height={400}
               className="w-full h-auto block"
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              unoptimized
             />
           </motion.div>
         ))}

@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${quicksand.variable} antialiased`}
       >
-        <div className="min-h-screen bg-toile-center">
+        <div className="min-h-screen bg-background">
           <NavHeader />
           <main className="min-h-screen overflow-y-auto sm:pt-20">
             {children}

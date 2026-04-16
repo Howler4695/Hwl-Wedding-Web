@@ -92,10 +92,10 @@ export default async function HomePage({
       >
         <NakedHeader text="Gallery" />
         <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {["front_pic_0.jpg", "front_pic_1.jpg", "front_pic_2.jpg", "front_pic_3.jpg"].map((photo) => (
+          {["160-IMG_6688.jpg", "91-IMG_6217.jpg", "front_pic_2.jpg", "front_pic_3.jpg"].map((photo) => (
             <Image
               key={photo}
-              src={`https://hwl-wedding-photos.s3.us-east-2.amazonaws.com/gallery/${photo}`}
+              src={`https://hwl-wedding-photos.s3.us-east-2.amazonaws.com/gallery/web/${photo}`}
               alt=""
               width={600}
               height={600}

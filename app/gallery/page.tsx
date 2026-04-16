@@ -3,21 +3,31 @@ import GalleryGrid from "@/components/Gallery/GalleryGrid";
 
 const S3_BUCKET_URL =
   "https://hwl-wedding-photos.s3.us-east-2.amazonaws.com";
-const PHOTO_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp"];
 
-async function getGalleryPhotos(): Promise<string[]> {
+export type GalleryPhoto = {
+  src: string;
+  fullRes: string;
+};
+
+async function getGalleryPhotos(): Promise<GalleryPhoto[]> {
   const res = await fetch(
-    `${S3_BUCKET_URL}?list-type=2&prefix=gallery/`,
+    `${S3_BUCKET_URL}?list-type=2&prefix=gallery/web/`,
     { next: { revalidate: 60 } }
   );
   const xml = await res.text();
   const keys = [...xml.matchAll(/<Key>([^<]+)<\/Key>/g)]
     .map((m) => m[1])
-    .filter((key) =>
-      PHOTO_EXTENSIONS.some((ext) => key.toLowerCase().endsWith(ext))
-    )
+    .filter((key) => key.toLowerCase().endsWith(".jpg"))
     .sort();
-  return keys.map((key) => `${S3_BUCKET_URL}/${key}`);
+
+  return keys.map((key) => {
+    const filename = key.replace("gallery/web/", "");
+    const baseName = filename.replace(/\.jpg$/, "");
+    return {
+      src: `${S3_BUCKET_URL}/${key}`,
+      fullRes: `${S3_BUCKET_URL}/gallery/${baseName}.png`,
+    };
+  });
 }
 
 export default async function GalleryPage() {

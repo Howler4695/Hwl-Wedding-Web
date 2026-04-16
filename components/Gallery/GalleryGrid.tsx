@@ -4,8 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Lightbox from "./Lightbox";
+import type { GalleryPhoto } from "@/app/gallery/page";
 
-export default function GalleryGrid({ photos }: { photos: string[] }) {
+export default function GalleryGrid({ photos }: { photos: GalleryPhoto[] }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   return (
@@ -13,8 +14,8 @@ export default function GalleryGrid({ photos }: { photos: string[] }) {
       <div className="mt-6 columns-2 md:columns-3 lg:columns-4 gap-3">
         {photos.map((photo, i) => (
           <motion.div
-            key={photo}
-            layoutId={`gallery-photo-${photo}`}
+            key={photo.src}
+            layoutId={`gallery-photo-${photo.src}`}
             className="mb-3 cursor-pointer overflow-hidden rounded-xl border border-[#E8DDC9] break-inside-avoid"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -23,7 +24,7 @@ export default function GalleryGrid({ photos }: { photos: string[] }) {
             onClick={() => setSelectedIndex(i)}
           >
             <Image
-              src={photo}
+              src={photo.src}
               alt={`Photo ${i + 1}`}
               width={600}
               height={400}

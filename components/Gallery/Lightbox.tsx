@@ -3,9 +3,10 @@
 import { useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import type { GalleryPhoto } from "@/app/gallery/page";
 
 type LightboxProps = {
-  photos: string[];
+  photos: GalleryPhoto[];
   selectedIndex: number;
   onClose: () => void;
   onNavigate: (index: number) => void;
@@ -60,28 +61,53 @@ export default function Lightbox({
         onClick={onClose}
       />
 
-      {/* Close button */}
-      <button
-        onClick={onClose}
-        className="absolute top-4 right-4 z-10 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
-        aria-label="Close"
-        autoFocus
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      {/* Top bar: close + download */}
+      <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+        <a
+          href={photo.fullRes}
+          download
+          className="rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
+          aria-label="Download full resolution"
+          onClick={(e) => e.stopPropagation()}
         >
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+        </a>
+        <button
+          onClick={onClose}
+          className="rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
+          aria-label="Close"
+          autoFocus
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
 
       {/* Navigation arrows */}
       {selectedIndex > 0 && (
@@ -130,7 +156,7 @@ export default function Lightbox({
       {/* Image with drag-to-dismiss and swipe navigation */}
       <motion.div
         className="relative z-10 flex max-h-[85vh] max-w-[90vw] items-center justify-center"
-        layoutId={`gallery-photo-${photo}`}
+        layoutId={`gallery-photo-${photo.src}`}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         drag
         dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
@@ -146,7 +172,7 @@ export default function Lightbox({
         }}
       >
         <Image
-          src={photo}
+          src={photo.src}
           alt={`Photo ${selectedIndex + 1} of ${photos.length}`}
           width={1200}
           height={800}

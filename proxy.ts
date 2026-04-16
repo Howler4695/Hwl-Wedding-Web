@@ -9,7 +9,8 @@ export default auth((req) => {
   if (
     !req.auth &&
     req.nextUrl.pathname !== "/auth/signin" &&
-    req.nextUrl.pathname !== "/"
+    req.nextUrl.pathname !== "/" &&
+    req.nextUrl.pathname !== "/gallery"
   ) {
     const signInUrl = new URL("/auth/signin", req.nextUrl.origin);
     signInUrl.searchParams.set("from", req.nextUrl.href);
@@ -29,6 +30,6 @@ export default auth((req) => {
 
 export const config = {
   matcher: [
-    "/((?!api/auth/|auth/signin|auth/signout|maintence|auth/reauth|_next/static|_next/image|favicon.ico|__nextjs_font|img/|images/|magnolia_no_stem.svg|front_pic_0.jpg|front_pic_1.jpg|front_pic_2.jpg|front_pic_3.jpg).*)",
+    "/((?!api/auth/|auth/signin|auth/signout|maintence|auth/reauth|_next/static|_next/image|favicon.ico|__nextjs_font|img/|images/|gallery/|magnolia_no_stem.svg).*)",
   ],
 };

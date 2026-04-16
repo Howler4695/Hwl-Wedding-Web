@@ -30,14 +30,19 @@ async function getGalleryPhotos(): Promise<GalleryPhoto[]> {
   });
 }
 
-export default async function GalleryPage() {
+export default async function GalleryPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ photo?: string }>;
+}) {
   const photos = await getGalleryPhotos();
+  const openPhoto = (await searchParams)?.photo ?? null;
 
   return (
     <div className="relative z-10 mx-auto mt-2 w-full max-w-6xl px-6 pb-16">
       <NakedHeader text="Gallery" />
       {photos.length > 0 ? (
-        <GalleryGrid photos={photos} />
+        <GalleryGrid photos={photos} initialPhoto={openPhoto} />
       ) : (
         <p className="mt-8 text-center text-[#4F5E50]">
           Photos coming soon.

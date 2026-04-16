@@ -6,8 +6,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import Lightbox from "./Lightbox";
 import type { GalleryPhoto } from "@/app/gallery/page";
 
-export default function GalleryGrid({ photos }: { photos: GalleryPhoto[] }) {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+export default function GalleryGrid({
+  photos,
+  initialPhoto,
+}: {
+  photos: GalleryPhoto[];
+  initialPhoto?: string | null;
+}) {
+  const initialIndex = initialPhoto
+    ? photos.findIndex((p) => p.src.includes(initialPhoto))
+    : null;
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(
+    initialIndex !== -1 ? initialIndex : null
+  );
 
   return (
     <>

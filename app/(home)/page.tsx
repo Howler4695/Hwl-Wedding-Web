@@ -93,15 +93,16 @@ export default async function HomePage({
         <NakedHeader text="Gallery" />
         <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
           {["160-IMG_6688.jpg", "91-IMG_6217.jpg", "front_pic_2.jpg", "front_pic_3.jpg"].map((photo) => (
-            <Image
-              key={photo}
-              src={`https://hwl-wedding-photos.s3.us-east-2.amazonaws.com/gallery/web/${photo}`}
-              alt=""
-              width={600}
-              height={600}
-              className="aspect-square rounded-xl border border-[#E8DDC9] bg-white/60 object-cover"
-              unoptimized
-            />
+            <Link key={photo} href={`/gallery?photo=${photo}`}>
+              <Image
+                src={`https://hwl-wedding-photos.s3.us-east-2.amazonaws.com/gallery/web/${photo}`}
+                alt=""
+                width={600}
+                height={600}
+                className="aspect-square rounded-xl border border-[#E8DDC9] bg-white/60 object-cover"
+                unoptimized
+              />
+            </Link>
           ))}
         </div>
         <div className="mt-2 flex flex-col items-center gap-1">

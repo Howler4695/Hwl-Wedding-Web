@@ -57,8 +57,8 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${quicksand.variable} antialiased`}
       >
-        <AuroraBackground />
-        <div className="min-h-screen">
+        <div className="relative min-h-screen">
+          <AuroraBackground />
           <NavHeader />
           <main className="min-h-screen overflow-y-auto sm:pt-20">
             {children}

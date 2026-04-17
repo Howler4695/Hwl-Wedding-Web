@@ -230,66 +230,62 @@ body {
   will-change: transform;
   transform: translateZ(0);
   pointer-events: none;
+  background-repeat: repeat-y;
+  background-position: 50% 0%;
 }
 
-/* V2 vibrant: 15 blobs spread top-to-bottom (4–96% Y), with off-edge
-   pairs at -8/-10% and 108/110% PLUS center-X (50%) clash blobs at
-   intermediate Y values. Less blur (28px) keeps the colors punchy. */
+/* Tile each layer at a different vh height so density is fixed per
+   viewport (not stretched across the document) AND the three layers
+   never align — creates a non-repeating organic clash even though
+   each layer individually tiles. Aceternity / Stripe technique. */
 @utility aurora-layer-1 {
   opacity: 1;
-  background:
-    /* Pair + center-clash, top */
-    radial-gradient(ellipse 90vw 22vh at -8% 4%, #A24E69, transparent 65%),
-    radial-gradient(ellipse 90vw 22vh at 108% 7%, #CAA55A, transparent 65%),
-    radial-gradient(ellipse 85vw 22vh at 50% 14%, #7E2E4B, transparent 60%),
-    /* Pair + center-clash */
-    radial-gradient(ellipse 95vw 25vh at -10% 24%, #7E2E4B, transparent 65%),
-    radial-gradient(ellipse 90vw 22vh at 110% 26%, #FFF8EC, transparent 60%),
-    radial-gradient(ellipse 90vw 22vh at 50% 34%, #C07F94, transparent 60%),
-    /* Pair + center-clash, mid */
-    radial-gradient(ellipse 95vw 25vh at -5% 44%, #FFF8EC, transparent 60%),
-    radial-gradient(ellipse 90vw 22vh at 108% 47%, #A24E69, transparent 65%),
-    radial-gradient(ellipse 90vw 22vh at 50% 56%, #CAA55A, transparent 60%),
-    /* Pair + center-clash */
-    radial-gradient(ellipse 90vw 22vh at -8% 64%, #CAA55A, transparent 65%),
-    radial-gradient(ellipse 95vw 25vh at 110% 67%, #7E2E4B, transparent 65%),
-    radial-gradient(ellipse 90vw 22vh at 50% 76%, #A24E69, transparent 60%),
-    /* Pair + bottom anchor */
-    radial-gradient(ellipse 95vw 25vh at -5% 84%, #A24E69, transparent 65%),
-    radial-gradient(ellipse 90vw 22vh at 108% 87%, #FFF8EC, transparent 60%),
-    radial-gradient(ellipse 95vw 22vh at 50% 96%, #7E2E4B, transparent 65%);
+  background-size: 100% 100vh;
+  background-image:
+    /* Pair + center clash, repeated every 100vh */
+    radial-gradient(ellipse 90% 22% at -8% 5%, #A24E69, transparent 65%),
+    radial-gradient(ellipse 90% 22% at 108% 8%, #CAA55A, transparent 65%),
+    radial-gradient(ellipse 85% 22% at 50% 18%, #7E2E4B, transparent 60%),
+    radial-gradient(ellipse 95% 25% at -10% 30%, #7E2E4B, transparent 65%),
+    radial-gradient(ellipse 90% 22% at 110% 33%, #FFF8EC, transparent 60%),
+    radial-gradient(ellipse 90% 22% at 50% 44%, #C07F94, transparent 60%),
+    radial-gradient(ellipse 95% 25% at -5% 56%, #FFF8EC, transparent 60%),
+    radial-gradient(ellipse 90% 22% at 108% 59%, #A24E69, transparent 65%),
+    radial-gradient(ellipse 90% 22% at 50% 70%, #CAA55A, transparent 60%),
+    radial-gradient(ellipse 90% 22% at -8% 82%, #CAA55A, transparent 65%),
+    radial-gradient(ellipse 95% 25% at 110% 84%, #7E2E4B, transparent 65%),
+    radial-gradient(ellipse 90% 22% at 50% 95%, #A24E69, transparent 60%);
   animation: auroraDrift1 14s ease-in-out infinite alternate;
 }
 
-/* Screen-blended layer — brightens overlaps and adds 8 more blobs
-   shifted by ~6% Y so they don't align with layer 1, increasing clash. */
 @utility aurora-layer-2 {
   opacity: 0.95;
   mix-blend-mode: screen;
-  background:
-    radial-gradient(ellipse 80vw 22vh at 50% -3%, #C07F94, transparent 60%),
-    radial-gradient(ellipse 75vw 20vh at 108% 16%, #E8DDC9, transparent 60%),
-    radial-gradient(ellipse 80vw 22vh at -5% 28%, #C07F94, transparent 60%),
-    radial-gradient(ellipse 85vw 22vh at 50% 40%, #A24E69, transparent 55%),
-    radial-gradient(ellipse 85vw 22vh at 110% 52%, #A24E69, transparent 60%),
-    radial-gradient(ellipse 80vw 22vh at -8% 66%, #E8DDC9, transparent 60%),
-    radial-gradient(ellipse 80vw 22vh at 50% 78%, #C07F94, transparent 55%),
-    radial-gradient(ellipse 85vw 22vh at 50% 96%, #C07F94, transparent 60%);
+  background-size: 100% 130vh;
+  background-image:
+    radial-gradient(ellipse 80% 22% at 50% 4%, #C07F94, transparent 60%),
+    radial-gradient(ellipse 75% 20% at 108% 18%, #E8DDC9, transparent 60%),
+    radial-gradient(ellipse 80% 22% at -5% 32%, #C07F94, transparent 60%),
+    radial-gradient(ellipse 85% 22% at 50% 46%, #A24E69, transparent 55%),
+    radial-gradient(ellipse 85% 22% at 110% 60%, #A24E69, transparent 60%),
+    radial-gradient(ellipse 80% 22% at -8% 74%, #E8DDC9, transparent 60%),
+    radial-gradient(ellipse 80% 22% at 50% 86%, #C07F94, transparent 55%),
+    radial-gradient(ellipse 85% 22% at 50% 96%, #A24E69, transparent 60%);
   animation: auroraDrift2 17s ease-in-out infinite alternate;
 }
 
-/* Hard-light blended highlights — vivid clash zones at fixed cadence */
 @utility aurora-layer-3 {
   opacity: 0.9;
   mix-blend-mode: hard-light;
   filter: blur(24px);
-  background:
-    radial-gradient(ellipse 70vw 20vh at 50% 10%, #CAA55A, transparent 55%),
-    radial-gradient(ellipse 65vw 18vh at -5% 28%, #7E2E4B, transparent 60%),
-    radial-gradient(ellipse 70vw 20vh at 50% 42%, #CAA55A, transparent 55%),
-    radial-gradient(ellipse 70vw 20vh at 108% 56%, #CAA55A, transparent 55%),
-    radial-gradient(ellipse 65vw 18vh at -8% 72%, #7E2E4B, transparent 60%),
-    radial-gradient(ellipse 70vw 20vh at 50% 90%, #CAA55A, transparent 55%);
+  background-size: 100% 90vh;
+  background-image:
+    radial-gradient(ellipse 70% 20% at 50% 10%, #CAA55A, transparent 55%),
+    radial-gradient(ellipse 65% 18% at -5% 28%, #7E2E4B, transparent 60%),
+    radial-gradient(ellipse 70% 20% at 50% 44%, #CAA55A, transparent 55%),
+    radial-gradient(ellipse 70% 20% at 108% 60%, #CAA55A, transparent 55%),
+    radial-gradient(ellipse 65% 18% at -8% 76%, #7E2E4B, transparent 60%),
+    radial-gradient(ellipse 70% 20% at 50% 92%, #CAA55A, transparent 55%);
   animation: auroraDrift3 11s ease-in-out infinite alternate;
 }
 

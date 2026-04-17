@@ -234,23 +234,27 @@ body {
   background-position: 50% 0%;
 }
 
-/* ANCHORED LAYER — no animation. Five full-width horizontal color
-   bands cascade vertically, each at a different Y position with a
-   different color: rose → gold → light rose → deep rose → rose. The
-   bands span both edges (no asymmetry) and blend into each other
-   via the heavy blur — reads as flowing aurora bands rather than
-   discrete blobs. Tiles every 100vh so each viewport gets the same
-   anchored band sequence. */
+/* ANCHORED LAYER — no animation. Colors anchor on the LEFT and RIGHT
+   edges (not the center). Each side has 5 color stops cascading down,
+   with DIFFERENT colors per side at each Y so opposing colors clash
+   in the middle of the viewport. Tiles every 100vh so anchors repeat. */
 @utility aurora-layer-1 {
   opacity: 1;
-  filter: blur(40px);
+  filter: blur(50px);
   background-size: 100% 100vh;
   background-image:
-    radial-gradient(ellipse 100% 16% at 50% 8%,  #A24E69, transparent 75%),
-    radial-gradient(ellipse 100% 16% at 50% 28%, #CAA55A, transparent 75%),
-    radial-gradient(ellipse 100% 16% at 50% 50%, #C07F94, transparent 75%),
-    radial-gradient(ellipse 100% 16% at 50% 72%, #7E2E4B, transparent 75%),
-    radial-gradient(ellipse 100% 16% at 50% 92%, #A24E69, transparent 75%);
+    /* LEFT edge cascade: rose → gold → light rose → deep rose → rose */
+    radial-gradient(ellipse 55% 22% at 0% 8%,  #A24E69, transparent 70%),
+    radial-gradient(ellipse 55% 22% at 0% 30%, #CAA55A, transparent 70%),
+    radial-gradient(ellipse 55% 22% at 0% 50%, #C07F94, transparent 70%),
+    radial-gradient(ellipse 55% 22% at 0% 72%, #7E2E4B, transparent 70%),
+    radial-gradient(ellipse 55% 22% at 0% 92%, #A24E69, transparent 70%),
+    /* RIGHT edge cascade: gold → deep rose → rose → light rose → gold */
+    radial-gradient(ellipse 55% 22% at 100% 8%,  #CAA55A, transparent 70%),
+    radial-gradient(ellipse 55% 22% at 100% 30%, #7E2E4B, transparent 70%),
+    radial-gradient(ellipse 55% 22% at 100% 50%, #A24E69, transparent 70%),
+    radial-gradient(ellipse 55% 22% at 100% 72%, #C07F94, transparent 70%),
+    radial-gradient(ellipse 55% 22% at 100% 92%, #CAA55A, transparent 70%);
   /* No animation — anchors. */
 }
 

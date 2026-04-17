@@ -42,6 +42,13 @@
   background: radial-gradient(120% 60% at 50% 50%, rgba(255, 248, 236, 0.95));
   filter: blur(14px);
   opacity: 0.95;
+
+  /* Pin the halo's compositor layer so Firefox doesn't re-create it
+     on every scroll tick — that re-creation is what produced the
+     flicker on the Gallery title (it's the only header sitting
+     adjacent to a Card with backdrop-blur AND a tall image grid). */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 @utility mobile-menu-backdrop {

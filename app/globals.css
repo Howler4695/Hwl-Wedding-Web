@@ -34,20 +34,23 @@
   /* Flat em-based extension: scales with font size, never gets out of
      control on wide headings (was -15%, which on "Travel & Lodging" at
      text-4xl pushed the layout box past mobile viewport edges). */
-  inset-inline: -0.6em;
-  inset-block: -0.35em;
+  inset-inline: -1em;
+  inset-block: -0.6em;
 
   border-radius: inherit;
   z-index: -1;
 
-  background: radial-gradient(120% 60% at 50% 50%, rgba(255, 248, 236, 0.95));
-  filter: blur(14px);
-  opacity: 0.95;
-
-  /* Promote to its own GPU layer to stop iOS Safari flicker on scroll */
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
+  /* Soft edges baked into the gradient itself — no filter: blur. The
+     blur version was unreliable on iOS Safari: the GPU layer wasn't
+     promoted until a scroll or interaction, so the halo would be
+     missing on first paint and then flicker on scroll. */
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 248, 236, 0.95) 0%,
+    rgba(255, 248, 236, 0.85) 35%,
+    rgba(255, 248, 236, 0.4) 65%,
+    rgba(255, 248, 236, 0) 90%
+  );
 }
 
 @utility mobile-menu-backdrop {

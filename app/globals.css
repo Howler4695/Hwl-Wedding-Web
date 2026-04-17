@@ -234,39 +234,40 @@ body {
   background-position: 50% 0%;
 }
 
-/* ANCHORED LAYER — no animation. Anchors translated OFF-SCREEN
-   (-15% and 115%) so the heavy blur doesn't push the bright color
-   away from the visible edges — full color still reaches the edges
-   after the 130px blur smear. */
+/* ANCHORED LAYER — no animation. Anchors at -25%/125% X (further
+   off-screen) and 200% wide so the heavy blur leaves full color
+   right at the visible edges. Color cascade rebalanced: rose stops
+   alternate with gold/beige so warm tones offset the pink instead
+   of letting rose dominate. */
 @utility aurora-layer-1 {
   opacity: 1;
   filter: blur(130px);
   background-size: 100% 100vh;
   background-image:
-    /* LEFT cascade — anchored OFF-SCREEN at -15% X */
-    radial-gradient(ellipse 180% 75% at -15% 5%,  #A24E69, transparent 100%),
-    radial-gradient(ellipse 180% 75% at -15% 28%, #CAA55A, transparent 100%),
-    radial-gradient(ellipse 180% 75% at -15% 52%, #C07F94, transparent 100%),
-    radial-gradient(ellipse 180% 75% at -15% 76%, #7E2E4B, transparent 100%),
-    radial-gradient(ellipse 180% 75% at -15% 96%, #A24E69, transparent 100%),
-    /* RIGHT cascade — anchored OFF-SCREEN at 115% X, Y staggered */
-    radial-gradient(ellipse 180% 75% at 115% 17%, #CAA55A, transparent 100%),
-    radial-gradient(ellipse 180% 75% at 115% 40%, #7E2E4B, transparent 100%),
-    radial-gradient(ellipse 180% 75% at 115% 64%, #A24E69, transparent 100%),
-    radial-gradient(ellipse 180% 75% at 115% 88%, #C07F94, transparent 100%);
+    /* LEFT cascade: rose → gold → beige → gold → rose */
+    radial-gradient(ellipse 200% 75% at -25% 5%,  #A24E69, transparent 100%),
+    radial-gradient(ellipse 200% 75% at -25% 28%, #CAA55A, transparent 100%),
+    radial-gradient(ellipse 200% 75% at -25% 52%, #E8DDC9, transparent 100%),
+    radial-gradient(ellipse 200% 75% at -25% 76%, #CAA55A, transparent 100%),
+    radial-gradient(ellipse 200% 75% at -25% 96%, #A24E69, transparent 100%),
+    /* RIGHT cascade: gold → beige → rose → gold → beige (Y staggered) */
+    radial-gradient(ellipse 200% 75% at 125% 17%, #CAA55A, transparent 100%),
+    radial-gradient(ellipse 200% 75% at 125% 40%, #E8DDC9, transparent 100%),
+    radial-gradient(ellipse 200% 75% at 125% 64%, #A24E69, transparent 100%),
+    radial-gradient(ellipse 200% 75% at 125% 88%, #CAA55A, transparent 100%);
   /* No animation — anchors. */
 }
 
-/* FLOATING WARMTH — soft beige accents drift left/right with screen
-   blend, giving subtle motion over the anchored bands. */
+/* FLOATING WARMTH — beige accents bumped up so the offsetting cream
+   tone is actually visible. Screen blend brightens overlaps. */
 @utility aurora-layer-2 {
-  opacity: 0.6;
+  opacity: 0.85;
   mix-blend-mode: screen;
   filter: blur(70px);
   background-size: 100% 130vh;
   background-image:
-    radial-gradient(ellipse 50% 30% at 30% 30%, #E8DDC9, transparent 70%),
-    radial-gradient(ellipse 55% 32% at 70% 70%, #E8DDC9, transparent 70%);
+    radial-gradient(ellipse 60% 35% at 30% 30%, #E8DDC9, transparent 75%),
+    radial-gradient(ellipse 65% 38% at 70% 70%, #E8DDC9, transparent 75%);
   animation: auroraDrift2 22s ease-in-out infinite alternate;
 }
 

@@ -232,33 +232,35 @@ body {
   pointer-events: none;
 }
 
-/* Each layer spreads 7 elliptical blobs across the full height of
-   the container (0–100% Y) so different aurora "moments" reveal as
-   you scroll. Ellipse dimensions are % of container — 45–55% wide,
-   12–16% tall — so blobs stay proportional on long or short pages. */
+/* Blob centers extend past the container edges (-15% to 115% X) so
+   blobs bleed in from off-screen rather than clustering in the middle.
+   Wider ellipses (60–75%) so each blob actually fills the horizontal
+   space. Spread vertically 0–100% Y across 7–8 stops per layer so the
+   aurora cascades down. */
 @utility aurora-layer-1 {
   opacity: 0.85;
   background:
-    radial-gradient(ellipse 50% 14% at 25% 6%, #A24E69 0%, transparent 60%),
-    radial-gradient(ellipse 45% 13% at 75% 20%, #CAA55A 0%, transparent 60%),
-    radial-gradient(ellipse 55% 15% at 45% 36%, #FFF8EC 0%, transparent 60%),
-    radial-gradient(ellipse 45% 14% at 15% 52%, #7E2E4B 0%, transparent 55%),
-    radial-gradient(ellipse 50% 14% at 80% 66%, #A24E69 0%, transparent 60%),
-    radial-gradient(ellipse 45% 13% at 35% 80%, #CAA55A 0%, transparent 55%),
-    radial-gradient(ellipse 50% 15% at 70% 94%, #7E2E4B 0%, transparent 55%);
-  animation: auroraDrift1 22s ease-in-out infinite alternate;
+    radial-gradient(ellipse 65% 14% at -10% 6%, #A24E69 0%, transparent 60%),
+    radial-gradient(ellipse 60% 13% at 110% 18%, #CAA55A 0%, transparent 60%),
+    radial-gradient(ellipse 70% 15% at 50% 32%, #FFF8EC 0%, transparent 60%),
+    radial-gradient(ellipse 60% 14% at -8% 48%, #7E2E4B 0%, transparent 55%),
+    radial-gradient(ellipse 65% 14% at 108% 62%, #A24E69 0%, transparent 60%),
+    radial-gradient(ellipse 60% 13% at 20% 78%, #CAA55A 0%, transparent 55%),
+    radial-gradient(ellipse 65% 15% at 95% 92%, #7E2E4B 0%, transparent 55%);
+  animation: auroraDrift1 16s ease-in-out infinite alternate;
 }
 
 @utility aurora-layer-2 {
   opacity: 0.75;
   mix-blend-mode: screen;
   background:
-    radial-gradient(ellipse 50% 14% at 70% 10%, #C07F94 0%, transparent 60%),
-    radial-gradient(ellipse 45% 13% at 20% 28%, #E8DDC9 0%, transparent 60%),
-    radial-gradient(ellipse 50% 15% at 80% 48%, #A24E69 0%, transparent 55%),
-    radial-gradient(ellipse 45% 13% at 30% 68%, #E8DDC9 0%, transparent 60%),
-    radial-gradient(ellipse 50% 14% at 60% 88%, #C07F94 0%, transparent 55%);
-  animation: auroraDrift2 26s ease-in-out infinite alternate;
+    radial-gradient(ellipse 65% 14% at 105% 8%, #C07F94 0%, transparent 60%),
+    radial-gradient(ellipse 60% 13% at -8% 24%, #E8DDC9 0%, transparent 60%),
+    radial-gradient(ellipse 70% 15% at 110% 44%, #A24E69 0%, transparent 55%),
+    radial-gradient(ellipse 60% 13% at -10% 64%, #E8DDC9 0%, transparent 60%),
+    radial-gradient(ellipse 65% 14% at 60% 84%, #C07F94 0%, transparent 55%),
+    radial-gradient(ellipse 60% 13% at 105% 96%, #C07F94 0%, transparent 55%);
+  animation: auroraDrift2 19s ease-in-out infinite alternate;
 }
 
 @utility aurora-layer-3 {
@@ -266,32 +268,32 @@ body {
   mix-blend-mode: overlay;
   filter: blur(55px);
   background:
-    radial-gradient(ellipse 40% 12% at 40% 12%, #CAA55A 0%, transparent 55%),
-    radial-gradient(ellipse 38% 11% at 65% 32%, #7E2E4B 0%, transparent 55%),
-    radial-gradient(ellipse 40% 12% at 25% 56%, #CAA55A 0%, transparent 55%),
-    radial-gradient(ellipse 38% 11% at 78% 76%, #7E2E4B 0%, transparent 55%),
-    radial-gradient(ellipse 40% 12% at 45% 95%, #CAA55A 0%, transparent 55%);
-  animation: auroraDrift3 18s ease-in-out infinite alternate;
+    radial-gradient(ellipse 55% 12% at 45% 10%, #CAA55A 0%, transparent 55%),
+    radial-gradient(ellipse 50% 11% at -5% 30%, #7E2E4B 0%, transparent 55%),
+    radial-gradient(ellipse 55% 12% at 105% 52%, #CAA55A 0%, transparent 55%),
+    radial-gradient(ellipse 50% 11% at -8% 72%, #7E2E4B 0%, transparent 55%),
+    radial-gradient(ellipse 55% 12% at 50% 94%, #CAA55A 0%, transparent 55%);
+  animation: auroraDrift3 13s ease-in-out infinite alternate;
 }
 
-/* Subtler motion than the v1 aurora — scrolling itself now provides
-   the primary dynamism; the time-based drift just keeps things alive. */
+/* Bigger amplitudes — bring back the A3 motion energy so the aurora
+   noticeably shifts even when not scrolling. */
 @keyframes auroraDrift1 {
-  0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(8%, 2%) scale(1.08); }
-  100% { transform: translate(-6%, -2%) scale(0.95); }
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50%  { transform: translate(20%, 5%) scale(1.25) rotate(4deg); }
+  100% { transform: translate(-18%, -4%) scale(0.85) rotate(-3deg); }
 }
 
 @keyframes auroraDrift2 {
-  0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(-8%, 3%) scale(1.07); }
-  100% { transform: translate(6%, -2%) scale(1.04); }
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50%  { transform: translate(-22%, 6%) scale(1.22) rotate(-5deg); }
+  100% { transform: translate(18%, -5%) scale(1.12) rotate(4deg); }
 }
 
 @keyframes auroraDrift3 {
   0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(5%, 4%) scale(1.12); }
-  100% { transform: translate(-6%, -3%) scale(0.92); }
+  50%  { transform: translate(15%, 8%) scale(1.3); }
+  100% { transform: translate(-18%, -6%) scale(0.85); }
 }
 
 /* Mobile: reduce blur radius to lighten GPU cost. Visual difference

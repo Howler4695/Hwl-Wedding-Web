@@ -23,7 +23,7 @@ export default async function LoadingHomePage() {
           <p className="mb-1 text-[12px] uppercase tracking-[0.35em] text-[#7A6B5C]">
             Welcome
           </p>
-          <h1 className="leading-tight">Hannah & Hayden</h1>
+          <h1 className="leading-tight">You&apos;re Invited</h1>
           <div className="mx-auto my-5 h-0.5 w-28 rounded-full bg-gradient-to-r from-transparent via-[#CAA55A] to-transparent" />
           <p className="text-[#5A4A42]">
             {formatDateLong(WEDDING_DATE)} · {CITY_STATE}

@@ -226,7 +226,7 @@ body {
 @utility aurora-layer {
   position: absolute;
   inset: 0;
-  filter: blur(40px);
+  filter: blur(50px);
   will-change: transform;
   transform: translateZ(0);
   pointer-events: none;
@@ -234,53 +234,45 @@ body {
   background-position: 50% 0%;
 }
 
-/* V1 (softer) settings with the tiling technique so density is
-   actually viewport-locked. 11 / 6 / 5 blobs, blur 40 / 40 / 35,
-   opacity 0.95 / 0.85 / 0.75. */
+/* ANCHORED LAYER — no animation. Four corner color zones using the
+   Aceternity-style circle farthest-side at corners. These are the
+   "hard points" — always in the same place, no drifting.
+   Tile every 100vh so each viewport has the same 4-corner anchor. */
 @utility aurora-layer-1 {
-  opacity: 0.95;
+  opacity: 1;
   background-size: 100% 100vh;
   background-image:
-    radial-gradient(ellipse 80% 25% at -5% 5%, #A24E69, transparent 70%),
-    radial-gradient(ellipse 80% 25% at 105% 8%, #CAA55A, transparent 70%),
-    radial-gradient(ellipse 85% 28% at -10% 22%, #7E2E4B, transparent 70%),
-    radial-gradient(ellipse 75% 25% at 110% 25%, #FFF8EC, transparent 65%),
-    radial-gradient(ellipse 90% 30% at -5% 42%, #FFF8EC, transparent 65%),
-    radial-gradient(ellipse 85% 28% at 108% 45%, #A24E69, transparent 70%),
-    radial-gradient(ellipse 80% 25% at -8% 62%, #CAA55A, transparent 70%),
-    radial-gradient(ellipse 85% 28% at 110% 65%, #7E2E4B, transparent 70%),
-    radial-gradient(ellipse 85% 28% at -5% 82%, #A24E69, transparent 70%),
-    radial-gradient(ellipse 80% 25% at 108% 85%, #FFF8EC, transparent 65%),
-    radial-gradient(ellipse 95% 25% at 50% 96%, #7E2E4B, transparent 70%);
-  animation: auroraDrift1 16s ease-in-out infinite alternate;
+    radial-gradient(circle farthest-side at 0% 0%,    #A24E69, transparent),
+    radial-gradient(circle farthest-side at 100% 0%,  #CAA55A, transparent),
+    radial-gradient(circle farthest-side at 0% 100%,  #C07F94, transparent),
+    radial-gradient(circle farthest-side at 100% 100%, #7E2E4B, transparent);
+  /* No animation — these are the anchors. */
 }
 
+/* FLOATING WARMTH — soft beige accents that gently drift over the
+   anchors. Screen blend so they brighten where they overlap rose/gold. */
 @utility aurora-layer-2 {
-  opacity: 0.85;
+  opacity: 0.65;
   mix-blend-mode: screen;
+  filter: blur(70px);
   background-size: 100% 130vh;
   background-image:
-    radial-gradient(ellipse 75% 25% at 50% 4%, #C07F94, transparent 65%),
-    radial-gradient(ellipse 65% 22% at 105% 18%, #E8DDC9, transparent 65%),
-    radial-gradient(ellipse 75% 25% at -5% 38%, #C07F94, transparent 65%),
-    radial-gradient(ellipse 85% 28% at 110% 55%, #A24E69, transparent 65%),
-    radial-gradient(ellipse 75% 25% at -8% 75%, #E8DDC9, transparent 65%),
-    radial-gradient(ellipse 85% 28% at 50% 95%, #C07F94, transparent 65%);
-  animation: auroraDrift2 19s ease-in-out infinite alternate;
+    radial-gradient(ellipse 70% 35% at 30% 25%, #E8DDC9, transparent 65%),
+    radial-gradient(ellipse 75% 38% at 70% 75%, #E8DDC9, transparent 65%);
+  animation: auroraDrift2 24s ease-in-out infinite alternate;
 }
 
+/* FLOATING HIGHLIGHTS — gold + deep-rose pops with hard-light blend
+   for the vivid clash effect. Drifts faster than layer 2. */
 @utility aurora-layer-3 {
-  opacity: 0.75;
+  opacity: 0.7;
   mix-blend-mode: hard-light;
-  filter: blur(35px);
+  filter: blur(45px);
   background-size: 100% 90vh;
   background-image:
-    radial-gradient(ellipse 65% 22% at 50% 12%, #CAA55A, transparent 60%),
-    radial-gradient(ellipse 60% 20% at -5% 32%, #7E2E4B, transparent 65%),
-    radial-gradient(ellipse 65% 22% at 105% 50%, #CAA55A, transparent 60%),
-    radial-gradient(ellipse 60% 20% at -8% 70%, #7E2E4B, transparent 65%),
-    radial-gradient(ellipse 65% 22% at 50% 90%, #CAA55A, transparent 60%);
-  animation: auroraDrift3 13s ease-in-out infinite alternate;
+    radial-gradient(ellipse 55% 25% at 50% 30%, #CAA55A, transparent 60%),
+    radial-gradient(ellipse 55% 25% at 50% 70%, #7E2E4B, transparent 60%);
+  animation: auroraDrift3 14s ease-in-out infinite alternate;
 }
 
 /* Bigger amplitudes — bring back the A3 motion energy so the aurora

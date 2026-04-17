@@ -50,7 +50,7 @@ export default async function HomePage({
 
   const displayName =
     userInfo?.FirstName === undefined && userInfo?.LastName === undefined
-      ? null
+      ? "Hannah & Hayden"
       : partyPops && partyPops.length > 1
       ? `${userInfo?.LastName} Party`
       : `${userInfo?.FirstName} ${userInfo?.LastName}`;

@@ -46,8 +46,8 @@ export const MobileNavButton = ({
 
       <div
         className={`
-          fixed inset-0 z-40 md:hidden 
-          bg-[#A24E69]/40 backdrop-blur-xl w-screen
+          fixed inset-0 z-40 md:hidden
+          bg-[#A24E69]/40 backdrop-blur-xl
           transition-[clip-path] duration-500 ease-out
           ${
             open

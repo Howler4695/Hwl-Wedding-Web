@@ -40,6 +40,11 @@
   background: radial-gradient(120% 60% at 50% 50%, rgba(255, 248, 236, 0.95));
   filter: blur(14px);
   opacity: 0.95;
+
+  /* Promote to its own GPU layer to stop iOS Safari flicker on scroll */
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 @utility mobile-menu-backdrop {
@@ -167,6 +172,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
 @layer base {

@@ -149,7 +149,7 @@
 }
 
 @utility card {
-  @apply rounded-2xl border border-[#E8DDC9] bg-[#FFF8EC]/85 md:bg-[#FFF8EC]/90 shadow-xl backdrop-blur-md;
+  @apply rounded-2xl border border-[#E8DDC9] bg-white/20 md:bg-white/40 shadow-xl backdrop-blur-xl;
 }
 
 @utility card-no-blur {
@@ -201,5 +201,101 @@ body {
 
   h4 {
     @apply heading-4;
+  }
+}
+
+/* ============================================================
+   Aurora Background
+   Three stacked full-viewport layers of blurred radial-gradient
+   blobs, each animating transform only (GPU-friendly).
+   ============================================================ */
+
+@utility aurora-root {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  isolation: isolate;
+  overflow: hidden;
+  background: #869A78;
+}
+
+@utility aurora-layer {
+  position: absolute;
+  inset: -40%;
+  filter: blur(60px);
+  will-change: transform;
+  transform: translateZ(0);
+  pointer-events: none;
+}
+
+@utility aurora-layer-1 {
+  opacity: 0.95;
+  background:
+    radial-gradient(circle at 20% 30%, #A24E69 0%, transparent 32%),
+    radial-gradient(circle at 80% 40%, #CAA55A 0%, transparent 35%),
+    radial-gradient(circle at 50% 80%, #FFF8EC 0%, transparent 38%),
+    radial-gradient(circle at 10% 90%, #7E2E4B 0%, transparent 30%);
+  animation: auroraDrift1 10s ease-in-out infinite alternate;
+}
+
+@utility aurora-layer-2 {
+  opacity: 0.80;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(circle at 70% 20%, #C07F94 0%, transparent 34%),
+    radial-gradient(circle at 30% 65%, #E8DDC9 0%, transparent 40%),
+    radial-gradient(circle at 90% 85%, #A24E69 0%, transparent 26%);
+  animation: auroraDrift2 13s ease-in-out infinite alternate;
+}
+
+@utility aurora-layer-3 {
+  opacity: 0.65;
+  mix-blend-mode: overlay;
+  filter: blur(65px);
+  background:
+    radial-gradient(circle at 40% 50%, #CAA55A 0%, transparent 28%),
+    radial-gradient(circle at 60% 15%, #7E2E4B 0%, transparent 28%);
+  animation: auroraDrift3 9s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift1 {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50%  { transform: translate(30%, -18%) scale(1.5) rotate(8deg); }
+  100% { transform: translate(-25%, 20%) scale(0.75) rotate(-6deg); }
+}
+
+@keyframes auroraDrift2 {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50%  { transform: translate(-32%, 22%) scale(1.35) rotate(-10deg); }
+  100% { transform: translate(28%, -20%) scale(1.2) rotate(8deg); }
+}
+
+@keyframes auroraDrift3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(22%, 26%) scale(1.55); }
+  100% { transform: translate(-28%, -18%) scale(0.75); }
+}
+
+/* Mobile: reduce blur radius to lighten GPU cost. Visual difference
+   at phone sizes is minor because blur blending is less pronounced. */
+@media (max-width: 640px) {
+  .aurora-layer,
+  .aurora-layer-1,
+  .aurora-layer-2 {
+    filter: blur(40px);
+  }
+  .aurora-layer-3 {
+    filter: blur(42px);
+  }
+}
+
+/* Accessibility: respect user motion preferences. Aurora still
+   renders with its colors blended, just frozen at the 0% keyframe. */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-layer-1,
+  .aurora-layer-2,
+  .aurora-layer-3 {
+    animation: none;
   }
 }

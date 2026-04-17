@@ -234,27 +234,27 @@ body {
   background-position: 50% 0%;
 }
 
-/* ANCHORED LAYER — no animation. Colors anchor on the LEFT and RIGHT
-   edges, and now expand far enough across (130% wide, transparent
-   85%) that each side's color reaches ~60% of the viewport. Opposing
-   colors meet and clash in the middle. Tiles every 100vh. */
+/* ANCHORED LAYER — no animation. Edge-anchored colors with stagger
+   between left/right Y positions so colors flow diagonally as well
+   as horizontally. Tall ellipses (40%) and heavy blur (70px) so
+   neighboring colors bleed vertically into each other. */
 @utility aurora-layer-1 {
   opacity: 1;
-  filter: blur(50px);
+  filter: blur(70px);
   background-size: 100% 100vh;
   background-image:
-    /* LEFT edge cascade: rose → gold → light rose → deep rose → rose */
-    radial-gradient(ellipse 130% 25% at 0% 8%,  #A24E69, transparent 85%),
-    radial-gradient(ellipse 130% 25% at 0% 30%, #CAA55A, transparent 85%),
-    radial-gradient(ellipse 130% 25% at 0% 50%, #C07F94, transparent 85%),
-    radial-gradient(ellipse 130% 25% at 0% 72%, #7E2E4B, transparent 85%),
-    radial-gradient(ellipse 130% 25% at 0% 92%, #A24E69, transparent 85%),
-    /* RIGHT edge cascade: gold → deep rose → rose → light rose → gold */
-    radial-gradient(ellipse 130% 25% at 100% 8%,  #CAA55A, transparent 85%),
-    radial-gradient(ellipse 130% 25% at 100% 30%, #7E2E4B, transparent 85%),
-    radial-gradient(ellipse 130% 25% at 100% 50%, #A24E69, transparent 85%),
-    radial-gradient(ellipse 130% 25% at 100% 72%, #C07F94, transparent 85%),
-    radial-gradient(ellipse 130% 25% at 100% 92%, #CAA55A, transparent 85%);
+    /* LEFT edge cascade — Y at 5%, 28%, 52%, 76%, 96% */
+    radial-gradient(ellipse 140% 40% at 0% 5%,  #A24E69, transparent 90%),
+    radial-gradient(ellipse 140% 40% at 0% 28%, #CAA55A, transparent 90%),
+    radial-gradient(ellipse 140% 40% at 0% 52%, #C07F94, transparent 90%),
+    radial-gradient(ellipse 140% 40% at 0% 76%, #7E2E4B, transparent 90%),
+    radial-gradient(ellipse 140% 40% at 0% 96%, #A24E69, transparent 90%),
+    /* RIGHT edge cascade — Y staggered by ~12% from left so colors
+       flow diagonally: 17%, 40%, 64%, 88% */
+    radial-gradient(ellipse 140% 40% at 100% 17%, #CAA55A, transparent 90%),
+    radial-gradient(ellipse 140% 40% at 100% 40%, #7E2E4B, transparent 90%),
+    radial-gradient(ellipse 140% 40% at 100% 64%, #A24E69, transparent 90%),
+    radial-gradient(ellipse 140% 40% at 100% 88%, #C07F94, transparent 90%);
   /* No animation — anchors. */
 }
 

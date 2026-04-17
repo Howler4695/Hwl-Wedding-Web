@@ -86,11 +86,12 @@ export default function Lightbox({
           </svg>
       </a>
 
-      {/* Navigation arrows */}
+      {/* Navigation arrows — bottom corners on mobile (out of the way of
+          the photo), vertically centered on desktop */}
       {selectedIndex > 0 && (
         <button
           onClick={() => onNavigate(selectedIndex - 1)}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
+          className="absolute left-4 bottom-4 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 z-20 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
           aria-label="Previous photo"
         >
           <svg
@@ -111,7 +112,7 @@ export default function Lightbox({
       {selectedIndex < photos.length - 1 && (
         <button
           onClick={() => onNavigate(selectedIndex + 1)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
+          className="absolute right-4 bottom-4 sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2 z-20 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
           aria-label="Next photo"
         >
           <svg

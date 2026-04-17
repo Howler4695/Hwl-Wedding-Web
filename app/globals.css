@@ -146,10 +146,14 @@
 
 @utility card {
   @apply rounded-2xl border border-[#E8DDC9] bg-[#FFF8EC]/85 md:bg-[#FFF8EC]/90 shadow-xl backdrop-blur-md;
+  /* Force the card onto its own GPU layer so backdrop-blur paints on
+     first frame instead of flashing flat. Mobile Safari especially. */
+  transform: translateZ(0);
 }
 
 @utility card-no-blur {
-  @apply rounded-2xl border border-[#E8DDC9] bg-[#FFF8EC]/95 shadow-xl;
+  @apply rounded-2xl border border-[#E8DDC9] bg-[#FFF8EC]/95 shadow-xl backdrop-blur-sm;
+  transform: translateZ(0);
 }
 
 @utility heading-1 {
@@ -168,11 +172,18 @@
   @apply font-heading font-medium text-xl;
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
 }
 
 @layer base {

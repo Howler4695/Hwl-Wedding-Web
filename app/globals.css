@@ -173,10 +173,6 @@
 }
 
 html {
-  /* Warm rose tone shows during iOS bounce-scroll above/below body
-     (browser exposes html bg in the overscroll area). Body bg stays
-     sage so the aurora layering isn't broken. */
-  background-color: #9C5366;
   overflow-x: clip;
 }
 

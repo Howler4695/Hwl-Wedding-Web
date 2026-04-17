@@ -173,11 +173,15 @@
 }
 
 html {
+  /* Warm rose tone shows during iOS bounce-scroll above/below the
+     content so the overscroll area matches the aurora aesthetic
+     instead of dropping back to the sage base. */
+  background: #9C5366;
   overflow-x: clip;
 }
 
 body {
-  background: var(--background);
+  background: #9C5366;
   color: var(--foreground);
   font-family: var(--font-body), system-ui, -apple-system, sans-serif;
   overflow-x: clip;

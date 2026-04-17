@@ -21,36 +21,17 @@
   }
 }
 
+/* Soft cream glow around section titles. Implemented as stacked
+   text-shadow layers — pure 2D paint, no GPU compositor layer, no
+   filter:blur. Renders on first frame and never flickers on scroll
+   because there's no separate layer to re-composite. */
 @utility naked-backdrop-halo {
-  position: relative;
-  display: inline-block;
-  border-radius: 9999px;
-}
-
-.naked-backdrop-halo::before {
-  content: "";
-  position: absolute;
-
-  /* Flat em-based extension: scales with font size, never gets out of
-     control on wide headings (was -15%, which on "Travel & Lodging" at
-     text-4xl pushed the layout box past mobile viewport edges). */
-  inset-inline: -1em;
-  inset-block: -0.6em;
-
-  border-radius: inherit;
-  z-index: -1;
-
-  /* Soft edges baked into the gradient itself — no filter: blur. The
-     blur version was unreliable on iOS Safari: the GPU layer wasn't
-     promoted until a scroll or interaction, so the halo would be
-     missing on first paint and then flicker on scroll. */
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 248, 236, 0.95) 0%,
-    rgba(255, 248, 236, 0.85) 35%,
-    rgba(255, 248, 236, 0.4) 65%,
-    rgba(255, 248, 236, 0) 90%
-  );
+  text-shadow:
+    0 0 6px rgba(255, 248, 236, 1),
+    0 0 12px rgba(255, 248, 236, 1),
+    0 0 22px rgba(255, 248, 236, 0.95),
+    0 0 36px rgba(255, 248, 236, 0.75),
+    0 0 54px rgba(255, 248, 236, 0.45);
 }
 
 @utility mobile-menu-backdrop {

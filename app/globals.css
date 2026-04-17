@@ -235,26 +235,26 @@ body {
 }
 
 /* ANCHORED LAYER — no animation. Colors anchor on the LEFT and RIGHT
-   edges (not the center). Each side has 5 color stops cascading down,
-   with DIFFERENT colors per side at each Y so opposing colors clash
-   in the middle of the viewport. Tiles every 100vh so anchors repeat. */
+   edges, and now expand far enough across (130% wide, transparent
+   85%) that each side's color reaches ~60% of the viewport. Opposing
+   colors meet and clash in the middle. Tiles every 100vh. */
 @utility aurora-layer-1 {
   opacity: 1;
   filter: blur(50px);
   background-size: 100% 100vh;
   background-image:
     /* LEFT edge cascade: rose → gold → light rose → deep rose → rose */
-    radial-gradient(ellipse 55% 22% at 0% 8%,  #A24E69, transparent 70%),
-    radial-gradient(ellipse 55% 22% at 0% 30%, #CAA55A, transparent 70%),
-    radial-gradient(ellipse 55% 22% at 0% 50%, #C07F94, transparent 70%),
-    radial-gradient(ellipse 55% 22% at 0% 72%, #7E2E4B, transparent 70%),
-    radial-gradient(ellipse 55% 22% at 0% 92%, #A24E69, transparent 70%),
+    radial-gradient(ellipse 130% 25% at 0% 8%,  #A24E69, transparent 85%),
+    radial-gradient(ellipse 130% 25% at 0% 30%, #CAA55A, transparent 85%),
+    radial-gradient(ellipse 130% 25% at 0% 50%, #C07F94, transparent 85%),
+    radial-gradient(ellipse 130% 25% at 0% 72%, #7E2E4B, transparent 85%),
+    radial-gradient(ellipse 130% 25% at 0% 92%, #A24E69, transparent 85%),
     /* RIGHT edge cascade: gold → deep rose → rose → light rose → gold */
-    radial-gradient(ellipse 55% 22% at 100% 8%,  #CAA55A, transparent 70%),
-    radial-gradient(ellipse 55% 22% at 100% 30%, #7E2E4B, transparent 70%),
-    radial-gradient(ellipse 55% 22% at 100% 50%, #A24E69, transparent 70%),
-    radial-gradient(ellipse 55% 22% at 100% 72%, #C07F94, transparent 70%),
-    radial-gradient(ellipse 55% 22% at 100% 92%, #CAA55A, transparent 70%);
+    radial-gradient(ellipse 130% 25% at 100% 8%,  #CAA55A, transparent 85%),
+    radial-gradient(ellipse 130% 25% at 100% 30%, #7E2E4B, transparent 85%),
+    radial-gradient(ellipse 130% 25% at 100% 50%, #A24E69, transparent 85%),
+    radial-gradient(ellipse 130% 25% at 100% 72%, #C07F94, transparent 85%),
+    radial-gradient(ellipse 130% 25% at 100% 92%, #CAA55A, transparent 85%);
   /* No animation — anchors. */
 }
 

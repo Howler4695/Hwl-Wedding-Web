@@ -30,7 +30,9 @@ Unchanged from current site — the aurora uses the established palette:
 
 ## Component Architecture
 
-### `components/Backgrounds/AuroraBackground.tsx` (new)
+### `components/Background/AuroraBackground.tsx` (new)
+
+File lives in the existing `components/Background/` directory (singular — same folder that holds `Corners.tsx`).
 
 A server component (pure markup + class names — no client interactivity). Renders a single outer `<div aria-hidden="true">` with `position: fixed`, `inset: 0`, `-z-10`, `pointer-events: none`, `isolation: isolate`, containing three stacked `<div>` layers.
 
@@ -51,11 +53,13 @@ Each inner layer:
 Animation amplitudes (match A3):
 - Layer 1: translate up to ±30% · scale 0.75–1.5 · rotate ±8° · 10s ease-in-out alternate
 - Layer 2: translate up to ±32% · scale 1.2–1.35 · rotate ±10° · 13s ease-in-out alternate
-- Layer 3: translate up to ±28% · scale 0.75–1.55 · 9s ease-in-out alternate
+- Layer 3: translate up to ±28% · scale 0.75–1.55 · rotate 0° (no rotation) · 9s ease-in-out alternate
 
 ### `app/layout.tsx`
 
 Render `<AuroraBackground />` once, inside the `<body>`, before the `<div className="min-h-screen bg-background">` (so it sits at the lowest z layer behind everything).
+
+**Important — remove the `bg-background` on the wrapper div.** Currently the wrapper is `<div className="min-h-screen bg-background">`, and `bg-background` paints solid sage over where the aurora would show. Change to `<div className="min-h-screen">` so the fixed aurora beneath is actually visible. The `body` itself still has `background: var(--background)` set in `globals.css` as a static fallback for pre-hydration or reduced-motion cases, so nothing appears broken if the aurora fails to render.
 
 No other files in `app/` need to change.
 
@@ -100,9 +104,10 @@ Revert the recent opaque-cream `card` utility back to translucent glass:
 ## Scope
 
 ### In scope
-- Create `components/Backgrounds/AuroraBackground.tsx`
+- Create `components/Background/AuroraBackground.tsx`
 - Export from `components/index.ts`
-- Render in `app/layout.tsx`
+- Render in `app/layout.tsx` (inside `<body>`, before the wrapper div)
+- Remove the `bg-background` class from the wrapper `<div className="min-h-screen ...">` in `app/layout.tsx` so the aurora is visible
 - Revert `card` utility in `app/globals.css` to translucent `bg-white/20 md:bg-white/40 backdrop-blur-xl`
 - Add `prefers-reduced-motion` and mobile-blur-radius media queries in `app/globals.css`
 

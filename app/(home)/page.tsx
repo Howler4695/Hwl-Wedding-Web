@@ -101,6 +101,7 @@ export default async function HomePage({
                 height={600}
                 className="aspect-square rounded-xl border border-[#E8DDC9] bg-white/60 object-cover"
                 unoptimized
+                priority
               />
             </Link>
           ))}

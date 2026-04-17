@@ -21,19 +21,27 @@
   }
 }
 
-/* Soft cream glow around section titles. Implemented as stacked
-   text-shadow layers — pure 2D paint, no GPU compositor layer, no
-   filter:blur. Renders on first frame and never flickers on scroll
-   because there's no separate layer to re-composite. */
 @utility naked-backdrop-halo {
-  /* 4 stacked text-shadow layers — solid cream where the text sits,
-     then a wide soft fade. Fewer layers + smaller max blur than the
-     previous stack so it doesn't tank paint performance. */
-  text-shadow:
-    0 0 16px rgba(255, 248, 236, 1),
-    0 0 48px rgba(255, 248, 236, 1),
-    0 0 110px rgba(255, 248, 236, 0.7),
-    0 0 200px rgba(255, 248, 236, 0.4);
+  position: relative;
+  display: inline-block;
+  border-radius: 9999px;
+}
+
+.naked-backdrop-halo::before {
+  content: "";
+  position: absolute;
+
+  /* Flat em-based extension — clamped so wide titles like "Travel &
+     Lodging" can't push the layout box past the mobile viewport. */
+  inset-inline: -0.6em;
+  inset-block: -0.35em;
+
+  border-radius: inherit;
+  z-index: -1;
+
+  background: radial-gradient(120% 60% at 50% 50%, rgba(255, 248, 236, 0.95));
+  filter: blur(14px);
+  opacity: 0.95;
 }
 
 @utility mobile-menu-backdrop {

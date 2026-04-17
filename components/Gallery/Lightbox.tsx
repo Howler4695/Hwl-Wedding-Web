@@ -2,7 +2,7 @@
 
 import { useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import type { GalleryPhoto } from "@/app/gallery/page";
 
 type LightboxProps = {
@@ -130,35 +130,42 @@ export default function Lightbox({
         </button>
       )}
 
-      {/* Image with drag-to-dismiss and swipe navigation */}
-      <motion.div
-        className="relative z-10 flex max-h-[85vh] max-w-[90vw] items-center justify-center"
-        layoutId={`gallery-photo-${photo.src}`}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        drag
-        dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
-        dragElastic={0.4}
-        onDragEnd={(_, info) => {
-          if (Math.abs(info.offset.y) > 100) {
-            onClose();
-          } else if (info.offset.x < -80 && selectedIndex < photos.length - 1) {
-            onNavigate(selectedIndex + 1);
-          } else if (info.offset.x > 80 && selectedIndex > 0) {
-            onNavigate(selectedIndex - 1);
-          }
-        }}
-      >
-        <Image
-          src={photo.src}
-          alt={`Photo ${selectedIndex + 1} of ${photos.length}`}
-          width={1200}
-          height={800}
-          className="max-h-[85vh] w-auto rounded-lg object-contain"
-          sizes="90vw"
-          priority
-          unoptimized
-        />
-      </motion.div>
+      {/* Image with drag-to-dismiss and swipe navigation. Keyed on src so
+          each navigation remounts cleanly — prevents stale drag transforms
+          and layout-cache issues after the tab is backgrounded. */}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={photo.src}
+          className="relative z-10 flex max-h-[85vh] max-w-[90vw] items-center justify-center"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.96 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          drag
+          dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
+          dragElastic={0.4}
+          onDragEnd={(_, info) => {
+            if (Math.abs(info.offset.y) > 100) {
+              onClose();
+            } else if (info.offset.x < -80 && selectedIndex < photos.length - 1) {
+              onNavigate(selectedIndex + 1);
+            } else if (info.offset.x > 80 && selectedIndex > 0) {
+              onNavigate(selectedIndex - 1);
+            }
+          }}
+        >
+          <Image
+            src={photo.src}
+            alt={`Photo ${selectedIndex + 1} of ${photos.length}`}
+            width={1200}
+            height={800}
+            className="max-h-[85vh] w-auto rounded-lg object-contain"
+            sizes="90vw"
+            priority
+            unoptimized
+          />
+        </motion.div>
+      </AnimatePresence>
     </motion.div>
   );
 }

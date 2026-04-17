@@ -50,7 +50,6 @@ export default function GalleryGrid({
         {photos.map((photo, i) => (
           <motion.div
             key={photo.src}
-            layoutId={`gallery-photo-${photo.src}`}
             className={`mb-3 cursor-pointer overflow-hidden rounded-xl border break-inside-avoid relative ${
               isAdmin && !visible.has(photo.filename)
                 ? "border-red-300 opacity-50"

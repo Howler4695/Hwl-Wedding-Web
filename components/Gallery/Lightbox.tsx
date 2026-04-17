@@ -90,7 +90,7 @@ export default function Lightbox({
       {selectedIndex > 0 && (
         <button
           onClick={() => onNavigate(selectedIndex - 1)}
-          className="absolute left-4 z-10 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
           aria-label="Previous photo"
         >
           <svg
@@ -111,7 +111,7 @@ export default function Lightbox({
       {selectedIndex < photos.length - 1 && (
         <button
           onClick={() => onNavigate(selectedIndex + 1)}
-          className="absolute right-4 z-10 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-white/20 p-2 text-white backdrop-blur-sm transition-colors hover:bg-white/40"
           aria-label="Next photo"
         >
           <svg
@@ -137,10 +137,10 @@ export default function Lightbox({
         <motion.div
           key={photo.src}
           className="relative z-10 flex max-h-[85vh] max-w-[90vw] items-center justify-center"
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.96 }}
-          transition={{ duration: 0.2, ease: "easeOut" }}
+          exit={{ opacity: 0, scale: 0.85 }}
+          transition={{ type: "spring", stiffness: 320, damping: 30, mass: 0.7 }}
           drag
           dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
           dragElastic={0.4}

@@ -234,26 +234,26 @@ body {
   background-position: 50% 0%;
 }
 
-/* ANCHORED LAYER — no animation. Heavy bleed: huge ellipse heights
-   (55%) and very heavy blur (95px) so vertical color neighbors
-   merge into continuous flowing color rivers. Right-side Y staggered
-   ~12% from left so colors flow diagonally too. */
+/* ANCHORED LAYER — no animation. Maximum-flow tuning: huge ellipse
+   heights (75%) and extreme blur (130px) so the bands fully dissolve
+   into one continuous color river. Diagonal Y stagger preserves
+   cross-flow. */
 @utility aurora-layer-1 {
   opacity: 1;
-  filter: blur(95px);
+  filter: blur(130px);
   background-size: 100% 100vh;
   background-image:
     /* LEFT edge cascade */
-    radial-gradient(ellipse 160% 55% at 0% 5%,  #A24E69, transparent 95%),
-    radial-gradient(ellipse 160% 55% at 0% 28%, #CAA55A, transparent 95%),
-    radial-gradient(ellipse 160% 55% at 0% 52%, #C07F94, transparent 95%),
-    radial-gradient(ellipse 160% 55% at 0% 76%, #7E2E4B, transparent 95%),
-    radial-gradient(ellipse 160% 55% at 0% 96%, #A24E69, transparent 95%),
+    radial-gradient(ellipse 180% 75% at 0% 5%,  #A24E69, transparent 100%),
+    radial-gradient(ellipse 180% 75% at 0% 28%, #CAA55A, transparent 100%),
+    radial-gradient(ellipse 180% 75% at 0% 52%, #C07F94, transparent 100%),
+    radial-gradient(ellipse 180% 75% at 0% 76%, #7E2E4B, transparent 100%),
+    radial-gradient(ellipse 180% 75% at 0% 96%, #A24E69, transparent 100%),
     /* RIGHT edge cascade — staggered Y for diagonal flow */
-    radial-gradient(ellipse 160% 55% at 100% 17%, #CAA55A, transparent 95%),
-    radial-gradient(ellipse 160% 55% at 100% 40%, #7E2E4B, transparent 95%),
-    radial-gradient(ellipse 160% 55% at 100% 64%, #A24E69, transparent 95%),
-    radial-gradient(ellipse 160% 55% at 100% 88%, #C07F94, transparent 95%);
+    radial-gradient(ellipse 180% 75% at 100% 17%, #CAA55A, transparent 100%),
+    radial-gradient(ellipse 180% 75% at 100% 40%, #7E2E4B, transparent 100%),
+    radial-gradient(ellipse 180% 75% at 100% 64%, #A24E69, transparent 100%),
+    radial-gradient(ellipse 180% 75% at 100% 88%, #C07F94, transparent 100%);
   /* No animation — anchors. */
 }
 

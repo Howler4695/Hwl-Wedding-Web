@@ -234,44 +234,49 @@ body {
   background-position: 50% 0%;
 }
 
-/* ANCHORED LAYER — no animation. Four corner color zones using the
-   Aceternity-style circle farthest-side at corners. These are the
-   "hard points" — always in the same place, no drifting.
-   Tile every 100vh so each viewport has the same 4-corner anchor. */
+/* ANCHORED LAYER — no animation. Five full-width horizontal color
+   bands cascade vertically, each at a different Y position with a
+   different color: rose → gold → light rose → deep rose → rose. The
+   bands span both edges (no asymmetry) and blend into each other
+   via the heavy blur — reads as flowing aurora bands rather than
+   discrete blobs. Tiles every 100vh so each viewport gets the same
+   anchored band sequence. */
 @utility aurora-layer-1 {
   opacity: 1;
+  filter: blur(40px);
   background-size: 100% 100vh;
   background-image:
-    radial-gradient(circle farthest-side at 0% 0%,    #A24E69, transparent),
-    radial-gradient(circle farthest-side at 100% 0%,  #CAA55A, transparent),
-    radial-gradient(circle farthest-side at 0% 100%,  #C07F94, transparent),
-    radial-gradient(circle farthest-side at 100% 100%, #7E2E4B, transparent);
-  /* No animation — these are the anchors. */
+    radial-gradient(ellipse 100% 16% at 50% 8%,  #A24E69, transparent 75%),
+    radial-gradient(ellipse 100% 16% at 50% 28%, #CAA55A, transparent 75%),
+    radial-gradient(ellipse 100% 16% at 50% 50%, #C07F94, transparent 75%),
+    radial-gradient(ellipse 100% 16% at 50% 72%, #7E2E4B, transparent 75%),
+    radial-gradient(ellipse 100% 16% at 50% 92%, #A24E69, transparent 75%);
+  /* No animation — anchors. */
 }
 
-/* FLOATING WARMTH — soft beige accents that gently drift over the
-   anchors. Screen blend so they brighten where they overlap rose/gold. */
+/* FLOATING WARMTH — soft beige accents drift left/right with screen
+   blend, giving subtle motion over the anchored bands. */
 @utility aurora-layer-2 {
-  opacity: 0.65;
+  opacity: 0.6;
   mix-blend-mode: screen;
   filter: blur(70px);
   background-size: 100% 130vh;
   background-image:
-    radial-gradient(ellipse 70% 35% at 30% 25%, #E8DDC9, transparent 65%),
-    radial-gradient(ellipse 75% 38% at 70% 75%, #E8DDC9, transparent 65%);
-  animation: auroraDrift2 24s ease-in-out infinite alternate;
+    radial-gradient(ellipse 50% 30% at 30% 30%, #E8DDC9, transparent 70%),
+    radial-gradient(ellipse 55% 32% at 70% 70%, #E8DDC9, transparent 70%);
+  animation: auroraDrift2 22s ease-in-out infinite alternate;
 }
 
 /* FLOATING HIGHLIGHTS — gold + deep-rose pops with hard-light blend
-   for the vivid clash effect. Drifts faster than layer 2. */
+   for the vivid clash. Faster drift across the bands. */
 @utility aurora-layer-3 {
   opacity: 0.7;
   mix-blend-mode: hard-light;
   filter: blur(45px);
   background-size: 100% 90vh;
   background-image:
-    radial-gradient(ellipse 55% 25% at 50% 30%, #CAA55A, transparent 60%),
-    radial-gradient(ellipse 55% 25% at 50% 70%, #7E2E4B, transparent 60%);
+    radial-gradient(ellipse 60% 25% at 20% 35%, #CAA55A, transparent 60%),
+    radial-gradient(ellipse 60% 25% at 80% 65%, #7E2E4B, transparent 60%);
   animation: auroraDrift3 14s ease-in-out infinite alternate;
 }
 

@@ -31,8 +31,11 @@
   content: "";
   position: absolute;
 
-  inset-inline: -15%; /* horizontal */
-  inset-block: -0.35em; /* vertical */
+  /* Flat em-based extension: scales with font size, never gets out of
+     control on wide headings (was -15%, which on "Travel & Lodging" at
+     text-4xl pushed the layout box past mobile viewport edges). */
+  inset-inline: -0.6em;
+  inset-block: -0.35em;
 
   border-radius: inherit;
   z-index: -1;

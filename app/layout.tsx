@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Quicksand } from "next/font/google";
 import "./globals.css";
-import { NavHeader } from "@/components";
+import { NavHeader, AuroraBackground } from "@/components";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -57,7 +57,8 @@ export default function RootLayout({
       <body
         className={`${cormorant.variable} ${quicksand.variable} antialiased`}
       >
-        <div className="min-h-screen bg-background">
+        <div className="relative min-h-screen">
+          <AuroraBackground />
           <NavHeader />
           <main className="min-h-screen overflow-y-auto sm:pt-20">
             {children}

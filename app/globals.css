@@ -149,7 +149,7 @@
 }
 
 @utility card {
-  @apply rounded-2xl border border-[#E8DDC9] bg-[#FFF8EC]/85 md:bg-[#FFF8EC]/90 shadow-xl backdrop-blur-md;
+  @apply rounded-2xl border border-[#E8DDC9] bg-white/20 md:bg-white/40 shadow-xl backdrop-blur-xl;
 }
 
 @utility card-no-blur {
@@ -201,5 +201,128 @@ body {
 
   h4 {
     @apply heading-4;
+  }
+}
+
+/* ============================================================
+   Aurora Background
+   Three stacked full-viewport layers of blurred radial-gradient
+   blobs, each animating transform only (GPU-friendly).
+   ============================================================ */
+
+@utility aurora-root {
+  /* Absolute + full parent height so the aurora cascades down the
+     document and scrolls with content instead of staying locked to
+     the viewport (that looked inorganic on long pages like home). */
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  isolation: isolate;
+  overflow: hidden;
+  background: #869A78;
+}
+
+@utility aurora-layer {
+  position: absolute;
+  inset: 0;
+  filter: blur(50px);
+  will-change: transform;
+  transform: translateZ(0);
+  pointer-events: none;
+  background-repeat: repeat-y;
+  background-position: 50% 0%;
+}
+
+/* ANCHORED LAYER — no animation. Anchors at -25%/125% X (further
+   off-screen) and 200% wide so the heavy blur leaves full color
+   right at the visible edges. Color cascade rebalanced: rose stops
+   alternate with gold/beige so warm tones offset the pink instead
+   of letting rose dominate. */
+@utility aurora-layer-1 {
+  opacity: 1;
+  filter: blur(130px);
+  background-size: 100% 100vh;
+  background-image:
+    /* LEFT cascade: rose → gold → beige → gold → rose */
+    radial-gradient(ellipse 200% 75% at -25% 5%,  #A24E69, transparent 100%),
+    radial-gradient(ellipse 200% 75% at -25% 28%, #CAA55A, transparent 100%),
+    radial-gradient(ellipse 200% 75% at -25% 52%, #E8DDC9, transparent 100%),
+    radial-gradient(ellipse 200% 75% at -25% 76%, #CAA55A, transparent 100%),
+    radial-gradient(ellipse 200% 75% at -25% 96%, #A24E69, transparent 100%),
+    /* RIGHT cascade: gold → beige → rose → gold → beige (Y staggered) */
+    radial-gradient(ellipse 200% 75% at 125% 17%, #CAA55A, transparent 100%),
+    radial-gradient(ellipse 200% 75% at 125% 40%, #E8DDC9, transparent 100%),
+    radial-gradient(ellipse 200% 75% at 125% 64%, #A24E69, transparent 100%),
+    radial-gradient(ellipse 200% 75% at 125% 88%, #CAA55A, transparent 100%);
+  /* No animation — anchors. */
+}
+
+/* FLOATING WARMTH — beige accents bumped up so the offsetting cream
+   tone is actually visible. Screen blend brightens overlaps. */
+@utility aurora-layer-2 {
+  opacity: 0.85;
+  mix-blend-mode: screen;
+  filter: blur(70px);
+  background-size: 100% 130vh;
+  background-image:
+    radial-gradient(ellipse 60% 35% at 30% 30%, #E8DDC9, transparent 75%),
+    radial-gradient(ellipse 65% 38% at 70% 70%, #E8DDC9, transparent 75%);
+  animation: auroraDrift2 22s ease-in-out infinite alternate;
+}
+
+/* FLOATING HIGHLIGHTS — gold + deep-rose pops with hard-light blend
+   for the vivid clash. Faster drift across the bands. */
+@utility aurora-layer-3 {
+  opacity: 0.7;
+  mix-blend-mode: hard-light;
+  filter: blur(45px);
+  background-size: 100% 90vh;
+  background-image:
+    radial-gradient(ellipse 60% 25% at 20% 35%, #CAA55A, transparent 60%),
+    radial-gradient(ellipse 60% 25% at 80% 65%, #7E2E4B, transparent 60%);
+  animation: auroraDrift3 14s ease-in-out infinite alternate;
+}
+
+/* Bigger amplitudes — bring back the A3 motion energy so the aurora
+   noticeably shifts even when not scrolling. */
+@keyframes auroraDrift1 {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50%  { transform: translate(20%, 5%) scale(1.25) rotate(4deg); }
+  100% { transform: translate(-18%, -4%) scale(0.85) rotate(-3deg); }
+}
+
+@keyframes auroraDrift2 {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50%  { transform: translate(-22%, 6%) scale(1.22) rotate(-5deg); }
+  100% { transform: translate(18%, -5%) scale(1.12) rotate(4deg); }
+}
+
+@keyframes auroraDrift3 {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(15%, 8%) scale(1.3); }
+  100% { transform: translate(-18%, -6%) scale(0.85); }
+}
+
+/* Mobile: reduce blur radius to lighten GPU cost. Visual difference
+   at phone sizes is minor because blur blending is less pronounced. */
+@media (max-width: 640px) {
+  .aurora-layer,
+  .aurora-layer-1,
+  .aurora-layer-2 {
+    filter: blur(40px);
+  }
+  .aurora-layer-3 {
+    filter: blur(42px);
+  }
+}
+
+/* Accessibility: respect user motion preferences. Aurora still
+   renders with its colors blended, just frozen at the 0% keyframe. */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-layer-1,
+  .aurora-layer-2,
+  .aurora-layer-3 {
+    animation: none;
   }
 }

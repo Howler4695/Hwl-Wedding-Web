@@ -9,6 +9,7 @@ export { default as Countdown } from "./Countdown/Countdown";
 export { LogoFull as LogoFull } from "./Logo/Logo";
 export { LogoBadge as LogoBadge } from "./Logo/Logo";
 export { MagCorners as MagCorners } from "./Background/Corners";
+export { AuroraBackground as AuroraBackground } from "./Background/AuroraBackground";
 export { default as TextField } from "./Fields/TextField";
 export { default as NumberField } from "./Fields/NumberField";
 export { default as TextAreaField } from "./Fields/TextAreaField";

@@ -298,10 +298,14 @@ body {
   100% { transform: translate(18%, -5%) scale(1.12) rotate(4deg); }
 }
 
+/* Scale stays ≥ 1 so the layer always fully covers aurora-root. If it
+   shrinks below 1 on a short page (aurora-root ≈ 100vh), the hard-light
+   edge wipes through the visible viewport every cycle — that's the
+   bottom-right mobile flicker. */
 @keyframes auroraDrift3 {
   0%   { transform: translate(0, 0) scale(1); }
   50%  { transform: translate(15%, 8%) scale(1.3); }
-  100% { transform: translate(-18%, -6%) scale(0.85); }
+  100% { transform: translate(-15%, -5%) scale(1.35); }
 }
 
 /* Mobile: reduce blur radius to lighten GPU cost. Visual difference

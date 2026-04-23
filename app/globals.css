@@ -335,3 +335,15 @@ body {
     animation: none;
   }
 }
+
+/* Firefox-only: freeze layer-3's animation. The hard-light blend +
+   filter:blur + animated transform combination triggers a Firefox
+   rendering bug where the blend recomposes unevenly each frame on
+   short pages with no scroll context — visible as bottom-right
+   flicker. Colors and blend still render; just no motion on layer-3
+   for Firefox. Layer-2's screen blend doesn't trigger it. */
+@supports (-moz-appearance: none) {
+  .aurora-layer-3 {
+    animation: none;
+  }
+}

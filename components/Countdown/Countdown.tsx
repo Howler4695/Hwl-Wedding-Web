@@ -10,19 +10,18 @@ export default function Countdown({
     () => new Date(weddingTarget).getTime(),
     [weddingTarget]
   );
-  const [now, setNow] = useState<number>(Date.now());
-  const diff = Math.max(0, target - now);
+  const [now, setNow] = useState<number | null>(null);
+  const diff = now === null ? 0 : Math.max(0, target - now);
 
   useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
+    const updateNow = () => setNow(Date.now());
+    updateNow();
+
+    const id = setInterval(updateNow, 1000);
     return () => clearInterval(id);
-  }, [setNow]);
+  }, []);
 
-  const [seconds, setSeconds] = useState<number>(0);
-  useEffect(() => {
-    setSeconds(Math.floor((diff / 1000) % 60));
-  }, [setSeconds, diff]);
-
+  const seconds = Math.floor((diff / 1000) % 60);
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((diff / (1000 * 60)) % 60);

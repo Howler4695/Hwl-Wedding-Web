@@ -26,7 +26,9 @@ fi
 # ── Backend ─────────────────────────────────────────────
 echo "==> Rebuilding backend"
 cd "$PROJECT_DIR/backend"
-go build -o wedding-server wedding.go
+# The app serves JSON; disabling Gin's optional msgpack binding avoids
+# compiling github.com/ugorji/go/codec on the t3.micro during deploys.
+go build -tags=nomsgpack -o wedding-server wedding.go
 
 echo "==> Restarting backend"
 if systemctl is-active --quiet wedding-backend 2>/dev/null; then
